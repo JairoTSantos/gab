@@ -65,18 +65,18 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" target="_blank" href="<?php echo $config['app']['url'] ?>/imprimir-pessoas">
-                                                        <button class="btn btn-outline-warning btn-sm" style="font-size: 0.850em;" type="button">
+                                                        <button class="btn btn-outline-primary btn-sm" style="font-size: 0.850em;" type="button">
                                                             <i class="fa-solid fa-print"></i> Imprimir lista
                                                         </button>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!--<li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/ficha">
                                                         <button class="btn btn-outline-danger btn-sm" style="font-size: 0.850em;" type="button">
                                                             <i class="fa-solid fa-print"></i> Imprimir ficha para cadastro
                                                         </button>
                                                     </a>
-                                                </li>
+                                                </li>-->
                                             </ul>
                                         </div>
                                     </div>
@@ -246,6 +246,7 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                             <select class="form-select form-select-sm" name="ordenarPor" required>
                                                 <option value="pessoa_nome" <?php echo $ordenarPor == 'pessoa_nome' ? 'selected' : ''; ?>>Ordenar por | Nome</option>
                                                 <option value="pessoa_estado" <?php echo $ordenarPor == 'pessoa_estado' ? 'selected' : ''; ?>>Ordenar por | Estado</option>
+                                                <option value="pessoa_municipio" <?php echo $ordenarPor == 'pessoa_municipio' ? 'selected' : ''; ?>>Ordenar por | Municipio</option>
                                                 <option value="pessoa_tipo_nome" <?php echo $ordenarPor == 'pessoa_tipo_nome' ? 'selected' : ''; ?>>Ordenar por | Tipo</option>
                                                 <option value="pessoa_criada_em" <?php echo $ordenarPor == 'pessoa_criada_em' ? 'selected' : ''; ?>>Ordenar por | Criação</option>
                                             </select>

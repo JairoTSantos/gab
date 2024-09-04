@@ -97,6 +97,7 @@ INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descric
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1004, 'Eleitores', 'Eleitores em geral', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1005, 'Imprensa', 'Jornalistas, diretores de jornais, assessoria', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1006, 'Site', 'Pessoas registradas no site', 1000);
+INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1007, 'Amigos', 'Amigos pessoais do deputado', 1000);
 
 CREATE TABLE pessoas_profissoes (
     pessoas_profissoes_id int NOT NULL AUTO_INCREMENT,
