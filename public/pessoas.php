@@ -3,6 +3,9 @@
 require_once __DIR__ . '/includes/layout.php';
 require_once __DIR__ . '/includes/verificaLogado.php';
 
+$config = require dirname(__DIR__) . '/app/config/config.php';
+$depConfig = $config['deputado'];
+
 require_once dirname(__DIR__) . '/app/controllers/PessoaController.php';
 $pessoaController = new PessoaController();
 
@@ -14,8 +17,7 @@ $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $ordenarPor = isset($_GET['ordenarPor']) ? htmlspecialchars($_GET['ordenarPor']) : 'pessoa_nome';
 $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 'asc';
 $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
-
-
+$filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : false;
 
 ?>
 <!DOCTYPE html>
@@ -62,6 +64,13 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
+                                                    <a class="nav-link active" aria-current="page" target="_blank" href="<?php echo $config['app']['url'] ?>/imprimir-pessoas">
+                                                        <button class="btn btn-outline-warning btn-sm" style="font-size: 0.850em;" type="button">
+                                                            <i class="fa-solid fa-print"></i> Imprimir lista
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/ficha">
                                                         <button class="btn btn-outline-danger btn-sm" style="font-size: 0.850em;" type="button">
                                                             <i class="fa-solid fa-print"></i> Imprimir ficha para cadastro
@@ -72,7 +81,6 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                         </div>
                                     </div>
                                 </nav>
-
                             </div>
                         </div>
                     </div>
@@ -254,13 +262,18 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                                 <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-1 col-12">
+                                            <select class="form-select form-select-sm" name="filtro" required>
+                                                <option value="0" <?php echo $filtro == 0 ? 'selected' : ''; ?>>Todos os estados</option>
+                                                <option value="1" <?php echo $filtro == 1 ? 'selected' : ''; ?>>Somente <?php echo $depConfig['estado_deputado'] ?></option>
+                                            </select>
+                                        </div>
                                         <div class="col-md-3 col-12">
-                                            <input type="text" class="form-control form-control-sm" name="termo" placeholder="Buscar...">
+                                            <input type="text" class="form-control form-control-sm" name="termo" value="<?php echo $termo ?>" placeholder="Buscar pessoa...">
                                         </div>
                                         <div class="col-md-1 col-6">
                                             <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
                                         </div>
-
                                     </form>
                                     <table class="table table-striped table-bordered mb-2 custom_table">
                                         <thead>
@@ -278,7 +291,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $buscaPessoa = $pessoaController->listarPessoas($pagina, $itens, $ordenarPor, $ordem, $termo);
+                                            $buscaPessoa = $pessoaController->listarPessoas($pagina, $itens, $ordenarPor, $ordem, $termo, $filtro);
 
                                             if ($buscaPessoa['status'] === 'success') {
                                                 foreach ($buscaPessoa['dados'] as $pessoa) {
@@ -383,7 +396,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
         $('#btn_novo_tipo').click(function() {
             if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
                 window.location.href = "./pessoas-tipos";
-            }else{
+            } else {
                 return false;
             }
         });
@@ -399,7 +412,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
         $('#btn_nova_profissao').click(function() {
             if (window.confirm("Você realmente deseja inserir uma nova profissão?")) {
                 window.location.href = "./profissoes";
-            }else{
+            } else {
                 return false;
             }
         });

@@ -55,6 +55,9 @@ RewriteRule ^pessoas/$ public/pessoas.php [L]
 RewriteRule ^pessoas/([0-9]+)$ public/editar-pessoa.php?id=$1 [L]
 RewriteRule ^pessoas/([0-9]+)/$ public/editar-pessoa.php?id=$1 [L]
 
+RewriteRule ^imprimir-pessoas$ public/imprimir-pessoas.php [L]
+RewriteRule ^imprimir-pessoas/$ public/imprimir-pessoas.php [L]
+
 
 RewriteRule ^comissoes$ public/comissoes.php [L]
 RewriteRule ^comissoes/$ public/comissoes.php [L]

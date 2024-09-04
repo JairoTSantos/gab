@@ -109,8 +109,8 @@ class PessoaController {
         }
     }
 
-    public function listarPessoas($pagina = 1, $itens = 10, $ordernarPor = 'pessoa_nome', $order = 'ASC', $termo = null) {
-        $resultado = $this->pessoaModel->listarPessoas($pagina, $itens, $ordernarPor, $order, $termo);
+    public function listarPessoas($pagina = 1, $itens = 10, $ordernarPor = 'pessoa_nome', $order = 'ASC', $termo = null, $filtro = true) {
+        $resultado = $this->pessoaModel->listarPessoas($pagina, $itens, $ordernarPor, $order, $termo, $filtro);
         return $resultado;
     }
 

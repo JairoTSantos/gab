@@ -28,6 +28,7 @@ return [
         'nome_deputado' => 'Acácio Favacho',
         'inicio_legislatura' => '2019-01-01',
         'fim_legislatura' => '2028-12-31',
-        'legislatura_atual' => 57
+        'legislatura_atual' => 57,
+        'estado_deputado' => 'AP'
     ]
 ];

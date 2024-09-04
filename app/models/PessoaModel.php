@@ -12,6 +12,7 @@ class PessoaModel {
     }
 
     public function novaPessoa($dados) {
+       
         $query = "INSERT INTO pessoas (pessoa_nome, pessoa_aniversario, pessoa_email, pessoa_telefone, pessoa_endereco, pessoa_bairro, pessoa_municipio, pessoa_estado, pessoa_cep, pessoa_sexo, pessoa_facebook, pessoa_instagram, pessoa_x, pessoa_informacoes, pessoa_profissao, pessoa_cargo, pessoa_tipo, pessoa_orgao, pessoa_criada_por) VALUES (:pessoa_nome, :pessoa_aniversario, :pessoa_email, :pessoa_telefone, :pessoa_endereco, :pessoa_bairro, :pessoa_municipio, :pessoa_estado, :pessoa_cep, :pessoa_sexo, :pessoa_facebook, :pessoa_instagram, :pessoa_x, :pessoa_informacoes, :pessoa_profissao, :pessoa_cargo, :pessoa_tipo, :pessoa_orgao, :pessoa_criada_por)";
 
         try {
@@ -98,7 +99,11 @@ class PessoaModel {
         }
     }
 
-    public function listarPessoas($pagina = 1, $itens = 10, $ordernarPor, $order, $termo) {
+    public function listarPessoas($pagina, $itens, $ordernarPor, $order, $termo, $filtro) {
+
+        $config = require dirname(__DIR__) . '/config/config.php';
+        $depConfig = $config['deputado'];
+        
         $ordernarPor = in_array($ordernarPor, ['pessoa_nome', 'pessoa_criada_por', 'pessoa_estado', 'pessoa_municipio']) ? $ordernarPor : 'pessoa_nome';
         $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
 
@@ -106,12 +111,24 @@ class PessoaModel {
         $itens = (int)$itens;
         $offset = ($pagina - 1) * $itens;
 
-        if ($termo === null) {
-            $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000) AS total FROM view_pessoas WHERE pessoa_id <> 1000 ORDER BY $ordernarPor $order LIMIT :offset, :itens";
-        } else {
-            $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo) AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo ORDER BY $ordernarPor $order LIMIT :offset, :itens";
-            $termo = '%' . $termo . '%';
+
+        if($filtro){
+            if ($termo === null) {
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_estado = '".$depConfig['estado_deputado']."') AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_estado = '".$depConfig['estado_deputado']."' ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+            } else {
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo  AND pessoa_estado = '".$depConfig['estado_deputado']."') AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo  AND pessoa_estado = '".$depConfig['estado_deputado']."' ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+                $termo = '%' . $termo . '%';
+            }
+        }else{
+            if ($termo === null) {
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000) AS total FROM view_pessoas WHERE pessoa_id <> 1000 ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+            } else {
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo) AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+                $termo = '%' . $termo . '%';
+            }
         }
+
+        
 
         try {
             $stmt = $this->db->prepare($query);
@@ -119,7 +136,7 @@ class PessoaModel {
             $stmt->bindValue(':itens', $itens, PDO::PARAM_INT);
 
             if ($termo !== null) {
-                $stmt->bindValue(':termo', $termo, PDO::PARAM_STR);  // Tipo correto é STRING
+                $stmt->bindValue(':termo', $termo, PDO::PARAM_STR);
             }
 
             $stmt->execute();
