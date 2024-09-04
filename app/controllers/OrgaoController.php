@@ -103,8 +103,8 @@ class OrgaoController {
         }
     }
 
-    public function listarOrgaos($pagina = 1, $itens = 10, $ordernarPor = 'orgao_nome', $order = 'ASC') {
-        $resultado = $this->orgaoModel->listarOrgaos($pagina, $itens, $ordernarPor, $order);
+    public function listarOrgaos($pagina = 1, $itens = 10, $ordernarPor = 'orgao_nome', $order = 'ASC', $termo = null) {
+        $resultado = $this->orgaoModel->listarOrgaos($pagina, $itens, $ordernarPor, $order, $termo);
         return $resultado;
     }
 

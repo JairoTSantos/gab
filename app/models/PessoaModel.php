@@ -98,7 +98,7 @@ class PessoaModel {
         }
     }
 
-    public function listarPessoas($pagina = 1, $itens = 10, $ordernarPor, $order) {
+    public function listarPessoas($pagina = 1, $itens = 10, $ordernarPor, $order, $termo) {
         $ordernarPor = in_array($ordernarPor, ['pessoa_nome', 'pessoa_criada_por', 'pessoa_estado', 'pessoa_municipio']) ? $ordernarPor : 'pessoa_nome';
         $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
 
@@ -106,12 +106,22 @@ class PessoaModel {
         $itens = (int)$itens;
         $offset = ($pagina - 1) * $itens;
 
-        $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000) AS total FROM view_pessoas WHERE pessoa_id <> 1000 ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+        if ($termo === null) {
+            $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000) AS total FROM view_pessoas WHERE pessoa_id <> 1000 ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+        } else {
+            $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo) AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+            $termo = '%' . $termo . '%';
+        }
 
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
             $stmt->bindValue(':itens', $itens, PDO::PARAM_INT);
+
+            if ($termo !== null) {
+                $stmt->bindValue(':termo', $termo, PDO::PARAM_STR);  // Tipo correto é STRING
+            }
+
             $stmt->execute();
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -133,6 +143,7 @@ class PessoaModel {
             return ['status' => 'error'];
         }
     }
+
 
     public function buscarPessoa($coluna, $valor) {
         $coluna = in_array($coluna, ['pessoa_id', 'pessoa_email']) ? $coluna : 'pessoa_id';
@@ -228,7 +239,7 @@ class PessoaModel {
 
     public function novaProfissaoPessoa($dados) {
         $query = "INSERT INTO pessoas_profissoes (pessoas_profissoes_nome, pessoas_profissoes_descricao, pessoas_profissoes_criado_por) VALUES (:pessoas_profissoes_nome, :pessoas_profissoes_descricao, :pessoas_profissoes_criado_por)";
-        
+
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':pessoas_profissoes_nome', $dados['pessoas_profissoes_nome'], PDO::PARAM_STR);

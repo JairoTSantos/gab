@@ -13,6 +13,7 @@ $itens = isset($_GET['itens']) ? (int)$_GET['itens'] : 10;
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $ordenarPor = isset($_GET['ordenarPor']) ? htmlspecialchars($_GET['ordenarPor']) : 'pessoa_nome';
 $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 'asc';
+$termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
 
 
 
@@ -48,14 +49,14 @@ $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 
                                             <ul class="navbar-nav me-auto mb-0 mb-lg-0">
                                                 <li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/pessoas-tipos">
-                                                        <button class="btn btn-outline-success btn-sm" style="font-size: 0.850em;" type="button">
+                                                        <button class="btn btn-outline-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
                                                             <i class="fa-solid fa-circle-plus"></i> Novo tipo
                                                         </button>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/profissoes">
-                                                        <button class="btn btn-outline-secondary btn-sm" style="font-size: 0.850em;" type="button">
+                                                        <button class="btn btn-outline-secondary btn-sm" style="font-size: 0.850em;" id="btn_nova_profissao" type="button">
                                                             <i class="fa-solid fa-circle-plus"></i> Nova profissão
                                                         </button>
                                                     </a>
@@ -247,11 +248,14 @@ $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 
                                                 <option value="desc" <?php echo $ordem == 'desc' ? 'selected' : ''; ?>>Ordem Decrescente</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 col-6">
+                                        <div class="col-md-2 col-12">
                                             <select class="form-select form-select-sm" name="itens" required>
                                                 <option value="5" <?php echo $itens == 5 ? 'selected' : ''; ?>>5 itens</option>
                                                 <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens</option>
                                             </select>
+                                        </div>
+                                        <div class="col-md-3 col-12">
+                                            <input type="text" class="form-control form-control-sm" name="termo" placeholder="Buscar...">
                                         </div>
                                         <div class="col-md-1 col-6">
                                             <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -274,7 +278,7 @@ $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $buscaPessoa = $pessoaController->listarPessoas($pagina, $itens, $ordenarPor, $ordem);
+                                            $buscaPessoa = $pessoaController->listarPessoas($pagina, $itens, $ordenarPor, $ordem, $termo);
 
                                             if ($buscaPessoa['status'] === 'success') {
                                                 foreach ($buscaPessoa['dados'] as $pessoa) {
@@ -296,7 +300,7 @@ $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 
                                             } else if ($buscaPessoa['status'] === 'empty') {
                                                 echo '<tr><td colspan="10">Nenhuma pessoa registrada.</td></tr>';
                                             } else if ($buscaPessoa['status'] === 'error') {
-                                                echo '<tr><td colspan="7">Erro interno do servidor.</td></tr>';
+                                                echo '<tr><td colspan="9">Erro interno do servidor.</td></tr>';
                                             }
 
                                             ?>
@@ -376,11 +380,27 @@ $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 
             }
         });
 
+        $('#btn_novo_tipo').click(function() {
+            if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
+                window.location.href = "./pessoas-tipos";
+            }else{
+                return false;
+            }
+        });
+
         $('#profissao').change(function() {
             if ($('#profissao').val() == '+') {
                 if (window.confirm("Você realmente deseja inserir uma nova profissão?")) {
                     window.location.href = "./profissoes";
                 }
+            }
+        });
+
+        $('#btn_nova_profissao').click(function() {
+            if (window.confirm("Você realmente deseja inserir uma nova profissão?")) {
+                window.location.href = "./profissoes";
+            }else{
+                return false;
             }
         });
 

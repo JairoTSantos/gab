@@ -54,14 +54,14 @@ if ($buscarPessoa['status'] === 'empty') {
                                             <ul class="navbar-nav me-auto mb-0 mb-lg-0">
                                                 <li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/pessoas-tipos">
-                                                        <button class="btn btn-outline-success btn-sm" style="font-size: 0.850em;" type="button">
+                                                        <button class="btn btn-outline-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
                                                             <i class="fa-solid fa-circle-plus"></i> Novo tipo
                                                         </button>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/profissoes">
-                                                        <button class="btn btn-outline-secondary btn-sm" style="font-size: 0.850em;" type="button">
+                                                        <button class="btn btn-outline-secondary btn-sm" style="font-size: 0.850em;" id="btn_nova_profissao" type="button">
                                                             <i class="fa-solid fa-circle-plus"></i> Nova profissão
                                                         </button>
                                                     </a>
@@ -351,6 +351,24 @@ if ($buscarPessoa['status'] === 'empty') {
                 if (window.confirm("Você realmente deseja inserir um novo órgão?")) {
                     window.location.href = "<?php echo $config['app']['url'] ?>/orgaos";
                 }
+            }
+        });
+
+        $('#btn_novo_tipo').click(function() {
+            if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
+                window.location.href = "./pessoas-tipos";
+            }else{
+                return false;
+            }
+        });
+
+        
+
+        $('#btn_nova_profissao').click(function() {
+            if (window.confirm("Você realmente deseja inserir uma nova profissão?")) {
+                window.location.href = "./profissoes";
+            }else{
+                return false;
             }
         });
     </script>

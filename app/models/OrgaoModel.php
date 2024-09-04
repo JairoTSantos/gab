@@ -87,7 +87,7 @@ class OrgaoModel {
         }
     }
 
-    public function listarOrgaos($pagina = 1, $itens = 10, $ordernarPor, $order) {
+    public function listarOrgaos($pagina = 1, $itens = 10, $ordernarPor, $order, $termo) {
         $ordernarPor = in_array($ordernarPor, ['orgao_nome', 'orgao_criado_por', 'orgao_estado', 'orgao_municipio']) ? $ordernarPor : 'orgao_nome';
         $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
 
@@ -95,12 +95,23 @@ class OrgaoModel {
         $itens = (int)$itens;
         $offset = ($pagina - 1) * $itens;
 
-        $query = "SELECT view_orgaos.*, (SELECT COUNT(*) FROM orgaos WHERE orgao_id <> 1000) AS total FROM view_orgaos WHERE orgao_id <> 1000 ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+
+        if ($termo === null) {
+            $query = "SELECT view_orgaos.*, (SELECT COUNT(*) FROM orgaos WHERE orgao_id <> 1000) AS total FROM view_orgaos WHERE orgao_id <> 1000 ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+        } else {
+            $query = "SELECT view_orgaos.*, (SELECT COUNT(*) FROM orgaos WHERE orgao_id <> 1000 AND orgao_nome LIKE :termo) AS total FROM view_orgaos WHERE orgao_id <> 1000 AND orgao_nome LIKE :termo ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+            $termo = '%' . $termo . '%';
+        }
 
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
             $stmt->bindValue(':itens', $itens, PDO::PARAM_INT);
+
+            if ($termo !== null) {
+                $stmt->bindValue(':termo', $termo, PDO::PARAM_STR);  // Tipo correto é STRING
+            }
+
             $stmt->execute();
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -154,7 +165,7 @@ class OrgaoModel {
 
 
 
-    
+
     public function novoTipoOrgao($dados) {
 
         $query = "INSERT INTO orgaos_tipos (orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUE (:orgao_tipo_nome, :orgao_tipo_descricao, :orgao_tipo_criado_por);";

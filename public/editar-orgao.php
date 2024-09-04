@@ -252,6 +252,14 @@ if ($buscaOrgao['status'] === 'empty') {
                 }
             }
         });
+
+        $('#btn_novo_tipo').click(function() {
+            if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
+                window.location.href = "./orgaos-tipos";
+            } else {
+                return false;
+            }
+        });
     </script>
 </body>
 
