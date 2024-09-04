@@ -261,6 +261,8 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                             <select class="form-select form-select-sm" name="itens" required>
                                                 <option value="5" <?php echo $itens == 5 ? 'selected' : ''; ?>>5 itens</option>
                                                 <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens</option>
+                                                <option value="50" <?php echo $itens == 50 ? 'selected' : ''; ?>>50 itens</option>
+                                                <option value="100" <?php echo $itens == 100 ? 'selected' : ''; ?>>100 itens</option>
                                             </select>
                                         </div>
                                         <div class="col-md-1 col-12">

@@ -21,10 +21,6 @@ class Database {
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             novoLog('database_error', 'Erro na conexão: ' . $e->getMessage());
-                session_start();
-                session_destroy();
-            
-            
             echo '<script>window.location.href = "' . $config['app']['url'] . '/erro-sistema";</script>';
             die();
         }
