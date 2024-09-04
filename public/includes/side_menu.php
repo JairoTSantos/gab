@@ -12,5 +12,6 @@ $appConfig = $config['app'];
         <p style="margin-left: 17px; margin-top:20px;font-weight: bolder;" class="text-muted mb-2"><i class="fas fa-bars"></i> Gestão de pessoas</p>
         <a class="list-group-item list-group-item-action list-group-item-light px-3" href="<?php echo $appConfig['url'] ?>/pessoas"><i class="fas fa-user-friends"></i> Pessoas</a>
         <a class="list-group-item list-group-item-action list-group-item-light px-3" href="<?php echo $appConfig['url'] ?>/orgaos"><i class="fas fa-hotel"></i> Órgãos e instituições</a>
+        <a class="list-group-item list-group-item-action list-group-item-light px-3" href="<?php echo $appConfig['url'] ?>/aniversarios"><i class="fa-solid fa-cake-candles"></i> Aniversários</a>
     </div>
 </div>

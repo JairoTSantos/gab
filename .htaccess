@@ -52,6 +52,12 @@ RewriteRule ^profissoes/$ public/profissoes.php [L]
 RewriteRule ^pessoas$ public/pessoas.php [L]
 RewriteRule ^pessoas/$ public/pessoas.php [L]
 
+RewriteRule ^aniversarios$ public/aniversarios.php [L]
+RewriteRule ^aniversarios/$ public/aniversarios.php [L]
+
+RewriteRule ^notas$ public/notas.php [L]
+RewriteRule ^notas/$ public/notas.php [L]
+
 RewriteRule ^pessoas/([0-9]+)$ public/editar-pessoa.php?id=$1 [L]
 RewriteRule ^pessoas/([0-9]+)/$ public/editar-pessoa.php?id=$1 [L]
 
