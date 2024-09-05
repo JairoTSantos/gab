@@ -130,7 +130,7 @@ class UsuarioController {
             return ['status' => 'forbidden', 'message' => 'Você não pode apagar sua própria conta.'];
         }
 
-        $result = $this->buscarUsuario('usuario_id', $id);
+        $result = $this->usuarioModel->buscarUsuario('usuario_id', $id);
 
         if ($result['status'] == 'success' && $result['dados']['usuario_foto'] != null) {
             unlink('..' . $result['dados']['usuario_foto']);
