@@ -22,7 +22,7 @@ class OrgaoController {
     }
 
     public function ListarOrgaos($itens = 10, $pagina = 1, $ordem = 'asc', $ordenarPor = 'usuario_nome') {
-        $ordernarPor = in_array($ordenarPor, ['usuario_nome', 'usuario_criado_por']) ? $ordenarPor : 'usuario_nome';
+        $ordernarPor = in_array($ordenarPor, ['orgao_id', 'orgao_nome', 'orgao_tipo_nome', 'orgao_estado', 'orgao_municipio']) ? $ordenarPor : 'orgao_nome';
         $order = strtoupper($ordem) === 'DESC' ? 'DESC' : 'ASC';
         return $this->orgaoModel->ListarOrgaos($itens, $pagina, $ordem, $ordenarPor);
     }
