@@ -7,16 +7,16 @@ class UsuarioController {
 
     private $usuarioModel;
     private $uploadFile;
+    private $pasta_foto;
 
     public function __construct() {
         $this->usuarioModel = new UsuarioModel();
         $this->uploadFile = new UploadFile();
+        $this->pasta_foto = '/public/arquivos/fotos_usuarios/';
     }
 
 
     public function criarUsuario($dados) {
-
-        $pasta_fotos = '/public/arquivos/fotos_usuarios/';
 
         $dados['usuario_nome'] = isset($dados['usuario_nome']) ? trim($dados['usuario_nome']) : '';
         $dados['usuario_email'] = isset($dados['usuario_email']) ? trim($dados['usuario_email']) : '';
@@ -35,9 +35,9 @@ class UsuarioController {
         }
 
         if (isset($dados['foto']['tmp_name']) && !empty($dados['foto']['tmp_name'])) {
-            $uploadResult = $this->uploadFile->salvarArquivo('..' . $pasta_fotos, $dados['foto']);
+            $uploadResult = $this->uploadFile->salvarArquivo('..' . $this->pasta_foto, $dados['foto']);
             if ($uploadResult['status'] == 'upload_ok') {
-                $dados['usuario_foto'] = $pasta_fotos . $uploadResult['filename'];
+                $dados['usuario_foto'] = $this->pasta_foto . $uploadResult['filename'];
             } else {
                 return $uploadResult;
             }
@@ -48,8 +48,6 @@ class UsuarioController {
 
     public function atualizarUsuario($id, $dados) {
 
-        $pasta_fotos = '/public/arquivos/fotos_usuarios/';
-
         $dados['usuario_nome'] = isset($dados['usuario_nome']) ? trim($dados['usuario_nome']) : '';
         $dados['usuario_email'] = isset($dados['usuario_email']) ? trim($dados['usuario_email']) : '';
         $dados['usuario_telefone'] = isset($dados['usuario_telefone']) ? trim($dados['usuario_telefone']) : '';
@@ -67,9 +65,9 @@ class UsuarioController {
         }
 
         if (isset($dados['foto']['tmp_name']) && !empty($dados['foto']['tmp_name'])) {
-            $uploadResult = $this->uploadFile->salvarArquivo('..' . $pasta_fotos, $dados['foto']);
+            $uploadResult = $this->uploadFile->salvarArquivo('..' . $this->pasta_foto, $dados['foto']);
             if ($uploadResult['status'] == 'upload_ok') {
-                $dados['usuario_foto'] = $pasta_fotos . $uploadResult['filename'];
+                $dados['usuario_foto'] = $this->pasta_foto . $uploadResult['filename'];
             } else {
                 return $uploadResult;
             }
