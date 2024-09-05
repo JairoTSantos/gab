@@ -100,6 +100,46 @@ class UsuarioModel {
         }
     }
 
+    public function ListarUsuarios($itens, $pagina, $ordem, $ordenarPor) {
+
+        $pagina = (int)$pagina;
+        $itens = (int)$itens;
+        $offset = ($pagina - 1) * $itens;
+
+        $query = "SELECT usuarios.*, (SELECT COUNT(usuario_id) FROM usuarios WHERE usuario_id <> 1000) AS total 
+                  FROM usuarios 
+                  WHERE usuario_id <> 1000 
+                  ORDER BY $ordenarPor $ordem 
+                  LIMIT :offset, :itens";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindValue(':itens', $itens, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return ['status' => 'empty'];
+            }
+
+            $total = $result[0]['total'];
+            $totalPaginas = ceil($total / $itens);
+
+            return [
+                'status' => 'success',
+                'dados' => $result,
+                'total_paginas' => $totalPaginas
+            ];
+        } catch (PDOException $e) {
+            $this->logger->novoLog('user_error', $e->getMessage());
+            return [
+                'status' => 'error',
+            ];
+        }
+    }
+
     public function ApagarUsuario($id) {
 
         $query = "DELETE FROM usuarios WHERE usuario_id = :id";

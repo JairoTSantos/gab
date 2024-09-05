@@ -8,15 +8,22 @@ class UsuarioController {
     private $usuarioModel;
     private $uploadFile;
     private $pasta_foto;
+    private $usuario_id;
+    private $usuario_nivel;
 
     public function __construct() {
         $this->usuarioModel = new UsuarioModel();
         $this->uploadFile = new UploadFile();
         $this->pasta_foto = '/public/arquivos/fotos_usuarios/';
+        $this->usuario_nivel = 1; /// pegar do session
+        $this->usuario_id = 1000; //pegaro do session
     }
 
-
     public function NovoUsuario($dados) {
+
+        if ($this->usuario_nivel != 1) {
+            return ['status' => 'forbidden', 'message' => 'Você não tem autorização para inserir novos usuários.'];
+        }
 
         $dados['usuario_nome'] = isset($dados['usuario_nome']) ? trim($dados['usuario_nome']) : '';
         $dados['usuario_email'] = isset($dados['usuario_email']) ? trim($dados['usuario_email']) : '';
@@ -55,6 +62,10 @@ class UsuarioController {
     }
 
     public function AtualizarUsuario($id, $dados) {
+
+        if ($this->usuario_nivel != 1) {
+            return ['status' => 'forbidden', 'message' => 'Você não tem autorização para atualiza esse usuário.'];
+        }
 
         $dados['usuario_nome'] = isset($dados['usuario_nome']) ? trim($dados['usuario_nome']) : '';
         $dados['usuario_email'] = isset($dados['usuario_email']) ? trim($dados['usuario_email']) : '';
@@ -103,7 +114,22 @@ class UsuarioController {
         return $this->usuarioModel->buscarUsuario($coluna, $valor);
     }
 
-    function ApagarUsuario($id) {
+    public function ListarUsuarios($itens = 10, $pagina = 1, $ordem = 'asc', $ordenarPor = 'usuario_nome') {
+        $ordernarPor = in_array($ordenarPor, ['usuario_nome', 'usuario_criado_por']) ? $ordenarPor : 'usuario_nome';
+        $order = strtoupper($ordem) === 'DESC' ? 'DESC' : 'ASC';
+        return $this->usuarioModel->ListarUsuarios($itens, $pagina, $ordem, $ordenarPor);
+    }
+
+    public function ApagarUsuario($id) {
+
+        if ($this->usuario_nivel != 1) {
+            return ['status' => 'forbidden', 'message' => 'Você não tem autorização para apagar esse usuário.'];
+        }
+
+        if ($this->usuario_id == $id) {
+            return ['status' => 'forbidden', 'message' => 'Você não pode apagar sua própria conta.'];
+        }
+
         $result = $this->buscarUsuario('usuario_id', $id);
 
         if ($result['status'] == 'success' && $result['dados']['usuario_foto'] != null) {
