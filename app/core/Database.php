@@ -21,7 +21,8 @@ class Database {
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             $logger->novoLog('database_error', 'Erro na conexão: ' . $e->getMessage());
-            throw new Exception('Não foi possível conectar ao banco de dados.');
+            die('<html><body><script type="text/javascript">window.location.href="pagina_destino.php";</script></body></html>');
+
         }
     }
 
