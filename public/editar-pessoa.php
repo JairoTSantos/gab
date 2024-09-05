@@ -119,7 +119,7 @@ if ($buscarPessoa['status'] === 'empty') {
                                 }
 
                                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_apagar'])) {
-                                    
+
                                     $resultado = $pessoaController->apagarPessoa($id);
 
                                     if ($resultado['status'] === 'success') {
@@ -250,7 +250,10 @@ if ($buscarPessoa['status'] === 'empty') {
                                         <input type="text" class="form-control form-control-sm" name="cargo" placeholder="Cargo (Diretor, assessor, coordenador....)">
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <input type="file" class="form-control form-control-sm" name="foto" placeholder="Foto">
+                                        <div class="file-upload">
+                                            <input type="file" id="file-input" name="foto" style="display: none;" />
+                                            <button id="file-button" type="button" class="btn btn-primary btn-sm"><i class="fa-regular fa-image"></i> Escolher Foto</button>
+                                        </div>
                                     </div>
                                     <div class="col-md-12 col-12">
                                         <textarea class="form-control form-control-sm" name="informacoes" rows="5" placeholder="Informações importantes dessa pessoa"><?php echo $buscarPessoa['dados']['pessoa_informacoes'] ?></textarea>
@@ -391,6 +394,15 @@ if ($buscarPessoa['status'] === 'empty') {
             } else {
                 return false;
             }
+        });
+
+        $('#file-button').on('click', function() {
+            $('#file-input').click();
+        });
+
+        $('#file-input').on('change', function() {
+            var fileName = $(this).val().split('\\').pop();
+            $('#file-name').text(fileName ? fileName : 'Nenhuma foto selecionada');
         });
     </script>
 
