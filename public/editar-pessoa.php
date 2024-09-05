@@ -14,7 +14,6 @@ $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $ordenarPor = isset($_GET['ordenarPor']) ? htmlspecialchars($_GET['ordenarPor']) : 'pessoa_nome';
 $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 'asc';
 
-
 $id = $_GET['id'];
 
 $buscarPessoa = $pessoaController->buscarPessoa('pessoa_id', $id);
@@ -75,6 +74,7 @@ if ($buscarPessoa['status'] === 'empty') {
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2">
@@ -102,6 +102,7 @@ if ($buscarPessoa['status'] === 'empty') {
                                         'pessoa_profissao' => $_POST['profissao'],
                                         'pessoa_cargo' => $_POST['cargo'],
                                         'pessoa_orgao' => $_POST['orgao'],
+                                        'pessoa_foto' => $_FILES['foto'],
                                         'pessoa_informacoes' => $_POST['informacoes']
                                     ];
 
@@ -118,6 +119,7 @@ if ($buscarPessoa['status'] === 'empty') {
                                 }
 
                                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_apagar'])) {
+                                    
                                     $resultado = $pessoaController->apagarPessoa($id);
 
                                     if ($resultado['status'] === 'success') {
@@ -134,28 +136,29 @@ if ($buscarPessoa['status'] === 'empty') {
 
 
                                 ?>
-                                <form class="row g-2 form_custom" id="form_novo" method="POST" enctype="application/x-www-form-urlencoded">
+                                <form class="row g-2 form_custom" id="form_novo" method="POST" enctype="multipart/form-data">
                                     <div class="col-md-4 col-12">
                                         <input type="text" class="form-control form-control-sm" name="nome" placeholder="Nome" value="<?php echo $buscarPessoa['dados']['pessoa_nome'] ?>" required>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <input type="text" class="form-control form-control-sm" name="email" placeholder="Email " value="<?php echo $buscarPessoa['dados']['pessoa_email'] ?>" required>
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-6">
                                         <input type="date" class="form-control form-control-sm" name="aniversario" value="<?php echo $buscarPessoa['dados']['pessoa_aniversario'] ?>" required>
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-6">
                                         <input type="text" class="form-control form-control-sm" name="telefone" placeholder="Telefone" value="<?php echo $buscarPessoa['dados']['pessoa_telefone'] ?>">
                                     </div>
                                     <div class="col-md-5 col-12">
                                         <input type="text" class="form-control form-control-sm" name="endereco" placeholder="Endereço" value="<?php echo $buscarPessoa['dados']['pessoa_endereco'] ?>">
                                     </div>
-                                    <div class="col-md-2 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP" maxlength="8" value="<?php echo $buscarPessoa['dados']['pessoa_cep'] ?>">
-                                    </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-6">
                                         <input type="text" class="form-control form-control-sm" name="bairro" placeholder="Bairro " value="<?php echo $buscarPessoa['dados']['pessoa_bairro'] ?>">
                                     </div>
+                                    <div class="col-md-2 col-6">
+                                        <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP" maxlength="8" value="<?php echo $buscarPessoa['dados']['pessoa_cep'] ?>">
+                                    </div>
+
                                     <div class="col-md-1 col-6">
                                         <select class="form-select form-select-sm" id="estado" name="estado" required>
                                             <option value="" selected>UF</option>
@@ -166,7 +169,7 @@ if ($buscarPessoa['status'] === 'empty') {
                                             <option value="" selected>Município</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" id="sexo" name="sexo" required>
                                             <option value="Sexo não informado" <?php echo $buscarPessoa['dados']['pessoa_sexo'] == 'Sexo não informado' ? 'selected' : ''; ?>>Sexo não informado</option>
                                             <option value="Masculino" <?php echo $buscarPessoa['dados']['pessoa_sexo'] == 'Masculino' ? 'selected' : ''; ?>>Masculino</option>
@@ -174,16 +177,16 @@ if ($buscarPessoa['status'] === 'empty') {
                                             <option value="Outro" <?php echo $buscarPessoa['dados']['pessoa_sexo'] == 'Outro' ? 'selected' : ''; ?>>Outro</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-4">
                                         <input type="text" class="form-control form-control-sm" name="facebook" placeholder="@facebook " value="<?php echo $buscarPessoa['dados']['pessoa_facebook'] ?>">
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-4">
                                         <input type="text" class="form-control form-control-sm" name="instagram" placeholder="@instagram " value="<?php echo $buscarPessoa['dados']['pessoa_instagram'] ?>">
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-4">
                                         <input type="text" class="form-control form-control-sm" name="x" placeholder="@X (Twitter) " value="<?php echo $buscarPessoa['dados']['pessoa_x'] ?>">
                                     </div>
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" id="orgao" name="orgao">
                                             <option value="1000" selected>Órgão não informado</option>
                                             <?php
@@ -205,7 +208,7 @@ if ($buscarPessoa['status'] === 'empty') {
                                             <option value="+">Novo órgão + </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" id="tipo" name="tipo" required>
                                             <option value="1000">Sem tipo definido</option>
                                             <?php
@@ -244,7 +247,10 @@ if ($buscarPessoa['status'] === 'empty') {
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="cargo" placeholder="Cargo" value="<?php echo $buscarPessoa['dados']['pessoa_cargo'] ?>">
+                                        <input type="text" class="form-control form-control-sm" name="cargo" placeholder="Cargo (Diretor, assessor, coordenador....)">
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <input type="file" class="form-control form-control-sm" name="foto" placeholder="Foto">
                                     </div>
                                     <div class="col-md-12 col-12">
                                         <textarea class="form-control form-control-sm" name="informacoes" rows="5" placeholder="Informações importantes dessa pessoa"><?php echo $buscarPessoa['dados']['pessoa_informacoes'] ?></textarea>
@@ -259,7 +265,22 @@ if ($buscarPessoa['status'] === 'empty') {
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-1 col-12">
+                        <div class="card shadow-sm mb-2">
+                            <div class="card-body p-2">
+                                <?php
+                                if ($buscarPessoa['dados']['pessoa_foto'] != null) {
+                                    echo ' <img class="img-fluid" src="../' . $buscarPessoa['dados']['pessoa_foto'] . '" alt="" />';
+                                } else {
+                                    echo ' <img class="img-fluid" src="../public/images/not_found.jpg" alt="" />';
+                                }
+                                ?>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -357,17 +378,17 @@ if ($buscarPessoa['status'] === 'empty') {
         $('#btn_novo_tipo').click(function() {
             if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
                 window.location.href = "./pessoas-tipos";
-            }else{
+            } else {
                 return false;
             }
         });
 
-        
+
 
         $('#btn_nova_profissao').click(function() {
             if (window.confirm("Você realmente deseja inserir uma nova profissão?")) {
                 window.location.href = "./profissoes";
-            }else{
+            } else {
                 return false;
             }
         });

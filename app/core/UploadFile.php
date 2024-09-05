@@ -7,12 +7,7 @@ class UploadFile {
             mkdir($pasta, 0777, true);
         }
     
-        $extensao = pathinfo($arquivoTmp, PATHINFO_EXTENSION);
-        if ($extensao) {
-            if (!strpos($nomeArquivo, '.')) {
-                $nomeArquivo .= '.' . $extensao;
-            }
-        }
+        
     
         $caminhoArquivo = $pasta . DIRECTORY_SEPARATOR . $nomeArquivo;
     

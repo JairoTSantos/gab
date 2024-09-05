@@ -2,18 +2,32 @@
 
 require_once dirname(__DIR__) . '/core/Database.php';
 require_once dirname(__DIR__) . '/core/Logger.php';
+require_once dirname(__DIR__) . '/core/UploadFile.php';
 
 class PessoaModel {
 
     private $db;
+    private $uploadFile;
 
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
+        $this->uploadFile = new UploadFile();
     }
 
     public function novaPessoa($dados) {
-       
-        $query = "INSERT INTO pessoas (pessoa_nome, pessoa_aniversario, pessoa_email, pessoa_telefone, pessoa_endereco, pessoa_bairro, pessoa_municipio, pessoa_estado, pessoa_cep, pessoa_sexo, pessoa_facebook, pessoa_instagram, pessoa_x, pessoa_informacoes, pessoa_profissao, pessoa_cargo, pessoa_tipo, pessoa_orgao, pessoa_criada_por) VALUES (:pessoa_nome, :pessoa_aniversario, :pessoa_email, :pessoa_telefone, :pessoa_endereco, :pessoa_bairro, :pessoa_municipio, :pessoa_estado, :pessoa_cep, :pessoa_sexo, :pessoa_facebook, :pessoa_instagram, :pessoa_x, :pessoa_informacoes, :pessoa_profissao, :pessoa_cargo, :pessoa_tipo, :pessoa_orgao, :pessoa_criada_por)";
+
+        $query = "INSERT INTO pessoas (pessoa_nome, pessoa_aniversario, pessoa_email, pessoa_telefone, pessoa_endereco, pessoa_bairro, pessoa_municipio, pessoa_estado, pessoa_cep, pessoa_sexo, pessoa_facebook, pessoa_instagram, pessoa_x, pessoa_informacoes, pessoa_profissao, pessoa_cargo, pessoa_tipo, pessoa_orgao, pessoa_foto, pessoa_criada_por) VALUES (:pessoa_nome, :pessoa_aniversario, :pessoa_email, :pessoa_telefone, :pessoa_endereco, :pessoa_bairro, :pessoa_municipio, :pessoa_estado, :pessoa_cep, :pessoa_sexo, :pessoa_facebook, :pessoa_instagram, :pessoa_x, :pessoa_informacoes, :pessoa_profissao, :pessoa_cargo, :pessoa_tipo, :pessoa_orgao, :pessoa_foto, :pessoa_criada_por)";
+
+        if (isset($dados['pessoa_foto']['tmp_name']) && !empty($dados['pessoa_foto']['tmp_name'])) {
+            $pasta = '../public/arquivos/fotos/';
+            $extensao_arquivo = pathinfo($dados['pessoa_foto']['name'], PATHINFO_EXTENSION);
+            $nome_arquivo = $dados['pessoa_nome'] . '.' . $extensao_arquivo;
+            $nome_arquivo = strtolower(str_replace(' ', '_', pathinfo($nome_arquivo, PATHINFO_FILENAME))) . '.' . $extensao_arquivo;
+            $nome_arquivo_completo = '/public/arquivos/fotos/' . $nome_arquivo;
+            $this->uploadFile->salvarArquivo($pasta, $nome_arquivo, $dados['pessoa_foto']['tmp_name']);
+        } else {
+            $nome_arquivo_completo = null;
+        }
 
         try {
             $stmt = $this->db->prepare($query);
@@ -35,6 +49,7 @@ class PessoaModel {
             $stmt->bindParam(':pessoa_cargo', $dados['pessoa_cargo'], PDO::PARAM_STR);
             $stmt->bindParam(':pessoa_tipo', $dados['pessoa_tipo'], PDO::PARAM_INT);
             $stmt->bindParam(':pessoa_orgao', $dados['pessoa_orgao'], PDO::PARAM_INT);
+            $stmt->bindParam(':pessoa_foto', $nome_arquivo_completo, PDO::PARAM_STR);
             $stmt->bindParam(':pessoa_criada_por', $dados['pessoa_criada_por'], PDO::PARAM_INT);
 
             $stmt->execute();
@@ -50,8 +65,27 @@ class PessoaModel {
     }
 
     public function atualizarPessoa($id, $dados) {
-        $query = "UPDATE pessoas SET pessoa_nome = :pessoa_nome, pessoa_aniversario = :pessoa_aniversario, pessoa_email = :pessoa_email, pessoa_telefone = :pessoa_telefone, pessoa_endereco = :pessoa_endereco, pessoa_bairro = :pessoa_bairro, pessoa_municipio = :pessoa_municipio, pessoa_estado = :pessoa_estado, pessoa_cep = :pessoa_cep, pessoa_sexo = :pessoa_sexo, pessoa_facebook = :pessoa_facebook, pessoa_instagram = :pessoa_instagram, pessoa_x = :pessoa_x, pessoa_informacoes = :pessoa_informacoes, pessoa_profissao = :pessoa_profissao, pessoa_cargo = :pessoa_cargo, pessoa_tipo = :pessoa_tipo, pessoa_orgao = :pessoa_orgao WHERE pessoa_id = :pessoa_id";
-
+        $fotoEnviada = isset($dados['pessoa_foto']['tmp_name']) && !empty($dados['pessoa_foto']['tmp_name']);
+    
+        if ($fotoEnviada) {
+            $pasta = '../public/arquivos/fotos/';
+            $extensao_arquivo = pathinfo($dados['pessoa_foto']['name'], PATHINFO_EXTENSION);
+            $nome_arquivo = $dados['pessoa_nome'] . '.' . $extensao_arquivo;
+            $nome_arquivo = strtolower(str_replace(' ', '_', pathinfo($nome_arquivo, PATHINFO_FILENAME))) . '.' . $extensao_arquivo;
+            $nome_arquivo_completo = '/public/arquivos/fotos/' . $nome_arquivo;
+            $this->uploadFile->salvarArquivo($pasta, $nome_arquivo, $dados['pessoa_foto']['tmp_name']);
+        } else {
+            $nome_arquivo_completo = null;
+        }
+    
+        $query = "UPDATE pessoas SET pessoa_nome = :pessoa_nome, pessoa_aniversario = :pessoa_aniversario, pessoa_email = :pessoa_email, pessoa_telefone = :pessoa_telefone, pessoa_endereco = :pessoa_endereco, pessoa_bairro = :pessoa_bairro, pessoa_municipio = :pessoa_municipio, pessoa_estado = :pessoa_estado, pessoa_cep = :pessoa_cep, pessoa_sexo = :pessoa_sexo, pessoa_facebook = :pessoa_facebook, pessoa_instagram = :pessoa_instagram, pessoa_x = :pessoa_x, pessoa_informacoes = :pessoa_informacoes, pessoa_profissao = :pessoa_profissao, pessoa_cargo = :pessoa_cargo, pessoa_tipo = :pessoa_tipo, pessoa_orgao = :pessoa_orgao";
+    
+        if ($fotoEnviada) {
+            $query .= ", pessoa_foto = :pessoa_foto";
+        }
+    
+        $query .= " WHERE pessoa_id = :pessoa_id";
+    
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':pessoa_nome', $dados['pessoa_nome'], PDO::PARAM_STR);
@@ -72,8 +106,13 @@ class PessoaModel {
             $stmt->bindParam(':pessoa_cargo', $dados['pessoa_cargo'], PDO::PARAM_STR);
             $stmt->bindParam(':pessoa_tipo', $dados['pessoa_tipo'], PDO::PARAM_INT);
             $stmt->bindParam(':pessoa_orgao', $dados['pessoa_orgao'], PDO::PARAM_INT);
+    
+            if ($fotoEnviada) {
+                $stmt->bindParam(':pessoa_foto', $nome_arquivo_completo, PDO::PARAM_STR);
+            }
+    
             $stmt->bindParam(':pessoa_id', $id, PDO::PARAM_INT);
-
+    
             $stmt->execute();
             return ['status' => 'success'];
         } catch (PDOException $e) {
@@ -81,6 +120,7 @@ class PessoaModel {
             return ['status' => 'error'];
         }
     }
+    
 
     public function apagarPessoa($id) {
         $query = "DELETE FROM pessoas WHERE pessoa_id = :id";
@@ -103,7 +143,7 @@ class PessoaModel {
 
         $config = require dirname(__DIR__) . '/config/config.php';
         $depConfig = $config['deputado'];
-        
+
         $ordernarPor = in_array($ordernarPor, ['pessoa_nome', 'pessoa_criada_por', 'pessoa_estado', 'pessoa_municipio']) ? $ordernarPor : 'pessoa_nome';
         $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
 
@@ -112,14 +152,14 @@ class PessoaModel {
         $offset = ($pagina - 1) * $itens;
 
 
-        if($filtro){
+        if ($filtro) {
             if ($termo === null) {
-                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_estado = '".$depConfig['estado_deputado']."') AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_estado = '".$depConfig['estado_deputado']."' ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_estado = '" . $depConfig['estado_deputado'] . "') AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_estado = '" . $depConfig['estado_deputado'] . "' ORDER BY $ordernarPor $order LIMIT :offset, :itens";
             } else {
-                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo  AND pessoa_estado = '".$depConfig['estado_deputado']."') AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo  AND pessoa_estado = '".$depConfig['estado_deputado']."' ORDER BY $ordernarPor $order LIMIT :offset, :itens";
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo  AND pessoa_estado = '" . $depConfig['estado_deputado'] . "') AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo  AND pessoa_estado = '" . $depConfig['estado_deputado'] . "' ORDER BY $ordernarPor $order LIMIT :offset, :itens";
                 $termo = '%' . $termo . '%';
             }
-        }else{
+        } else {
             if ($termo === null) {
                 $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000) AS total FROM view_pessoas WHERE pessoa_id <> 1000 ORDER BY $ordernarPor $order LIMIT :offset, :itens";
             } else {
@@ -128,7 +168,7 @@ class PessoaModel {
             }
         }
 
-        
+
 
         try {
             $stmt = $this->db->prepare($query);

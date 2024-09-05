@@ -178,7 +178,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                                 <option value="desc" <?php echo $ordem == 'desc' ? 'selected' : ''; ?>>Ordem Decrescente</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 col-6">
+                                        <div class="col-md-2 col-12">
                                             <select class="form-select form-select-sm" name="itens" required>
                                                 <option value="5" <?php echo $itens == 5 ? 'selected' : ''; ?>>5 itens</option>
                                                 <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens</option>
@@ -220,15 +220,15 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
 
                                                     echo '
                                                             <tr>
-                                                                <td><a href="' . $config['app']['url'] . '/orgaos/' . $orgao['orgao_id'] . '" id="link">' . $orgao['orgao_nome'] . '</a></td>
-                                                                <td>' . $orgao['orgao_email'] . '</td>
-                                                                <td>' . $orgao['orgao_telefone'] . '</td>
-                                                                <td>' . $orgao['orgao_endereco'] . '  ' . $orgao['orgao_bairro'] . '</td>
-                                                                <td>' . $orgao['orgao_municipio'] . '/' . $orgao['orgao_estado'] . '</td>
-                                                                <td>' . $orgao['orgao_cep'] . '</td>
-                                                                <td>' . $orgao['orgao_tipo_nome'] . '</td>
-                                                                <td>' . $orgao['orgao_site'] . '</td>
-                                                                <td>' . $orgao['usuario_nome'] . ' | ' . $criado . '</td>
+                                                                <td style="white-space: nowrap;"><a href="' . $config['app']['url'] . '/orgaos/' . $orgao['orgao_id'] . '" id="link">' . $orgao['orgao_nome'] . '</a></td>
+                                                                <td style="white-space: nowrap;">' . $orgao['orgao_email'] . '</td>
+                                                                <td style="white-space: nowrap;">' . $orgao['orgao_telefone'] . '</td>
+                                                                <td style="white-space: nowrap;">' . $orgao['orgao_endereco'] . '  ' . $orgao['orgao_bairro'] . '</td>
+                                                                <td style="white-space: nowrap;">' . $orgao['orgao_municipio'] . '/' . $orgao['orgao_estado'] . '</td>
+                                                                <td style="white-space: nowrap;">' . $orgao['orgao_cep'] . '</td>
+                                                                <td style="white-space: nowrap;">' . $orgao['orgao_tipo_nome'] . '</td>
+                                                                <td style="white-space: nowrap;">' . $orgao['orgao_site'] . '</td>
+                                                                <td style="white-space: nowrap;">' . $orgao['usuario_nome'] . ' | ' . $criado . '</td>
                                                             </tr>
                                                         ';
                                                 }

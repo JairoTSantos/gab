@@ -181,6 +181,7 @@ CREATE TABLE pessoas (
     pessoa_cargo varchar(255) DEFAULT NULL,
     pessoa_tipo int NOT NULL,
     pessoa_orgao int NOT NULL,
+    pessoa_foto text DEFAULT NULL,
     pessoa_criada_em timestamp NULL DEFAULT CURRENT_TIMESTAMP,
     pessoa_atualizada_em timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     pessoa_criada_por int NOT NULL,

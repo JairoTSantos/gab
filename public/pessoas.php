@@ -63,13 +63,13 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                                         </button>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!--<li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" target="_blank" href="<?php echo $config['app']['url'] ?>/imprimir-pessoas">
                                                         <button class="btn btn-outline-primary btn-sm" style="font-size: 0.850em;" type="button">
                                                             <i class="fa-solid fa-print"></i> Imprimir lista
                                                         </button>
                                                     </a>
-                                                </li>
+                                                </li>-->
                                                 <!--<li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/ficha">
                                                         <button class="btn btn-outline-danger btn-sm" style="font-size: 0.850em;" type="button">
@@ -111,7 +111,8 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                         'pessoa_profissao' => $_POST['profissao'],
                                         'pessoa_cargo' => $_POST['cargo'],
                                         'pessoa_orgao' => $_POST['orgao'],
-                                        'pessoa_informacoes' => $_POST['informacoes']
+                                        'pessoa_informacoes' => $_POST['informacoes'],
+                                        'pessoa_foto' => $_FILES['foto']
                                     ];
 
                                     $resultado = $pessoaController->novaPessoa($dados);
@@ -126,28 +127,29 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                 }
 
                                 ?>
-                                <form class="row g-2 form_custom" id="form_novo" method="POST" enctype="application/x-www-form-urlencoded">
+                                <form class="row g-2 form_custom" id="form_novo" method="POST" enctype="multipart/form-data">
                                     <div class="col-md-4 col-12">
                                         <input type="text" class="form-control form-control-sm" name="nome" placeholder="Nome " required>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <input type="text" class="form-control form-control-sm" name="email" placeholder="Email " required>
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-6">
                                         <input type="date" class="form-control form-control-sm" name="aniversario" placeholder="Nome " required>
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-6">
                                         <input type="text" class="form-control form-control-sm" name="telefone" placeholder="Telefone (Somente números)">
                                     </div>
                                     <div class="col-md-5 col-12">
                                         <input type="text" class="form-control form-control-sm" name="endereco" placeholder="Endereço ">
                                     </div>
-                                    <div class="col-md-2 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP (Somente números)" maxlength="8">
-                                    </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-6">
                                         <input type="text" class="form-control form-control-sm" name="bairro" placeholder="Bairro ">
                                     </div>
+                                    <div class="col-md-2 col-6">
+                                        <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP (Somente números)" maxlength="8">
+                                    </div>
+                                    
                                     <div class="col-md-1 col-6">
                                         <select class="form-select form-select-sm" id="estado" name="estado" required>
                                             <option value="" selected>UF</option>
@@ -158,7 +160,7 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                             <option value="" selected>Município</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" id="sexo" name="sexo" required>
                                             <option value="Sexo não informado" selected>Sexo não informado</option>
                                             <option value="Masculino">Masculino</option>
@@ -166,16 +168,16 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                             <option value="Outro">Outro</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-4">
                                         <input type="text" class="form-control form-control-sm" name="facebook" placeholder="@facebook ">
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-4">
                                         <input type="text" class="form-control form-control-sm" name="instagram" placeholder="@instagram ">
                                     </div>
-                                    <div class="col-md-2 col-12">
+                                    <div class="col-md-2 col-4">
                                         <input type="text" class="form-control form-control-sm" name="x" placeholder="@X (Twitter) ">
                                     </div>
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" id="orgao" name="orgao">
                                             <option value="1000" selected>Órgão não informado</option>
                                             <?php
@@ -186,13 +188,12 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                                     echo '<option value="' . $orgao['orgao_id'] . '">' . $orgao['orgao_nome'] . '</option>';
                                                 }
                                             }
-
                                             ?>
 
                                             <option value="+">Novo órgão + </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" id="tipo" name="tipo" required>
                                             <option value="1000" selected>Sem tipo definido</option>
                                             <?php
@@ -223,6 +224,9 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <input type="text" class="form-control form-control-sm" name="cargo" placeholder="Cargo (Diretor, assessor, coordenador....)">
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <input type="file" class="form-control form-control-sm" name="foto" placeholder="Foto">
                                     </div>
                                     <div class="col-md-12 col-12">
                                         <textarea class="form-control form-control-sm" name="informacoes" rows="5" placeholder="Informações importantes dessa pessoa"></textarea>
@@ -301,15 +305,15 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
                                                     $criado = date('d/m H:i', strtotime($pessoa['pessoa_criada_em']));
                                                     echo '
                                                         <tr>
-                                                            <td><a href="' . $config['app']['url'] . '/pessoas/' . $pessoa['pessoa_id'] . '" id="link">' . $pessoa['pessoa_nome'] . '</a></td>
-                                                            <td>' . $pessoa['pessoa_email'] . '</td>
-                                                            <td>' . $pessoa['pessoa_telefone'] . '</td>
-                                                            <td>' . $pessoa['pessoa_endereco'] . '  ' . $pessoa['pessoa_bairro'] . '</td>
-                                                            <td>' . $pessoa['pessoa_municipio'] . '/' . $pessoa['pessoa_estado'] . '</td>
-                                                            <td>' . $pessoa['pessoa_tipo_nome'] . '</td>
-                                                            <td>' . $pessoa['pessoas_profissoes_nome'] . '</td>
-                                                            <td>' . $pessoa['orgao_nome'] . '</td>
-                                                            <td>' . $pessoa['usuario_nome'] . ' | ' . $criado . '</td>
+                                                            <td style="white-space: nowrap;"><a href="' . $config['app']['url'] . '/pessoas/' . $pessoa['pessoa_id'] . '" id="link">' . $pessoa['pessoa_nome'] . '</a></td>
+                                                            <td style="white-space: nowrap;">' . $pessoa['pessoa_email'] . '</td>
+                                                            <td style="white-space: nowrap;">' . $pessoa['pessoa_telefone'] . '</td>
+                                                            <td style="white-space: nowrap;">' . $pessoa['pessoa_endereco'] . '  ' . $pessoa['pessoa_bairro'] . '</td>
+                                                            <td style="white-space: nowrap;">' . $pessoa['pessoa_municipio'] . '/' . $pessoa['pessoa_estado'] . '</td>
+                                                            <td style="white-space: nowrap;">' . $pessoa['pessoa_tipo_nome'] . '</td>
+                                                            <td style="white-space: nowrap;">' . $pessoa['pessoas_profissoes_nome'] . '</td>
+                                                            <td style="white-space: nowrap;">' . $pessoa['orgao_nome'] . '</td>
+                                                            <td style="white-space: nowrap;">' . $pessoa['usuario_nome'] . ' | ' . $criado . '</td>
                                                         </tr>
                                                     ';
                                                 }
