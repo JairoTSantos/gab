@@ -73,4 +73,48 @@ class UsuarioModel {
             return ['status' => 'error'];
         }
     }
+
+    public function BuscarUsuario($coluna, $valor) {
+
+        $query = "SELECT * FROM usuarios WHERE $coluna = :valor AND usuario_id <> 1000";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':valor', $valor);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return ['status' => 'empty'];
+            }
+            return [
+                'status' => 'success',
+                'dados' => $result
+            ];
+        } catch (PDOException $e) {
+            $this->logger->novoLog('user_error', $e->getMessage());
+            return [
+                'status' => 'error',
+            ];
+        }
+    }
+
+    public function ApagarUsuario($id) {
+
+        $query = "DELETE FROM usuarios WHERE usuario_id = :id";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return ['status' => 'success'];
+        } catch (PDOException $e) {
+            if (isset($e->errorInfo[1]) && $e->errorInfo[1] === 1451) {
+                return ['status' => 'delete_conflict'];
+            }
+            $this->logger->novoLog('user_error', $e->getMessage());
+            return ['status' => 'error'];
+        }
+    }
 }

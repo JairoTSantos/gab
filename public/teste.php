@@ -16,6 +16,10 @@
     require_once dirname(__DIR__) . '/app/controllers/usuarioController.php';
 
     $usuarioController = new UsuarioController();
+
+    //print_r($usuarioController->apagarUsuario(1014));
+
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
@@ -29,7 +33,7 @@
             'usuario_senha' => $_POST['usuario_senha'],
             'foto' => $_FILES['foto']
         ];
-        $resultado = $usuarioController->atualizarUsuario(1011, $usuario);
+        $resultado = $usuarioController->NovoUsuario($usuario);
 
 
         print_r($resultado);

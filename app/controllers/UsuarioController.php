@@ -16,7 +16,7 @@ class UsuarioController {
     }
 
 
-    public function criarUsuario($dados) {
+    public function NovoUsuario($dados) {
 
         $dados['usuario_nome'] = isset($dados['usuario_nome']) ? trim($dados['usuario_nome']) : '';
         $dados['usuario_email'] = isset($dados['usuario_email']) ? trim($dados['usuario_email']) : '';
@@ -43,10 +43,18 @@ class UsuarioController {
             }
         }
 
-        return $this->usuarioModel->NovoUsuario($dados);
+        $result =  $this->usuarioModel->NovoUsuario($dados);
+
+        if ($result['status'] == 'error' || $result['status'] == 'duplicated') {
+            if (isset($dados['usuario_foto']) && !empty($dados['usuario_foto'])) {
+                unlink('..' . $dados['usuario_foto']);
+            }
+        }
+
+        return $result;
     }
 
-    public function atualizarUsuario($id, $dados) {
+    public function AtualizarUsuario($id, $dados) {
 
         $dados['usuario_nome'] = isset($dados['usuario_nome']) ? trim($dados['usuario_nome']) : '';
         $dados['usuario_email'] = isset($dados['usuario_email']) ? trim($dados['usuario_email']) : '';
@@ -75,6 +83,33 @@ class UsuarioController {
             $dados['usuario_foto'] = '';
         }
 
-        return $this->usuarioModel->AtualizarUsuario($id, $dados);
+        $result = $this->usuarioModel->AtualizarUsuario($id, $dados);
+
+        if ($result['status'] == 'error') {
+            if (isset($dados['usuario_foto']) && !empty($dados['usuario_foto'])) {
+                unlink('..' . $dados['usuario_foto']);
+            }
+        }
+
+        return $result;
+    }
+
+    public function BuscarUsuario($coluna, $valor) {
+
+        if (!in_array($coluna, ['usuario_id', 'usuario_email'])) {
+            return ['status' => 'invalid_column', 'message' => 'A coluna selecionada é inválida'];
+        }
+
+        return $this->usuarioModel->buscarUsuario($coluna, $valor);
+    }
+
+    function ApagarUsuario($id) {
+        $result = $this->buscarUsuario('usuario_id', $id);
+
+        if ($result['status'] == 'success' && $result['dados']['usuario_foto'] != null) {
+            unlink('..' . $result['dados']['usuario_foto']);
+        }
+
+        return $this->usuarioModel->ApagarUsuario($id);
     }
 }
