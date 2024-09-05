@@ -18,9 +18,8 @@ return [
         'pass' => 'intell01'
     ],
     'app' => [
-        'session_time' => 86400,
-        'app_folder' => $protocol . $host . $uri,
-        'url' => '/' . basename(dirname(dirname(__DIR__)))
+        'maximum_file_size' => 5, //MB
+        'permitted_files' => ['png', 'jpg', 'jpeg', 'docx', 'pdf', 'doc']
     ],
     'deputado' => [
         'id_deputado' => 204379,

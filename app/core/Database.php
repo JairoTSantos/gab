@@ -1,6 +1,5 @@
 <?php
 
-
 class Database {
 
     private static $instance = null;
@@ -8,6 +7,7 @@ class Database {
 
     private function __construct() {
         require_once dirname(__DIR__) . '/core/Logger.php';
+        $logger = new Logger();
 
         $config = require dirname(__DIR__) . '/config/config.php';
         $dbConfig = $config['db'];
@@ -20,9 +20,8 @@ class Database {
             );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            novoLog('database_error', 'Erro na conexão: ' . $e->getMessage());
-            echo '<script>window.location.href = "' . $config['app']['url'] . '/erro-sistema";</script>';
-            die();
+            $logger->novoLog('database_error', 'Erro na conexão: ' . $e->getMessage());
+            throw new Exception('Não foi possível conectar ao banco de dados.');
         }
     }
 
