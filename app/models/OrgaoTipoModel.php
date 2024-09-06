@@ -103,7 +103,7 @@ class OrgaoTipoModel {
 
     public function BuscarOrgaoTipo($coluna, $valor) {
         try {
-            $query = "SELECT * FROM orgaos_tipos WHERE $coluna = :valor";
+            $query = "SELECT * FROM orgaos_tipos WHERE $coluna = :valor AND orgao_tipo_id <> 1000";
 
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':valor', $valor);

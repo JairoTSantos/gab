@@ -103,7 +103,7 @@ class TipoPessoaModel {
 
     public function BuscarTipoPessoa($coluna, $valor) {
         try {
-            $query = "SELECT * FROM pessoas_tipos WHERE $coluna = :valor";
+            $query = "SELECT * FROM pessoas_tipos WHERE $coluna = :valor AND pessoa_tipo_id <> 1000";
 
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':valor', $valor);
