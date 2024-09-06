@@ -28,7 +28,6 @@ class TipoPessoaModel {
 
             return ['status' => 'success'];
         } catch (PDOException $e) {
-            // Verifica erro de chave duplicada
             if (isset($e->errorInfo[1]) && $e->errorInfo[1] === 1062) {
                 return ['status' => 'duplicated'];
             }
