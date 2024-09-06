@@ -148,24 +148,22 @@ class UsuarioController {
 
     public function ApagarUsuario($id) {
 
-        $result = $this->usuarioModel->ApagarUsuario('usuario_id', $id);
+        $result = $this->usuarioModel->BuscarUsuario('usuario_id', $id);
 
-        if ($result['status'] == 'success' && $result['dados']['usuario_foto'] != null) {
-            unlink('..' . $result['dados']['pessoa_foto']);
-        }
+        $resultDelete = $this->usuarioModel->ApagarUsuario($id);
 
-        $result = $this->usuarioModel->ApagarUsuario($id);
-
-
-        if ($result['status'] == 'success') {
+        if ($resultDelete['status'] == 'success') {
+            if ($result['dados']['usuario_foto'] != null) {
+                unlink('..' . $result['dados']['usuario_foto']);
+            }
             return ['status' => 'success', 'dados' => $result['dados']];
         }
 
-        if ($result['status'] == 'delete_conflict') {
+        if ($resultDelete['status'] == 'delete_conflict') {
             return ['status' => 'delete_conflict', 'message' => 'Esse usuário não pode ser apagado.'];
         }
 
-        if ($result['status'] == 'error') {
+        if ($resultDelete['status'] == 'error') {
             return ['status' => 'error', 'message' => 'Erro ao listar usuários.'];
         }
     }
