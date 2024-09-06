@@ -1,6 +1,6 @@
 RewriteEngine On
 
-Options -Indexes
+#Options -Indexes
 
 #RewriteCond %{THE_REQUEST} \.php [NC]
 #RewriteRule ^ - [F,L]

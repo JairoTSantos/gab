@@ -21,14 +21,14 @@ class UploadFile {
         if (!in_array($extensao, $arquivosPermitidos)) {
             return [
                 'status' => 'file_not_permitted',
-                'message' => 'Tipo de arquivo não permitido. Tipos permitidos: ' . $tiposPermitidos
+                'permitted_files' => $tiposPermitidos
             ];
         }
 
         if ($arquivo['size'] > $this->appConfig['app']['maximum_file_size'] * 1024 * 1024) {
             return [
                 'status' => 'file_too_large',
-                'message' => 'O arquivo é muito grande. Máximo permitido é ' . $this->appConfig['app']['maximum_file_size'] . ' MB.'
+                'maximun_size' => $this->appConfig['app']['maximum_file_size'] . ' MB.'
             ];
         }
 
@@ -36,9 +36,9 @@ class UploadFile {
         $caminhoArquivo = $pasta . DIRECTORY_SEPARATOR . $nomeArquivo;
 
         if (move_uploaded_file($arquivo['tmp_name'], $caminhoArquivo)) {
-            return ['status' => 'upload_ok', 'message' => 'Upload feito com sucesso.', 'filename' => $nomeArquivo];
+            return ['status' => 'upload_ok', 'filename' => $nomeArquivo];
         } else {
-            return ['status' => 'error', 'message' => 'Erro interno do servidor.'];
+            return ['status' => 'error'];
         }
     }
 }

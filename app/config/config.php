@@ -1,10 +1,5 @@
 <?php
 
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-$host = $_SERVER['HTTP_HOST'];
-$uri = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-
-
 return [
     'db' => [
         'host' => 'localhost',
@@ -18,13 +13,12 @@ return [
         'pass' => 'intell01'
     ],
     'app' => [
-        'maximum_file_size' => 5, //MB
+        'maximum_file_size' => 5,
         'permitted_files' => ['png', 'jpg', 'jpeg', 'docx', 'pdf', 'doc']
     ],
     'deputado' => [
         'id_deputado' => 204379,
         'nome_deputado' => 'Acácio Favacho',
-        'legislatura_atual' => 57,
         'estado_deputado' => 'AP'
     ]
 ];
