@@ -21,50 +21,43 @@ $usuarioController = new UsuarioController();
 
 
 <body class="bg-secondary">
-
     <div class="d-flex" id="wrapper">
         <?php $layoutClass->MontarSideMenu() ?>
         <div id="page-content-wrapper">
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
                 <?php $layoutClass->navBar() ?>
-                <?php $layoutClass->cardDescription('Usuário', 'card usuarios') ?>
-
+                <?php $layoutClass->cardDescription('<i class="fa-solid fa-user-plus"></i> Adicionar usuários', '<p class="card-text mb-2">Seção para gerenciamento do sistema. <p class="card-text mb-2">Todos os campos são obrigatórios (exceto a foto)</p><p class="card-text mb-0">A foto deve ser em JPG ou PNG e ter até 5mb</p>') ?>
                 <div class="row">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2">
                             <div class="card-body p-2">
-
                                 <?php
 
-
                                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
-                                    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
+                                    if ($_POST['usuario_senha'] !== $_POST['usuario_senha2']) {
+                                        $layoutClass->alert('danger', 'As senhas não conferem.', 3);
+                                    } elseif (strlen($_POST['usuario_senha']) < 6) {
+                                        $layoutClass->alert('danger', 'A senha deve ter pelo menos 6 caracteres.', 3);
+                                    } else {
+                                        $usuario = [
+                                            'usuario_nome' => $_POST['usuario_nome'],
+                                            'usuario_email' => $_POST['usuario_email'],
+                                            'usuario_telefone' => $_POST['usuario_telefone'],
+                                            'usuario_aniversario' => $_POST['usuario_aniversario'],
+                                            'usuario_ativo' => $_POST['usuario_ativo'],
+                                            'usuario_nivel' => $_POST['usuario_nivel'],
+                                            'usuario_senha' => $_POST['usuario_senha'],
+                                            'foto' => $_FILES['foto']
+                                        ];
+                                        $resultado = $usuarioController->novoUsuario($usuario);
 
-                                        if ($_POST['usuario_senha'] !== $_POST['usuario_senha2']) {
-                                            $layoutClass->alert('danger', 'As senhas não conferem.', 3);
-                                        } elseif (strlen($_POST['usuario_senha']) < 6) {
-                                            $layoutClass->alert('danger', 'A senha deve ter pelo menos 6 caracteres.', 3);
-                                        } else {
-                                            $usuario = [
-                                                'usuario_nome' => $_POST['usuario_nome'],
-                                                'usuario_email' => $_POST['usuario_email'],
-                                                'usuario_telefone' => $_POST['usuario_telefone'],
-                                                'usuario_aniversario' => $_POST['usuario_aniversario'],
-                                                'usuario_ativo' => $_POST['usuario_ativo'],
-                                                'usuario_nivel' => $_POST['usuario_nivel'],
-                                                'usuario_senha' => $_POST['usuario_senha'],
-                                                'foto' => $_FILES['foto']
-                                            ];
-                                            $resultado = $usuarioController->novoUsuario($usuario);
-
-                                            if ($resultado['status'] === 'success') {
-                                                $layoutClass->alert('success', $resultado['message'], 3);
-                                            } else if ($resultado['status'] === 'file_not_permitted' || $resultado['status'] === 'duplicated' || $resultado['status'] === 'file_too_large') {
-                                                $layoutClass->alert('info', $resultado['message'], 3);
-                                            } else if ($resultado['status'] === 'error') {
-                                                $layoutClass->alert('danger', $resultado['message'], 3);
-                                            }
+                                        if ($resultado['status'] === 'success') {
+                                            $layoutClass->alert('success', $resultado['message'], 3);
+                                        } else if ($resultado['status'] === 'file_not_permitted' || $resultado['status'] === 'duplicated' || $resultado['status'] === 'file_too_large') {
+                                            $layoutClass->alert('info', $resultado['message'], 3);
+                                        } else if ($resultado['status'] === 'error' || $resultado['status'] === 'forbidden') {
+                                            $layoutClass->alert('danger', $resultado['message'], 3);
                                         }
                                     }
                                 }
@@ -120,7 +113,7 @@ $usuarioController = new UsuarioController();
                 if ($usuarios['status'] == 'success' && $usuarios['status'] != 'empty') {
                     foreach ($usuarios['dados'] as $usuario) {
                         $tabela[] = [
-                            'Nome' => $usuario['usuario_nome'],
+                            'Nome' => '<a href="editar-usuario.php?id=' . $usuario['usuario_id'] . '">' . $usuario['usuario_nome'] . '</a>',
                             'Email' => $usuario['usuario_email'],
                             'Telefone' => $usuario['usuario_telefone'],
                             'Aniversário' => date('d/m', strtotime($usuario['usuario_aniversario'])),

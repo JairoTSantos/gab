@@ -91,22 +91,41 @@ class OrgaoModel {
         }
     }
 
-    public function ListarOrgaos($itens, $pagina, $ordem, $ordenarPor) {
+    public function ListarOrgaos($itens, $pagina, $ordem, $ordenarPor, $termo, $filtro) {
+
+        $config = require dirname(__DIR__) . '/config/config.php';
+        $depConfig = $config['deputado'];
 
         $pagina = (int)$pagina;
         $itens = (int)$itens;
         $offset = ($pagina - 1) * $itens;
 
-        $query = "SELECT view_orgaos.*, (SELECT COUNT(usuario_id) FROM orgaos WHERE orgao_id <> 1000) AS total 
-                  FROM view_orgaos 
-                  WHERE orgao_id <> 1000 
-                  ORDER BY $ordenarPor $ordem 
-                  LIMIT :offset, :itens";
+
+        if ($termo === null) {
+            if ($filtro) {
+                $query = "SELECT view_orgaos.*, (SELECT COUNT(*) FROM orgaos WHERE orgao_id <> 1000 AND orgao_estado = '".$depConfig['estado_deputado']."') AS total FROM view_orgaos WHERE orgao_id <> 1000 AND orgao_estado = '".$depConfig['estado_deputado']."' ORDER BY $ordenarPor $ordem LIMIT :offset, :itens";
+            } else {
+                $query = "SELECT view_orgaos.*, (SELECT COUNT(*) FROM orgaos WHERE orgao_id <> 1000) AS total FROM view_orgaos WHERE orgao_id <> 1000 ORDER BY $ordenarPor $ordem LIMIT :offset, :itens";
+            }
+        } else {
+            if ($filtro) {
+                $query = "SELECT view_orgaos.*, (SELECT COUNT(*) FROM orgaos WHERE orgao_id <> 1000 AND orgao_nome LIKE :termo AND orgao_estado = '".$depConfig['estado_deputado']."') AS total FROM view_orgaos WHERE orgao_id <> 1000 AND orgao_nome LIKE :termo AND orgao_estado = '".$depConfig['estado_deputado']."' ORDER BY $ordenarPor $ordem LIMIT :offset, :itens";
+                $termo = '%' . $termo . '%';
+            } else {
+                $query = "SELECT view_orgaos.*, (SELECT COUNT(*) FROM orgaos WHERE orgao_id <> 1000 AND orgao_nome LIKE :termo) AS total FROM view_orgaos WHERE orgao_id <> 1000 AND orgao_nome LIKE :termo ORDER BY $ordenarPor $ordem LIMIT :offset, :itens";
+                $termo = '%' . $termo . '%';
+            }
+        }
 
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
             $stmt->bindValue(':itens', $itens, PDO::PARAM_INT);
+
+            if ($termo !== null) {
+                $stmt->bindValue(':termo', $termo, PDO::PARAM_STR);
+            }
+
             $stmt->execute();
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

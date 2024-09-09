@@ -11,7 +11,8 @@ class Layout {
                <link href="css/custom.css" rel="stylesheet" />
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
               <script src="vendor/startbootstrap-simple-sidebar-gh-pages/js/scripts.js"></script>
-               <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+              <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
         <script src="https://kit.fontawesome.com/632988d903.js" crossorigin="anonymous"></script>';
     }
 
@@ -74,7 +75,7 @@ class Layout {
 
     function cardDescription($titulo, $message) {
         echo '<div class="card mb-2 card_description">
-                <div class="card-header bg-primary text-white px-2 py-1">' . $titulo . '</div>
+                <div class="card-header bg-primary text-white px-2 py-1  card-background">' . $titulo . '</div>
                 <div class="card-body p-2">
                  ' . $message . '
                 </div>
@@ -84,9 +85,9 @@ class Layout {
     public function criarTabela(array $dados = []) {
         if (empty($dados)) {
             return <<<HTML
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-12">
-                        <div class="card shadow-sm mb-3">
+                        <div class="card shadow-sm">
                             <div class="card-body p-2">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered mb-0 custom_table">
@@ -112,9 +113,9 @@ class Layout {
         $chaves = array_keys(reset($dados));
 
         $html = <<<HTML
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col-12">
-                    <div class="card shadow-sm mb-3">
+                    <div class="card shadow-sm">
                         <div class="card-body p-2">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered mb-0 custom_table">
@@ -123,7 +124,7 @@ class Layout {
         HTML;
 
         foreach ($chaves as $chave) {
-            $html .= "<th>{$chave}</th>";
+            $html .= "<th style='white-space: nowrap;'>{$chave}</th>";
         }
 
         $html .= <<<HTML
@@ -135,7 +136,7 @@ class Layout {
         foreach ($dados as $linha) {
             $html .= '<tr>';
             foreach ($chaves as $chave) {
-                $html .= "<td>{$linha[$chave]}</td>";
+                $html .= "<td style='white-space: nowrap;'>{$linha[$chave]}</td>";
             }
             $html .= '</tr>';
         }

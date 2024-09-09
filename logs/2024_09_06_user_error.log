@@ -1,3 +1,0 @@
-2024-09-06 15:18:31 - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ususario_nome' in 'field list'
-2024-09-06 15:18:42 - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ususario_nome' in 'field list'
-2024-09-06 15:24:52 - SQLSTATE[42S02]: Base table or view not found: 1051 Unknown table 'usuasrios'

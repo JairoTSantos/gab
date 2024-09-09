@@ -17,6 +17,7 @@ class UsuarioController {
         $this->usuario_nivel = 1; /// pegar do session
     }
 
+
     public function NovoUsuario($dados) {
 
         if ($this->usuario_nivel != 1) {
@@ -62,13 +63,13 @@ class UsuarioController {
         }
     }
 
-    public function AtualizarUsuario($dados) {
+    public function AtualizarUsuario($id, $dados) {
 
         if ($this->usuario_nivel != 1) {
-            return ['status' => 'forbidden', 'message' => 'Você não tem autorização para inserir novos usuários.'];
+            return ['status' => 'forbidden', 'message' => 'Você não tem autorização para atualizar usuários.'];
         }
 
-        if (empty($dados['usuario_nome']) || empty($dados['usuario_email']) || empty($dados['usuario_telefone']) || empty($dados['usuario_senha']) || !isset($dados['usuario_nivel']) || !isset($dados['usuario_ativo']) || empty($dados['usuario_aniversario'])) {
+        if (empty($dados['usuario_nome']) || empty($dados['usuario_email']) || empty($dados['usuario_telefone']) || !isset($dados['usuario_nivel']) || !isset($dados['usuario_ativo']) || empty($dados['usuario_aniversario'])) {
             return ['status' => 'bad_request', 'message' => 'Preencha todos os campos.'];
         }
 
@@ -88,13 +89,13 @@ class UsuarioController {
                 }
             }
         } else {
-            $dados['usuario_foto'] == null;
+            $dados['usuario_foto'] = null;
         }
 
-        $result = $this->usuarioModel->NovoUsuario($dados);
+        $result = $this->usuarioModel->AtualizarUsuario($id, $dados);
 
         if ($result['status'] == 'success') {
-            return ['status' => 'success', 'message' => 'Usuário atualizado com sucesso.'];
+            return ['status' => 'success', 'message' => 'Usuário atualizado com sucesso. Aguarde...'];
         }
 
         if ($result['status'] == 'error') {
@@ -156,7 +157,7 @@ class UsuarioController {
             if ($result['dados']['usuario_foto'] != null) {
                 unlink('..' . $result['dados']['usuario_foto']);
             }
-            return ['status' => 'success', 'dados' => $result['dados']];
+            return ['status' => 'success', 'message' => 'Usuário apagado com sucesso. Aguarde...', 'dados' => $result['dados']];
         }
 
         if ($resultDelete['status'] == 'delete_conflict') {
