@@ -12,13 +12,13 @@ class OrgaoTipoController {
         $this->usuario_id = 1000; // pegar do session
     }
 
-    public function NovoOrgao($dados) {
+    public function NovoTipoOrgao($dados) {
 
         if (empty($dados['orgao_tipo_nome'])) {
             return ['status' => 'bad_request', 'message' => 'Preencha todos os campos.'];
         }
 
-        $dados['orgao_criado_por'] = $this->usuario_id;
+        $dados['orgao_tipo_criado_por'] = $this->usuario_id;
 
         $result = $this->orgaoTipoModel->NovoOrgaoTipo($dados);
 

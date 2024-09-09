@@ -57,6 +57,30 @@ if ($buscarOrgao['status'] == 'empty' || $buscarOrgao['status'] == 'error') {
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-12 ">
+                        <div class="card shadow-sm mb-2 ">
+                            <div class="card-body p-0">
+                                <nav class="navbar navbar-expand bg-body-tertiary p-0">
+                                    <div class="container-fluid p-0 ">
+                                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                            <ul class="navbar-nav me-auto mb-0 mb-lg-0 ">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/orgaos-tipos">
+                                                        <button class="btn btn-outline-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
+                                                            <i class="fa-solid fa-circle-plus"></i> Novo tipo
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2">
                             <div class="card-body p-2">
@@ -232,7 +256,7 @@ if ($buscarOrgao['status'] == 'empty' || $buscarOrgao['status'] == 'error') {
         $('#tipo').change(function() {
             if ($('#tipo').val() == '+') {
                 if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
-                    window.location.href = "orgaos-tipo.php";
+                    window.location.href = "orgaos-tipos.php";
                 }
             }
         });
@@ -250,6 +274,14 @@ if ($buscarOrgao['status'] == 'empty' || $buscarOrgao['status'] == 'error') {
             const confirmacao = confirm("Tem certeza que deseja atualizar este órgao?");
             if (!confirmacao) {
                 event.preventDefault();
+            }
+        });
+
+        $('#btn_novo_tipo').click(function() {
+            if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
+                window.location.href = "orgaos-tipos.php";
+            }else{
+                return false;
             }
         });
     </script>

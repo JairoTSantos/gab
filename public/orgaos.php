@@ -5,10 +5,8 @@ $layoutClass = new Layout();
 require_once dirname(__DIR__) . '/app/controllers/OrgaoController.php';
 $orgaoController = new OrgaoController();
 
-
 require_once dirname(__DIR__) . '/app/controllers/OrgaoTipoController.php';
 $orgaoTipoController = new OrgaoTipoController();
-
 
 
 $itens = isset($_GET['itens']) ? (int)$_GET['itens'] : 10;
@@ -22,8 +20,6 @@ $config = require dirname(__DIR__) . '/app/config/config.php';
 $depConfig = $config['deputado'];
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +41,33 @@ $depConfig = $config['deputado'];
             <div class="container-fluid p-2">
                 <?php $layoutClass->navBar() ?>
                 <?php $layoutClass->cardDescription('<i class="fa-solid fa-user-plus"></i> Adicionar órgãos e instituições', '<p class="card-text mb-2">Seção para gerenciamento de órgãos e instituições</p><p class="card-text mb-0">Os campos <b>nome, email, município e estado</b> são obrigatórios</p>') ?>
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="card shadow-sm mb-2 ">
+                            <div class="card-body p-0">
+                                <nav class="navbar navbar-expand bg-body-tertiary p-0 ">
+                                    <div class="container-fluid p-0">
+                                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                            <ul class="navbar-nav me-auto mb-0 mb-lg-0">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/orgaos-tipos">
+                                                        <button class="btn btn-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
+                                                            <i class="fa-solid fa-circle-plus"></i> Novo tipo
+                                                        </button>
+                                                        <button class="btn btn-secondary btn-sm" style="font-size: 0.850em;" id="btn_imprimir" type="button">
+                                                            <i class="fa-solid fa-print"></i> Imprimir
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2">
@@ -147,7 +170,6 @@ $depConfig = $config['deputado'];
                         <div class="card shadow-sm mb-2">
                             <div class="card-body p-2">
                                 <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
-
                                     <div class="col-md-2 col-6">
                                         <select class="form-select form-select-sm" name="ordenarPor" required>
                                             <option value="orgao_nome" <?php echo $ordenarPor == 'orgao_nome' ? 'selected' : ''; ?>>Ordenar por | Nome</option>
@@ -183,7 +205,6 @@ $depConfig = $config['deputado'];
                                     <div class="col-md-1 col-6">
                                         <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -272,11 +293,19 @@ $depConfig = $config['deputado'];
             }
         });
 
+        $('#btn_novo_tipo').click(function() {
+            if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
+                window.location.href = "orgaos-tipos.php";
+            }else{
+                return false;
+            }
+        });
+
 
         $('#tipo').change(function() {
             if ($('#tipo').val() == '+') {
                 if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
-                    window.location.href = "orgaos-tipo.php";
+                    window.location.href = "orgaos-tipos.php";
                 }
             }
         });

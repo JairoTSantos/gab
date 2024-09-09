@@ -80,7 +80,7 @@ class OrgaoTipoModel {
 
     public function ListarOrgaosTipos() {
         try {
-            $query = "SELECT * FROM orgaos_tipos ORDER BY orgao_tipo_nome ASC";
+            $query = "SELECT * FROM view_orgaos_tipos WHERE orgao_tipo_id ORDER BY orgao_tipo_nome ASC";
 
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -103,7 +103,7 @@ class OrgaoTipoModel {
 
     public function BuscarOrgaoTipo($coluna, $valor) {
         try {
-            $query = "SELECT * FROM orgaos_tipos WHERE $coluna = :valor AND orgao_tipo_id <> 1000";
+            $query = "SELECT * FROM view_orgaos_tipos WHERE $coluna = :valor AND orgao_tipo_id <> 1000";
 
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':valor', $valor);
