@@ -56,7 +56,7 @@ class OrgaoController {
 
 
     public function ListarOrgaos($itens = 10, $pagina = 1, $ordem = 'asc', $ordenarPor = 'orgao_nome', $termo = '', $filtro = false) {
-        $ordenarPor = in_array($ordenarPor, ['orgao_id', 'orgao_nome', 'orgao_criado_em']) ? $ordenarPor : 'orgao_nome';
+        $ordenarPor = in_array($ordenarPor, ['orgao_id', 'orgao_nome', 'orgao_criado_em', 'orgao_municipio', 'orgao_estado']) ? $ordenarPor : 'orgao_nome';
         $ordem = strtoupper($ordem) === 'DESC' ? 'DESC' : 'ASC';
 
         $result = $this->orgaoModel->ListarOrgaos($itens, $pagina, $ordem, $ordenarPor, $termo, $filtro);

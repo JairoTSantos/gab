@@ -152,6 +152,7 @@ $depConfig = $config['deputado'];
                                         <select class="form-select form-select-sm" name="ordenarPor" required>
                                             <option value="orgao_nome" <?php echo $ordenarPor == 'orgao_nome' ? 'selected' : ''; ?>>Ordenar por | Nome</option>
                                             <option value="orgao_estado" <?php echo $ordenarPor == 'orgao_estado' ? 'selected' : ''; ?>>Ordenar por | Estado</option>
+                                            <option value="orgao_municipio" <?php echo $ordenarPor == 'orgao_municipio' ? 'selected' : ''; ?>>Ordenar por | Muncípio</option>
                                             <option value="orgao_tipo_nome" <?php echo $ordenarPor == 'orgao_tipo_nome' ? 'selected' : ''; ?>>Ordenar por | Tipo</option>
                                             <option value="orgao_criado_em" <?php echo $ordenarPor == 'orgao_criado_em' ? 'selected' : ''; ?>>Ordenar por | Criação</option>
                                         </select>
