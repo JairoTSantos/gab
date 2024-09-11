@@ -29,7 +29,7 @@ if ($buscarOrgao['status'] == 'empty' || $buscarOrgao['status'] == 'error') {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <?php $layoutClass->MontarHead('Órgãos e instituições') ?>
+    <?php $layoutClass->MontarHead('Editar órgão') ?>
 </head>
 
 

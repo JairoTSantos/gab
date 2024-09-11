@@ -69,7 +69,7 @@ class PessoaController {
         if (isset($dados['foto']['tmp_name']) && !empty($dados['foto']['tmp_name'])) {
             $uploadResult = $this->uploadFile->salvarArquivo('..' . $this->pasta_foto, $dados['foto']);
             if ($uploadResult['status'] == 'upload_ok') {
-                $dados['usuario_foto'] = $this->pasta_foto . $uploadResult['filename'];
+                $dados['pessoa_foto'] = $this->pasta_foto . $uploadResult['filename'];
             } else {
                 if ($uploadResult['status'] == 'file_not_permitted') {
                     return ['status' => 'file_not_permitted', 'message' => 'Tipo de arquivo não permitido', 'permitted_files' => $uploadResult['permitted_files']];
@@ -88,7 +88,7 @@ class PessoaController {
         $result = $this->pessoaModel->AtualizarPessoa($id, $dados);
 
         if ($result['status'] == 'success') {
-            return ['status' => 'success', 'message' => 'Pessoa atualizada com sucesso.'];
+            return ['status' => 'success', 'message' => 'Pessoa atualizada com sucesso. Aguarde...'];
         }
 
         if ($result['status'] == 'error') {
@@ -138,10 +138,15 @@ class PessoaController {
 
     public function ApagarPessoa($id) {
 
+        $result = $this->pessoaModel->BuscarPessoa('pessoa_id', $id);
+
         $resultDelete = $this->pessoaModel->ApagarPessoa($id);
 
         if ($resultDelete['status'] == 'success') {
-            return ['status' => 'success', 'message' => 'Pessoa apagada com sucesso.'];
+            if ($result['dados']['pessoa_foto'] != null) {
+                unlink('..' . $result['dados']['pessoa_foto']);
+            }
+            return ['status' => 'success', 'message' => 'Pessoa apagada com sucesso. Aguarde...', 'dados' => $result['dados']];
         }
 
         if ($resultDelete['status'] == 'delete_conflict') {
@@ -149,7 +154,7 @@ class PessoaController {
         }
 
         if ($resultDelete['status'] == 'error') {
-            return ['status' => 'error', 'message' => 'Erro ao apagar pessoa.'];
+            return ['status' => 'error', 'message' => 'Erro ao buscar pessoa.'];
         }
     }
 }
