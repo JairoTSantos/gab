@@ -60,7 +60,7 @@ if ($buscaPessoa['status'] == 'empty' || $buscaPessoa['status'] == 'error') {
                                         ?>
                                     </div>
                                     <div class="col-12 col-md-11 mt-2 ">
-                                        <h5 class="card-title"><?php echo $buscaPessoa['dados']['usuario_nome']; ?></h5>
+                                        <h5 class="card-title"><?php echo $buscaPessoa['dados']['pessoa_nome']; ?></h5>
                                         <p class="card-text mb-2"><i class="fa-solid fa-envelope"></i> <?php echo $buscaPessoa['dados']['pessoa_email']; ?></p>
                                         <p class="card-text mb-2"><i class="fa-solid fa-mobile-screen"></i> <?php echo $buscaPessoa['dados']['pessoa_telefone'] ? $buscaPessoa['dados']['pessoa_telefone'] : 'Sem telefone'; ?></p>
                                         <p class="card-text mb-2"><i class="fa-solid fa-cake-candles"></i> <?php echo date('d/M', strtotime($buscaPessoa['dados']['pessoa_aniversario'])); ?></p>

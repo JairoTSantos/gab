@@ -259,8 +259,8 @@ $depConfig = $config['deputado'];
                                         <select class="form-select form-select-sm" name="itens" required>
                                             <option value="5" <?php echo $itens == 5 ? 'selected' : ''; ?>>5 itens</option>
                                             <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens</option>
-                                            <option value="5" <?php echo $itens == 25 ? 'selected' : ''; ?>>25 itens</option>
-                                            <option value="10" <?php echo $itens == 59 ? 'selected' : ''; ?>>50 itens</option>
+                                            <option value="25" <?php echo $itens == 25 ? 'selected' : ''; ?>>25 itens</option>
+                                            <option value="50" <?php echo $itens == 50 ? 'selected' : ''; ?>>50 itens</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-6">
