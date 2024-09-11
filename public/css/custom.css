@@ -30,7 +30,8 @@ a {
 .form_custom input,
 .form_custom select,
 .form_custom textarea,
-.form_custom button {
+.form_custom button,
+.form_custom a  {
     font-size: inherit;
 }
 

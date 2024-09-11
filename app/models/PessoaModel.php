@@ -116,6 +116,42 @@ class PessoaModel {
         }
     }
 
+    public function BuscarAniversariante($mes, $dia) {
+        if ($dia !== null) {
+            $query = "SELECT * FROM view_pessoas WHERE MONTH(pessoa_aniversario) = :mes AND DAY(pessoa_aniversario) = :dia ORDER BY DAY(pessoa_aniversario) ASC";
+        } else {
+            $query = "SELECT * FROM view_pessoas WHERE MONTH(pessoa_aniversario) = :mes ORDER BY DAY(pessoa_aniversario) ASC";
+        }
+    
+        try {
+            $stmt = $this->db->prepare($query);
+            
+            $stmt->bindParam(':mes', $mes, PDO::PARAM_INT);
+    
+            if ($dia !== null) {
+                $stmt->bindParam(':dia', $dia, PDO::PARAM_INT);
+            }
+            
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            if (empty($result)) {
+                return ['status' => 'empty'];
+            }
+            
+            return [
+                'status' => 'success',
+                'dados' => $result
+            ];
+        } catch (PDOException $e) {
+            $this->logger->novoLog('pessoa_error', $e->getMessage());
+            return [
+                'status' => 'error',
+            ];
+        }
+    }
+    
+
 
     public function BuscarPessoa($coluna, $valor) {
 

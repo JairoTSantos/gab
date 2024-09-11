@@ -136,6 +136,24 @@ class PessoaController {
         }
     }
 
+    public function BuscarAniversariante($mes, $dia = null) {
+
+
+        $result = $this->pessoaModel->BuscarAniversariante($mes, $dia);
+
+        if ($result['status'] == 'success') {
+            return ['status' => 'success', 'dados' => $result['dados']];
+        }
+
+        if ($result['status'] == 'empty') {
+            return ['status' => 'empty', 'message' => 'Nenhuma pessoa registrada.'];
+        }
+
+        if ($result['status'] == 'error') {
+            return ['status' => 'error', 'message' => 'Erro ao buscar pessoa.'];
+        }
+    }
+
     public function ApagarPessoa($id) {
 
         $result = $this->pessoaModel->BuscarPessoa('pessoa_id', $id);
