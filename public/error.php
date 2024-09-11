@@ -27,7 +27,7 @@
                                     <div class="card-body p-4 d-flex align-items-center">
                                         <div class="flex-grow-1">
                                             <p class="card-text">O sistema encontrou um erro. Tente novamente ou consulte o administrador do sistema.</p>
-                                            <a href="login" >Voltar para a tela de login</a>
+                                            <a href="login.php" >Voltar para a tela de login</a>
                                         </div>
                                         <div class="ms-3">
                                             <i class="fas fa-exclamation-circle fa-2x text-danger"></i>

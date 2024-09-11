@@ -36,7 +36,7 @@ class Layout {
                                 </li>
                                
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle"  id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$_SESSION['usuario_nome'].'</a>
+                                    <a class="nav-link dropdown-toggle"  id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['usuario_nome'] . '</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="sair.php" style="font-size:0.8em"><i class="fa-solid fa-door-open"></i> Sair</a>
                                     </div>
@@ -46,12 +46,14 @@ class Layout {
                     </div>
                 </nav>';
     }
-    
+
 
     public function MontarSideMenu() {
         echo ' <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
                 <div class="list-group list-group-flush">
+
+                    <p style="margin-left: 21px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão de pessoas</p> 
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="orgaos.php"><i class="fa-solid fa-building-columns"></i> Órgãos e instituições</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="pessoas.php"><i class="fa-solid fa-person"></i> Pessoas</a>
                 </div>
@@ -160,7 +162,7 @@ class Layout {
     function alert($type, $message, $time = 3) {
         // Exibe o alerta com a classe Bootstrap
         echo '<div id="alert-box" class="alert alert-' . $type . ' custom_alert alert-dismissible fade show px-2 py-1 mb-2" role="alert"><b>' . $message . '</b></div>';
-    
+
         // Adiciona o script para remover o alerta após o tempo especificado
         if ($time > 0) {
             echo '<script>
