@@ -14,7 +14,7 @@ class UsuarioController {
         $this->usuarioModel = new UsuarioModel();
         $this->uploadFile = new UploadFile();
         $this->pasta_foto = '/public/arquivos/fotos_usuarios/';
-        $this->usuario_nivel = 1; /// pegar do session
+        $this->usuario_nivel = $_SESSION['usuario_nivel']; /// pegar do session
     }
 
 

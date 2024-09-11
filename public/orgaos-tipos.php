@@ -1,4 +1,7 @@
 <?php
+
+require_once dirname(__DIR__) . '/public/includes/verificaLogado.php';
+
 require_once dirname(__DIR__) . '/public/includes/Layout.php';
 $layoutClass = new Layout();
 

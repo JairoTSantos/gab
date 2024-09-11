@@ -9,7 +9,7 @@ class OrgaoTipoController {
 
     public function __construct() {
         $this->orgaoTipoModel = new orgaoTipoModel();
-        $this->usuario_id = 1000; // pegar do session
+        $this->usuario_id = $_SESSION['usuario_id']; // pegar do session
     }
 
     public function NovoTipoOrgao($dados) {

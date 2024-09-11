@@ -1,4 +1,7 @@
 <?php
+
+require_once dirname(__DIR__) . '/public/includes/verificaLogado.php';
+
 require_once dirname(__DIR__) . '/public/includes/Layout.php';
 $layoutClass = new Layout();
 
@@ -50,7 +53,7 @@ $depConfig = $config['deputado'];
                                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                             <ul class="navbar-nav me-auto mb-0 mb-lg-0">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" aria-current="page" href="<?php echo $config['app']['url'] ?>/orgaos-tipos">
+                                                    <a class="nav-link active p-1" aria-current="page" href="<?php echo $config['app']['url'] ?>/orgaos-tipos">
                                                         <button class="btn btn-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
                                                             <i class="fa-solid fa-circle-plus"></i> Novo tipo
                                                         </button>
