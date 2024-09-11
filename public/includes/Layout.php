@@ -30,10 +30,9 @@ class Layout {
                                         <a class="dropdown-item" href="profissoes.php" style="font-size:0.8em"><i class="fa-solid fa-user-tie"></i> Profissões</a>
                                         <a class="dropdown-item" href="pessoas-tipos.php" style="font-size:0.8em"><i class="fa-solid fa-users-gear"></i> Tipos de pessoas</a>
                                         <a class="dropdown-item" href="orgaos-tipos.php" style="font-size:0.8em"><i class="fa-solid fa-building-flag"></i> Tipos de órgãos ou instituições</a>
+                                         <a class="dropdown-item" href="usuarios.php" style="font-size:0.8em"><i class="fa-solid fa-users"></i> Usuários</a>
                                     </div>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="usuarios.php" style="font-size:0.8em"><i class="fa-solid fa-users"></i> Usuários</a>
-                                    </div>
+                                   
                                 </li>
                                
                                 <li class="nav-item dropdown">
