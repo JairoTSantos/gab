@@ -42,13 +42,14 @@ class Layout {
                     </div>
                 </nav>';
     }
-
+    
 
     public function MontarSideMenu() {
         echo ' <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="orgaos.php"><i class="fa-solid fa-building-columns"></i> Órgãos e instituições</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="pessoas.php"><i class="fa-solid fa-person"></i> Pessoas</a>
                 </div>
             </div>';
     }
