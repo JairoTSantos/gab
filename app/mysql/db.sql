@@ -250,3 +250,5 @@ CREATE VIEW view_clipping AS SELECT clipping.*, orgaos.orgao_nome, usuarios.usua
 CREATE VIEW view_oficios AS SELECT oficios.*, orgaos.orgao_nome, usuarios.usuario_nome FROM oficios INNER JOIN orgaos ON oficios.oficio_orgao = orgaos.orgao_id INNER JOIN usuarios ON oficios.oficio_criado_por = usuarios.usuario_id;
 CREATE VIEW view_notas_tecnicas AS SELECT notas_tecnicas.*, usuarios.usuario_nome FROM notas_tecnicas INNER JOIN usuarios ON notas_tecnicas.nota_criada_por = usuarios.usuario_id;
 CREATE VIEW view_orgaos_tipos AS SELECT orgaos_tipos.*, usuarios.usuario_nome FROM orgaos_tipos INNER JOIN usuarios on orgaos_tipos.orgao_tipo_criado_por = usuarios.usuario_id;
+CREATE VIEW view_pessoas_tipos AS SELECT pessoas_tipos.*, usuarios.usuario_nome FROM pessoas_tipos INNER JOIN usuarios ON pessoas_tipos.pessoa_tipo_criado_por = usuarios.usuario_id ORDER BY pessoas_tipos.pessoa_tipo_nome ASC;
+CREATE VIEW view_profissoes AS SELECT pessoas_profissoes.*, usuarios.usuario_nome FROM pessoas_profissoes INNER JOIN usuarios ON pessoas_profissoes.pessoas_profissoes_criado_por = usuarios.usuario_id ORDER BY pessoas_profissoes.pessoas_profissoes_nome ASC;

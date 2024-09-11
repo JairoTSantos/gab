@@ -77,7 +77,7 @@ class ProfissaoModel {
     public function ListarProfissoes() {
 
       
-        $query = "SELECT * FROM pessoas_profissoes ORDER BY pessoas_profissoes_nome ASC";
+        $query = "SELECT * FROM view_profissoes ORDER BY pessoas_profissoes_nome ASC";
 
         try {
             $stmt = $this->db->prepare($query);
@@ -104,7 +104,7 @@ class ProfissaoModel {
 
     public function BuscarProfissao($coluna, $valor) {
 
-        $query = "SELECT * FROM pessoas_profissoes WHERE $coluna = :valor AND pessoas_profissoes_id <> 1000";
+        $query = "SELECT * FROM view_profissoes WHERE $coluna = :valor AND pessoas_profissoes_id <> 1000";
 
         try {
             $stmt = $this->db->prepare($query);

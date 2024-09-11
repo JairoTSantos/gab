@@ -59,7 +59,7 @@ class PessoaModel {
             $query = "UPDATE pessoas SET pessoa_nome = :pessoa_nome, pessoa_aniversario = :pessoa_aniversario, pessoa_email = :pessoa_email, pessoa_telefone = :pessoa_telefone, pessoa_endereco = :pessoa_endereco, pessoa_bairro = :pessoa_bairro, pessoa_municipio = :pessoa_municipio, pessoa_estado = :pessoa_estado, pessoa_cep = :pessoa_cep, pessoa_sexo = :pessoa_sexo, pessoa_facebook = :pessoa_facebook, pessoa_instagram = :pessoa_instagram, pessoa_x = :pessoa_x, pessoa_informacoes = :pessoa_informacoes, pessoa_profissao = :pessoa_profissao, pessoa_cargo = :pessoa_cargo, pessoa_tipo = :pessoa_tipo, pessoa_orgao = :pessoa_orgao, pessoa_foto = :pessoa_foto, pessoa_atualizada_em = CURRENT_TIMESTAMP WHERE pessoa_id = :pessoa_id";
 
             $stmt = $this->db->prepare($query);
-    
+
             $stmt->bindParam(':pessoa_nome', $dados['pessoa_nome'], PDO::PARAM_STR);
             $stmt->bindParam(':pessoa_aniversario', $dados['pessoa_aniversario'], PDO::PARAM_STR);
             $stmt->bindParam(':pessoa_email', $dados['pessoa_email'], PDO::PARAM_STR);
@@ -80,9 +80,9 @@ class PessoaModel {
             $stmt->bindParam(':pessoa_orgao', $dados['pessoa_orgao'], PDO::PARAM_INT);
             $stmt->bindParam(':pessoa_foto', $dados['pessoa_foto'], PDO::PARAM_STR);
             $stmt->bindParam(':pessoa_id', $pessoa_id, PDO::PARAM_INT);
-    
+
             $stmt->execute();
-    
+
             return ['status' => 'success'];
         } catch (PDOException $e) {
             $this->logger->novoLog('pessoa_error', $e->getMessage());
@@ -93,7 +93,7 @@ class PessoaModel {
     public function ApagarPessoa($id) {
 
         $query = "DELETE FROM pessoas WHERE pessoa_id = :id";
-    
+
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -112,14 +112,14 @@ class PessoaModel {
     public function BuscarPessoa($coluna, $valor) {
 
         $query = "SELECT * FROM view_pessoas WHERE $coluna = :valor";
-    
+
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':valor', $valor);
             $stmt->execute();
-    
+
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
             if (empty($result)) {
                 return ['status' => 'empty'];
             }
@@ -135,21 +135,43 @@ class PessoaModel {
         }
     }
 
-    public function ListarPessoas($itens, $pagina, $ordem, $ordenarPor) {
+    public function ListarPessoas($itens, $pagina, $ordem, $ordenarPor, $termo, $filtro) {
+
+   
+
+        $config = require dirname(__DIR__) . '/config/config.php';
+        $depConfig = $config['deputado'];
 
         $pagina = (int)$pagina;
         $itens = (int)$itens;
         $offset = ($pagina - 1) * $itens;
 
-        $query = "SELECT view_pessoas.*, (SELECT COUNT(pessoa_id) FROM view_pessoas) AS total 
-                  FROM view_pessoas
-                  ORDER BY $ordenarPor $ordem 
-                  LIMIT :offset, :itens";
+
+        if ($termo === null) {
+            if ($filtro) {
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_estado = '" . $depConfig['estado_deputado'] . "') AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_estado = '" . $depConfig['estado_deputado'] . "' ORDER BY $ordenarPor $ordem LIMIT :offset, :itens";
+            } else {
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000) AS total FROM view_pessoas WHERE pessoa_id <> 1000 ORDER BY $ordenarPor $ordem LIMIT :offset, :itens";
+            }
+        } else {
+            if ($filtro) {
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo AND pessoa_estado = '" . $depConfig['estado_deputado'] . "') AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo AND pessoa_estado = '" . $depConfig['estado_deputado'] . "' ORDER BY $ordenarPor $ordem LIMIT :offset, :itens";
+                $termo = '%' . $termo . '%';
+            } else {
+                $query = "SELECT view_pessoas.*, (SELECT COUNT(*) FROM pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo) AS total FROM view_pessoas WHERE pessoa_id <> 1000 AND pessoa_nome LIKE :termo ORDER BY $ordenarPor $ordem LIMIT :offset, :itens";
+                $termo = '%' . $termo . '%';
+            }
+        }
 
         try {
             $stmt = $this->db->prepare($query);
             $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
             $stmt->bindValue(':itens', $itens, PDO::PARAM_INT);
+
+            if ($termo !== null) {
+                $stmt->bindValue(':termo', $termo, PDO::PARAM_STR);
+            }
+
             $stmt->execute();
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -173,7 +195,4 @@ class PessoaModel {
             ];
         }
     }
-    
-    
-    
 }

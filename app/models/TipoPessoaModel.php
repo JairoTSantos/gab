@@ -79,7 +79,7 @@ class TipoPessoaModel {
 
     public function ListarTiposPessoas() {
         try {
-            $query = "SELECT * FROM pessoas_tipos ORDER BY pessoa_tipo_nome ASC";
+            $query = "SELECT * FROM view_pessoas_tipos ORDER BY pessoa_tipo_nome ASC";
 
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -102,7 +102,7 @@ class TipoPessoaModel {
 
     public function BuscarTipoPessoa($coluna, $valor) {
         try {
-            $query = "SELECT * FROM pessoas_tipos WHERE $coluna = :valor AND pessoa_tipo_id <> 1000";
+            $query = "SELECT * FROM view_pessoas_tipos WHERE $coluna = :valor AND pessoa_tipo_id <> 1000";
 
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':valor', $valor);
