@@ -26,6 +26,11 @@ class Layout {
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                              <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle"  id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Configurações</a>
+                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="profissoes.php" style="font-size:0.8em"><i class="fa-solid fa-user-tie"></i> Profissões</a>
+                                        <a class="dropdown-item" href="pessoas-tipos.php" style="font-size:0.8em"><i class="fa-solid fa-users-gear"></i> Tipos de pessoas</a>
+                                        <a class="dropdown-item" href="orgaos-tipos.php" style="font-size:0.8em"><i class="fa-solid fa-building-flag"></i> Tipos de órgãos ou instituições</a>
+                                    </div>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="usuarios.php" style="font-size:0.8em"><i class="fa-solid fa-users"></i> Usuários</a>
                                     </div>
