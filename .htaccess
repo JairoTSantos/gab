@@ -1,3 +1,10 @@
 RewriteEngine On
 
 Options -Indexes
+
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+
