@@ -66,6 +66,25 @@ class PessoaController {
             return ['status' => 'bad_request', 'message' => 'Preencha todos os campos.'];
         }
 
+        if (isset($dados['foto']['tmp_name']) && !empty($dados['foto']['tmp_name'])) {
+            $uploadResult = $this->uploadFile->salvarArquivo('..' . $this->pasta_foto, $dados['foto']);
+            if ($uploadResult['status'] == 'upload_ok') {
+                $dados['usuario_foto'] = $this->pasta_foto . $uploadResult['filename'];
+            } else {
+                if ($uploadResult['status'] == 'file_not_permitted') {
+                    return ['status' => 'file_not_permitted', 'message' => 'Tipo de arquivo não permitido', 'permitted_files' => $uploadResult['permitted_files']];
+                }
+                if ($uploadResult['status'] == 'file_too_large') {
+                    return ['status' => 'file_too_large', 'message' => 'O arquivo deve ter no máximo ' . $uploadResult['maximun_size']];
+                }
+                if ($uploadResult['status'] == 'error') {
+                    return ['status' => 'error', 'message' => 'Erro ao fazer upload.'];
+                }
+            }
+        } else {
+            $dados['pessoa_foto'] = null;
+        }
+
         $result = $this->pessoaModel->AtualizarPessoa($id, $dados);
 
         if ($result['status'] == 'success') {
