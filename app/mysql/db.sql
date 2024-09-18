@@ -33,62 +33,50 @@ CREATE TABLE orgaos_tipos (
 INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1000, 'Tipo não informado', 'Sem tipo definido', 1000);
 
 -- Federal
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1001, 'Ministério', 'Órgão responsável por uma área específica do governo federal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1002, 'Secretaria Especial', 'Órgão que auxilia o governo federal em sua área de atuação', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1003, 'Autarquia Federal', 'Órgão com autonomia administrativa e financeira', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1004, 'Fundação Federal', 'Órgão criado para fins específicos e de interesse público', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1005, 'Empresa Pública Federal', 'Órgão que realiza atividades econômicas', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1006, 'Sociedade de Economia Mista Federal', 'Órgão com capital misto público e privado', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1007, 'Agência Reguladora Federal', 'Órgão responsável por regular setores específicos', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1008, 'Universidade Federal', 'Instituição de ensino superior federal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1009, 'Instituto Federal', 'Instituição de ensino técnico e tecnológico federal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1010, 'Centro de Pesquisa Federal', 'Instituição voltada para pesquisas científicas e tecnológicas', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1011, 'Hospital Público Federal', 'Unidade de saúde pública federal para atendimento à população', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1012, 'Escola Pública Federal', 'Instituição de ensino fundamental e médio pública federal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1013, 'Biblioteca Pública Federal', 'Instituição que disponibiliza livros e recursos culturais', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1014, 'Polícia Federal', 'Órgão responsável pela segurança e investigação em âmbito federal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1015, 'Corpo de Bombeiros Militar Federal', 'Órgão responsável pelo combate a incêndios e salvamento em âmbito federal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1016, 'Supremo Tribunal Federal', 'Órgão judiciário máximo do país responsável por questões constitucionais', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1017, 'Tribunal Superior Eleitoral', 'Órgão responsável pela organização das eleições no país', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1018, 'Governo Federal', 'Órgão executivo federal responsável pela administração do país', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1019, 'Congresso Nacional', 'Sede do poder legislativo federal', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1001, 'Ministério', 'Órgão responsável por uma área específica do governo federal', 1000);
+
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1002, 'Autarquia Federal', 'Órgão com autonomia administrativa e financeira', 1000);
+
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1003, 'Empresa Pública Federal', 'Órgão que realiza atividades econômicas como públicos, correios, eletrobras..', 1000);
+
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1004, 'Universidade Federal', 'Instituição de ensino superior federal', 1000);
+
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1005, 'Polícia Federal', 'Órgão responsável pela segurança e investigação em âmbito federal', 1000);
 
 -- Estadual
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1020, 'Governo Estadual', 'Órgão executivo estadual responsável pela administração de um estado', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1021, 'Assembleia Legislativa Estadual', 'Órgão legislativo estadual responsável pela criação de leis estaduais', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1022, 'Tribunal de Justiça Estadual', 'Órgão judiciário responsável por julgar casos no âmbito estadual', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1023, 'Polícia Militar Estadual', 'Órgão responsável pela segurança e ordem pública estadual', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1020, 'Governo Estadual', 'Órgão executivo estadual responsável pela administração de um estado', 1000);
+
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1021, 'Assembleia Legislativa Estadual', 'Órgão legislativo estadual responsável pela criação de leis estaduais', 1000);
 
 -- Municipal
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1025, 'Prefeitura', 'Órgão executivo municipal responsável pela administração local', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1026, 'Câmara Municipal', 'Órgão legislativo municipal responsável pela criação de leis municipais', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1027, 'Tribunal de Contas Municipal', 'Órgão responsável pela fiscalização financeira e orçamentária municipal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1028, 'Polícia Municipal', 'Órgão responsável pela segurança pública municipal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1029, 'Corpo de Bombeiros Municipal', 'Órgão responsável pelo combate a incêndios e salvamento em nível municipal', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1025, 'Prefeitura', 'Órgão executivo municipal responsável pela administração local', 1000);
+
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1026, 'Câmara Municipal', 'Órgão legislativo municipal responsável pela criação de leis municipais', 1000);
+
 -- Órgãos Gerais
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1030, 'Entidade Civil', 'Organização sem fins lucrativos que atua em prol de causas sociais', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1031, 'Organização Não-Governamental (ONG)', 'Entidade privada que realiza atividades de interesse público, sem fins lucrativos', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1032, 'Agência de Desenvolvimento Regional', 'Órgão que promove o desenvolvimento econômico e social de regiões específicas', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1030, 'Entidade Civil', 'Organização sem fins lucrativos que atua em prol de causas sociais', 1000);
 
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1032, 'Escola municipal', 'Escolas municipais', 1000);
 
--- Federal
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1034, 'Banco Central', 'Instituição responsável pela política monetária e estabilidade financeira do país', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1035, 'Procuradoria Geral da República', 'Órgão responsável pela defesa da ordem jurídica e interesses da sociedade no âmbito federal', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1036, 'Instituto Nacional de Estudos e Pesquisas Educacionais (INEP)', 'Órgão responsável pela avaliação e estatísticas educacionais no Brasil', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1031, 'Escola estadual', 'Escolas estaduais', 1000);
 
--- Estadual
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1037, 'Secretaria de Segurança Pública Estadual', 'Órgão responsável pela coordenação das políticas de segurança pública em nível estadual', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1038, 'Secretaria de Saúde Estadual', 'Órgão responsável pela coordenação das políticas de saúde pública em nível estadual', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1039, 'Instituto de Terras e Reforma Agrária Estadual', 'Órgão responsável pela regularização fundiária e reforma agrária em nível estadual', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
+VALUES (1031, 'Escola Federal', 'Escolas federais', 1000);
 
--- Municipal
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1040, 'Secretaria Municipal de Educação', 'Órgão responsável pela administração e políticas educacionais no município', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1041, 'Secretaria Municipal de Saúde', 'Órgão responsável pela coordenação das políticas de saúde pública no município', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1042, 'Instituto Municipal de Previdência', 'Órgão responsável pela gestão dos planos de previdência dos servidores municipais', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1043, 'Fundação Municipal de Cultura', 'Órgão responsável pela promoção e gestão de atividades culturais no município', 1000);
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1044, 'Companhia Municipal de Transporte', 'Órgão responsável pelo gerenciamento do transporte público municipal', 1000);
-
-
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por)
+VALUES (1032, 'Partido Político', 'Partido Político', 1000);
 
 
 CREATE TABLE orgaos (
