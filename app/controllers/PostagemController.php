@@ -74,8 +74,8 @@ class PostagemController {
         }
     }
 
-    public function ListarPostagens($itens = 1000, $pagina = 1, $ordem = 'asc', $ordenarPor = 'postagem_titulo') {
-        $ordenarPor = in_array($ordenarPor, ['postagem_id', 'postagem_titulo', 'postagem_criada_em']) ? $ordenarPor : 'postagem_titulo';
+    public function ListarPostagens($itens = 10, $pagina = 1, $ordem = 'asc', $ordenarPor = 'postagem_data') {
+        $ordenarPor = in_array($ordenarPor, ['postagem_id', 'postagem_titulo', 'postagem_criada_em']) ? $ordenarPor : 'postagem_data';
         $ordem = strtoupper($ordem) === 'DESC' ? 'DESC' : 'ASC';
 
         $result = $this->postagemModel->ListarPostagens($itens, $pagina, $ordem, $ordenarPor);

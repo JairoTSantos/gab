@@ -131,9 +131,10 @@ $statusPostagensController = new StatusPostagemController();
                         $tabela[] = [
                             'Título' => '<a href="editar-postagem.php?id=' . $postagem['postagem_id'] . '">' . $postagem['postagem_titulo'] . '</a>',
                             'Data da publicação' => date('d/m/Y', strtotime($postagem['postagem_data'])),
+                            'Status' => '<b><i class="fa-solid fa-circle-info"></i> ' . $postagem['postagem_status_nome'] . '</b>',
                             'Informações' => $postagem['postagem_informacoes'],
                             'Mídias' => $postagem['postagem_midias'],
-                            'Status' => '<b>' . $postagem['postagem_status_nome'] . '</b>',
+                           
                             'Criado por' => $postagem['usuario_nome'],
                             'Criado em' => date('d/m - H:i', strtotime($postagem['postagem_criada_em'])),
                         ];
