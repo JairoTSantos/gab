@@ -95,7 +95,7 @@ $layoutClass = new Layout();
                                             <input type="password" class="form-control form-control-sm" name="usuario_senha2" placeholder="Confirme a senha" required>
                                         </div>
                                         <div class="col-md-12 col-12">
-                                        <input type="file" id="file-input" name="foto" style="display: none;" />
+                                            <input type="file" id="file-input" name="foto" style="display: none;" />
                                             <button id="file-button" type="button" class="btn btn-primary btn-sm"><i class="fa-regular fa-image"></i> Escolher Foto</button>
                                             <button type="submit" class="btn btn-success btn-sm" name="btn_login"><i class="fa-regular fa-floppy-disk"></i> Salvar</button>
                                         </div>

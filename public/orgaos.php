@@ -57,9 +57,9 @@ $depConfig = $config['deputado'];
                                                         <button class="btn btn-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
                                                             <i class="fa-solid fa-circle-plus"></i> Novo tipo
                                                         </button>
-                                                        <button class="btn btn-secondary btn-sm" style="font-size: 0.850em;" id="btn_imprimir" type="button">
+                                                        <!--<button class="btn btn-secondary btn-sm" style="font-size: 0.850em;" id="btn_imprimir" type="button">
                                                             <i class="fa-solid fa-print"></i> Imprimir
-                                                        </button>
+                                                        </button>-->
                                                     </a>
                                                 </li>
                                             </ul>

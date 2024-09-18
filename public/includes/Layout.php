@@ -53,10 +53,11 @@ class Layout {
                 <div class="sidebar-heading border-bottom bg-light">Gabinete Digital</div>
                 <div class="list-group list-group-flush">
 
-                    <p style="margin-left: 21px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão de pessoas</p> 
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="orgaos.php"><i class="fa-solid fa-building-columns"></i> Órgãos e instituições</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="pessoas.php"><i class="fa-solid fa-person"></i> Pessoas</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="oficios.php"><i class="fa-regular fa-file-lines"></i>  Ofícios</a>
+                    <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão de pessoas</p> 
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2" href="orgaos.php"><i class="fa-solid fa-building-columns"></i> Órgãos e instituições</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2" href="pessoas.php"><i class="fa-solid fa-person"></i> Pessoas</a>
+                    <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão do gabinete</p> 
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2" href="oficios.php"><i class="fa-regular fa-file-lines"></i>  Ofícios</a>
                 </div>
             </div>';
     }
