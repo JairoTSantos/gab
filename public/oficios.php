@@ -176,7 +176,7 @@ $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
                             'Titulo' => '<a href="editar-oficio.php?id=' . $oficio['oficio_id'] . '">' . $oficio['oficio_titulo'] . '</a>',
                             'Ano' => $oficio['oficio_ano'],
                             'Órgão' => $oficio['orgao_nome'],
-                            'Resumo' => $oficio['oficio_resumo'],
+                            'Resumo' => substr($oficio['oficio_resumo'], 0, 50) . '...',
                             'Criado em' => date('d/m - H:i', strtotime($oficio['oficio_criado_em'])),
                         ];
                     }
