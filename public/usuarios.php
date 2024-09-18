@@ -121,7 +121,8 @@ $usuarioController = new UsuarioController();
                             'Telefone' => $usuario['usuario_telefone'],
                             'Aniversário' => date('d/m', strtotime($usuario['usuario_aniversario'])),
                             'Ativo' => $usuario['usuario_ativo'] ? 'Ativo' : 'Desativado',
-                            'Nível' => $usuario['usuario_nivel'] == 1 ? 'Administrador' : 'Assessor'
+                            'Nível' => $usuario['usuario_nivel'] == 1 ? 'Administrador' : 'Assessor',
+                            'Criado em' => date('d/m - H:i', strtotime($usuario['usuario_criado_em'])),
                         ];
                     }
                     echo $layoutClass->criarTabela($tabela);

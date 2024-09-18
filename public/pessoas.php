@@ -16,7 +16,6 @@ $profissaoController = new ProfissaoController();
 require_once dirname(__DIR__) . '/app/controllers/OrgaoController.php';
 $orgaoController = new OrgaoController();
 
-
 $itens = isset($_GET['itens']) ? (int)$_GET['itens'] : 10;
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $ordenarPor = isset($_GET['ordenarPor']) ? htmlspecialchars($_GET['ordenarPor']) : 'pessoa_nome';
@@ -141,7 +140,6 @@ $depConfig = $config['deputado'];
                                     <div class="col-md-2 col-6">
                                         <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP (Somente números)" maxlength="8">
                                     </div>
-
                                     <div class="col-md-1 col-6">
                                         <select class="form-select form-select-sm" id="estado" name="estado" required>
                                             <option value="" selected>UF</option>

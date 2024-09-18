@@ -56,6 +56,7 @@ class Layout {
                     <p style="margin-left: 21px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão de pessoas</p> 
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="orgaos.php"><i class="fa-solid fa-building-columns"></i> Órgãos e instituições</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="pessoas.php"><i class="fa-solid fa-person"></i> Pessoas</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="oficios.php"><i class="fa-regular fa-file-lines"></i>  Ofícios</a>
                 </div>
             </div>';
     }

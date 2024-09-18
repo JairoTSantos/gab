@@ -5,7 +5,7 @@ return [
         'host' => 'localhost',
         'username' => 'root',
         'password' => 'root',
-        'database' => 'api'
+        'database' => 'gabinete_digital'
     ],
     'master_user' => [
         'name' => 'Administrador',
