@@ -29,54 +29,21 @@ CREATE TABLE orgaos_tipos (
     CONSTRAINT fk_orgao_tipo_criado_por FOREIGN KEY (orgao_tipo_criado_por) REFERENCES usuarios(usuario_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
--- Órgãos Gerais
 INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1000, 'Tipo não informado', 'Sem tipo definido', 1000);
-
--- Federal
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1001, 'Ministério', 'Órgão responsável por uma área específica do governo federal', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1002, 'Autarquia Federal', 'Órgão com autonomia administrativa e financeira', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1003, 'Empresa Pública Federal', 'Órgão que realiza atividades econômicas como públicos, correios, eletrobras..', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1004, 'Universidade Federal', 'Instituição de ensino superior federal', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1005, 'Polícia Federal', 'Órgão responsável pela segurança e investigação em âmbito federal', 1000);
-
--- Estadual
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1020, 'Governo Estadual', 'Órgão executivo estadual responsável pela administração de um estado', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1021, 'Assembleia Legislativa Estadual', 'Órgão legislativo estadual responsável pela criação de leis estaduais', 1000);
-
--- Municipal
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1025, 'Prefeitura', 'Órgão executivo municipal responsável pela administração local', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1026, 'Câmara Municipal', 'Órgão legislativo municipal responsável pela criação de leis municipais', 1000);
-
--- Órgãos Gerais
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1030, 'Entidade Civil', 'Organização sem fins lucrativos que atua em prol de causas sociais', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1032, 'Escola municipal', 'Escolas municipais', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1031, 'Escola estadual', 'Escolas estaduais', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1033, 'Escola Federal', 'Escolas federais', 1000);
-
-INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por)
-VALUES (1034, 'Partido Político', 'Partido Político', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1001, 'Ministério', 'Órgão responsável por uma área específica do governo federal', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1002, 'Autarquia Federal', 'Órgão com autonomia administrativa e financeira', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1003, 'Empresa Pública Federal', 'Órgão que realiza atividades econômicas como públicos, correios, eletrobras..', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1004, 'Universidade Federal', 'Instituição de ensino superior federal', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1005, 'Polícia Federal', 'Órgão responsável pela segurança e investigação em âmbito federal', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1020, 'Governo Estadual', 'Órgão executivo estadual responsável pela administração de um estado', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1021, 'Assembleia Legislativa Estadual', 'Órgão legislativo estadual responsável pela criação de leis estaduais', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1025, 'Prefeitura', 'Órgão executivo municipal responsável pela administração local', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1026, 'Câmara Municipal', 'Órgão legislativo municipal responsável pela criação de leis municipais', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1030, 'Entidade Civil', 'Organização sem fins lucrativos que atua em prol de causas sociais', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1031, 'Escola estadual', 'Escolas estaduais', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1032, 'Escola municipal', 'Escolas municipais', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1033, 'Escola Federal', 'Escolas federais', 1000);
+INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) VALUES (1034, 'Partido Político', 'Partido Político', 1000);
 
 
 CREATE TABLE orgaos (
@@ -264,6 +231,39 @@ CREATE TABLE oficios(
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
+CREATE TABLE postagem_status(
+    postagem_status_id INT NOT NULL AUTO_INCREMENT,
+    postagem_status_nome VARCHAR(255) NOT NULL UNIQUE,
+    postagem_status_descricao TEXT NULL,
+    postagem_status_criado_por INT NOT NULL,
+    postagem_status_criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    postagem_status_atualizada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY(postagem_status_id),
+    CONSTRAINT fk_postagem_status_criado_por FOREIGN KEY (postagem_status_criado_por) REFERENCES usuarios(usuario_id)
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+INSERT INTO postagem_status (postagem_status_id, postagem_status_nome, postagem_status_descricao,postagem_status_criado_por) VALUES (1000, 'Iniciada', 'Iniciada uma postagem', 1000);
+INSERT INTO postagem_status (postagem_status_id, postagem_status_nome, postagem_status_descricao,postagem_status_criado_por) VALUES (1001, 'Em produção', 'Postagem em fase de produção', 1000);
+INSERT INTO postagem_status (postagem_status_id, postagem_status_nome, postagem_status_descricao,postagem_status_criado_por) VALUES (1002, 'Em aprovação', 'Postagem em fase de aprovação', 1000);
+INSERT INTO postagem_status (postagem_status_id, postagem_status_nome, postagem_status_descricao,postagem_status_criado_por) VALUES (1003, 'Aprovada', 'Postagem aprovada', 1000);
+INSERT INTO postagem_status (postagem_status_id, postagem_status_nome, postagem_status_descricao,postagem_status_criado_por) VALUES (1004, 'Postada', 'Postagem postada', 1000);
+
+CREATE TABLE postagens(
+    postagem_id INT NOT NULL AUTO_INCREMENT,
+    postagem_titulo VARCHAR(255) NOT NULL,
+    postagem_data TIMESTAMP NULL,
+    postagem_pasta TEXT, 
+    postagem_informacoes TEXT,
+    postagem_midias TEXT,  
+    postagem_status INT,
+    postagem_criada_por INT NOT NULL,
+    postagem_criada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    postagem_atualizada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY(postagem_id),
+    CONSTRAINT fk_postagem_criada_por FOREIGN KEY (postagem_criada_por) REFERENCES usuarios(usuario_id),
+    CONSTRAINT fk_postagem_status FOREIGN KEY (postagem_status) REFERENCES postagem_status(postagem_status_id)
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
 /*-----------------------VIEWS-----------------------*/
 CREATE VIEW view_orgaos AS SELECT orgaos.*, orgaos_tipos.orgao_tipo_nome, usuarios.usuario_nome FROM orgaos INNER JOIN orgaos_tipos ON orgaos.orgao_tipo = orgaos_tipos.orgao_tipo_id INNER JOIN usuarios ON orgaos.orgao_criado_por = usuarios.usuario_id;
 CREATE VIEW view_pessoas AS SELECT pessoas.*, pessoas_profissoes.pessoas_profissoes_nome,  pessoas_tipos.pessoa_tipo_nome, orgaos.orgao_nome, usuarios.usuario_nome FROM pessoas INNER JOIN pessoas_tipos ON pessoas.pessoa_tipo = pessoas_tipos.pessoa_tipo_id INNER JOIN orgaos ON pessoas.pessoa_orgao = orgaos.orgao_id INNER JOIN pessoas_profissoes ON pessoas.pessoa_profissao = pessoas_profissoes.pessoas_profissoes_id INNER JOIN usuarios ON pessoas.pessoa_criada_por = usuarios.usuario_id;
@@ -273,3 +273,4 @@ CREATE VIEW view_notas_tecnicas AS SELECT notas_tecnicas.*, usuarios.usuario_nom
 CREATE VIEW view_orgaos_tipos AS SELECT orgaos_tipos.*, usuarios.usuario_nome FROM orgaos_tipos INNER JOIN usuarios on orgaos_tipos.orgao_tipo_criado_por = usuarios.usuario_id;
 CREATE VIEW view_pessoas_tipos AS SELECT pessoas_tipos.*, usuarios.usuario_nome FROM pessoas_tipos INNER JOIN usuarios ON pessoas_tipos.pessoa_tipo_criado_por = usuarios.usuario_id ORDER BY pessoas_tipos.pessoa_tipo_nome ASC;
 CREATE VIEW view_profissoes AS SELECT pessoas_profissoes.*, usuarios.usuario_nome FROM pessoas_profissoes INNER JOIN usuarios ON pessoas_profissoes.pessoas_profissoes_criado_por = usuarios.usuario_id ORDER BY pessoas_profissoes.pessoas_profissoes_nome ASC;
+CREATE VIEW view_postagens AS SELECT postagens.*, usuarios.usuario_nome, postagem_status.postagem_status_id, postagem_status.postagem_status_nome, postagem_status.postagem_status_descricao FROM postagens INNER JOIN usuarios ON postagens.postagem_criada_por = usuarios.usuario_id INNER JOIN postagem_status ON postagens.postagem_status = postagem_status.postagem_status_id;
