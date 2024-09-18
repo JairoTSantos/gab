@@ -230,7 +230,7 @@ CREATE TABLE oficios(
     CONSTRAINT fk_oficio_orgao FOREIGN KEY (oficio_orgao) REFERENCES orgaos(orgao_id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
-
+/*-----------------------TABELAS POSTAGENS-----------------------*/
 CREATE TABLE postagem_status(
     postagem_status_id INT NOT NULL AUTO_INCREMENT,
     postagem_status_nome VARCHAR(255) NOT NULL UNIQUE,
@@ -274,3 +274,4 @@ CREATE VIEW view_orgaos_tipos AS SELECT orgaos_tipos.*, usuarios.usuario_nome FR
 CREATE VIEW view_pessoas_tipos AS SELECT pessoas_tipos.*, usuarios.usuario_nome FROM pessoas_tipos INNER JOIN usuarios ON pessoas_tipos.pessoa_tipo_criado_por = usuarios.usuario_id ORDER BY pessoas_tipos.pessoa_tipo_nome ASC;
 CREATE VIEW view_profissoes AS SELECT pessoas_profissoes.*, usuarios.usuario_nome FROM pessoas_profissoes INNER JOIN usuarios ON pessoas_profissoes.pessoas_profissoes_criado_por = usuarios.usuario_id ORDER BY pessoas_profissoes.pessoas_profissoes_nome ASC;
 CREATE VIEW view_postagens AS SELECT postagens.*, usuarios.usuario_nome, postagem_status.postagem_status_id, postagem_status.postagem_status_nome, postagem_status.postagem_status_descricao FROM postagens INNER JOIN usuarios ON postagens.postagem_criada_por = usuarios.usuario_id INNER JOIN postagem_status ON postagens.postagem_status = postagem_status.postagem_status_id;
+CREATE VIEW view_postagens_status AS SELECT postagem_status.*, usuarios.usuario_nome FROM postagem_status INNER JOIN usuarios ON postagem_status.postagem_status_criado_por = usuarios.usuario_id ORDER BY postagem_status.postagem_status_nome ASC;
