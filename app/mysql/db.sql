@@ -73,10 +73,10 @@ INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, 
 VALUES (1031, 'Escola estadual', 'Escolas estaduais', 1000);
 
 INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por) 
-VALUES (1031, 'Escola Federal', 'Escolas federais', 1000);
+VALUES (1033, 'Escola Federal', 'Escolas federais', 1000);
 
 INSERT INTO orgaos_tipos (orgao_tipo_id, orgao_tipo_nome, orgao_tipo_descricao, orgao_tipo_criado_por)
-VALUES (1032, 'Partido Político', 'Partido Político', 1000);
+VALUES (1034, 'Partido Político', 'Partido Político', 1000);
 
 
 CREATE TABLE orgaos (
