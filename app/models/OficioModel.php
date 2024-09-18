@@ -15,13 +15,14 @@ class OficioModel {
 
     public function NovoOficio($dados) {
         try {
-            $query = "INSERT INTO oficios (oficio_titulo, oficio_resumo, oficio_ano, oficio_arquivo, oficio_criado_por) VALUES (:oficio_titulo, :oficio_resumo, :oficio_ano,  :oficio_arquivo, :oficio_criado_por)";
+            $query = "INSERT INTO oficios (oficio_titulo, oficio_resumo, oficio_ano, oficio_arquivo, oficio_orgao, oficio_criado_por) VALUES (:oficio_titulo, :oficio_resumo, :oficio_ano, :oficio_arquivo,  :oficio_orgao, :oficio_criado_por)";
 
             $stmt = $this->db->prepare($query);
 
             $stmt->bindParam(':oficio_titulo', $dados['oficio_titulo'], PDO::PARAM_STR);
             $stmt->bindParam(':oficio_resumo', $dados['oficio_resumo'], PDO::PARAM_STR);
             $stmt->bindParam(':oficio_ano', $dados['oficio_ano'], PDO::PARAM_INT);
+            $stmt->bindParam(':oficio_orgao', $dados['oficio_orgao'], PDO::PARAM_INT);
             $stmt->bindParam(':oficio_arquivo', $dados['oficio_arquivo'], PDO::PARAM_STR);
             $stmt->bindParam(':oficio_criado_por', $dados['oficio_criado_por'], PDO::PARAM_INT);
 
@@ -40,31 +41,32 @@ class OficioModel {
     public function AtualizarOficio($id, $dados) {
         try {
             if (isset($dados['oficio_arquivo']) && !empty($dados['oficio_arquivo'])) {
-                $query = "UPDATE oficios SET oficio_titulo = :oficio_titulo, oficio_resumo = :oficio_resumo, oficio_ano = :oficio_ano, oficio_arquivo = :oficio_arquivo WHERE oficio_id = :oficio_id;";
+                $query = "UPDATE oficios SET oficio_titulo = :oficio_titulo, oficio_resumo = :oficio_resumo, oficio_ano = :oficio_ano, oficio_orgao = :oficio_orgao, oficio_arquivo = :oficio_arquivo WHERE oficio_id = :oficio_id;";
             } else {
-                $query = "UPDATE oficios SET oficio_titulo = :oficio_titulo, oficio_resumo = :oficio_resumo, oficio_ano = :oficio_ano WHERE oficio_id = :oficio_id;";
+                $query = "UPDATE oficios SET oficio_titulo = :oficio_titulo, oficio_resumo = :oficio_resumo, oficio_ano = :oficio_ano, oficio_orgao = :oficio_orgao WHERE oficio_id = :oficio_id;";
             }
-    
+
             $stmt = $this->db->prepare($query);
-    
+
             $stmt->bindParam(':oficio_titulo', $dados['oficio_titulo'], PDO::PARAM_STR);
             $stmt->bindParam(':oficio_resumo', $dados['oficio_resumo'], PDO::PARAM_STR);
             $stmt->bindParam(':oficio_ano', $dados['oficio_ano'], PDO::PARAM_INT);
+            $stmt->bindParam(':oficio_orgao', $dados['oficio_orgao'], PDO::PARAM_INT);
             $stmt->bindParam(':oficio_id', $id, PDO::PARAM_INT);
-    
+
             if (isset($dados['oficio_arquivo']) && !empty($dados['oficio_arquivo'])) {
                 $stmt->bindParam(':oficio_arquivo', $dados['oficio_arquivo'], PDO::PARAM_STR);
             }
-    
+
             $stmt->execute();
-    
+
             return ['status' => 'success'];
         } catch (PDOException $e) {
             $this->logger->novoLog('oficio_error', $e->getMessage());
             return ['status' => 'error'];
         }
     }
-    
+
     public function ListarOficios($ano, $busca) {
         try {
             if ($busca === '') {

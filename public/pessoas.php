@@ -62,9 +62,12 @@ $depConfig = $config['deputado'];
                                                         <button class="btn btn-primary btn-sm" style="font-size: 0.850em;" id="btn_nova_profissao" type="button">
                                                             <i class="fa-solid fa-circle-plus"></i> Nova profissão
                                                         </button>
-                                                        <button class="btn btn-secondary btn-sm" style="font-size: 0.850em;" id="btn_imprimir" type="button">
-                                                            <i class="fa-solid fa-print"></i> Imprimir
+                                                        <button class="btn btn-secondary btn-sm" style="font-size: 0.850em;" id="btn_novo_orgao" type="button">
+                                                            <i class="fa-solid fa-circle-plus"></i> Novo órgão
                                                         </button>
+                                                        <!--<button class="btn btn-secondary btn-sm" style="font-size: 0.850em;" id="btn_imprimir" type="button">
+                                                            <i class="fa-solid fa-print"></i> Imprimir
+                                                        </button>-->
                                                     </a>
                                                 </li>
                                             </ul>
@@ -395,6 +398,22 @@ $depConfig = $config['deputado'];
                     window.location.href = "profissoes.php";
                 }
             }
+        });
+
+        $('#orgao').change(function() {
+            if ($('#orgao').val() == '+') {
+                if (window.confirm("Você realmente deseja inserir um novo órgão?")) {
+                    window.location.href = "orgaos.php";
+                }
+            }
+        });
+
+        $('#btn_novo_orgao').click(function() {
+
+            if (window.confirm("Você realmente deseja inserir um novo órgão?")) {
+                window.location.href = "orgaos.php";
+            }
+
         });
 
         $('#file-button').on('click', function() {

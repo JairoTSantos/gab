@@ -264,13 +264,15 @@ CREATE TABLE oficios(
     oficio_id INT NOT NULL AUTO_INCREMENT,
     oficio_titulo VARCHAR(255) NOT NULL UNIQUE,
     oficio_resumo text,
-    oficio_ano int,
     oficio_arquivo text,
+    oficio_ano int,
+    oficio_orgao INT NOT NULL,
     oficio_criado_por INT NOT NULL,
     oficio_criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     oficio_atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(oficio_id),
-    CONSTRAINT fk_oficio_criado_por FOREIGN KEY (oficio_criado_por) REFERENCES usuarios(usuario_id)
+    CONSTRAINT fk_oficio_criado_por FOREIGN KEY (oficio_criado_por) REFERENCES usuarios(usuario_id),
+    CONSTRAINT fk_oficio_orgao FOREIGN KEY (oficio_orgao) REFERENCES orgaos(orgao_id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
@@ -278,7 +280,7 @@ CREATE TABLE oficios(
 CREATE VIEW view_orgaos AS SELECT orgaos.*, orgaos_tipos.orgao_tipo_nome, usuarios.usuario_nome FROM orgaos INNER JOIN orgaos_tipos ON orgaos.orgao_tipo = orgaos_tipos.orgao_tipo_id INNER JOIN usuarios ON orgaos.orgao_criado_por = usuarios.usuario_id;
 CREATE VIEW view_pessoas AS SELECT pessoas.*, pessoas_profissoes.pessoas_profissoes_nome,  pessoas_tipos.pessoa_tipo_nome, orgaos.orgao_nome, usuarios.usuario_nome FROM pessoas INNER JOIN pessoas_tipos ON pessoas.pessoa_tipo = pessoas_tipos.pessoa_tipo_id INNER JOIN orgaos ON pessoas.pessoa_orgao = orgaos.orgao_id INNER JOIN pessoas_profissoes ON pessoas.pessoa_profissao = pessoas_profissoes.pessoas_profissoes_id INNER JOIN usuarios ON pessoas.pessoa_criada_por = usuarios.usuario_id;
 CREATE VIEW view_clipping AS SELECT clipping.*, orgaos.orgao_nome, usuarios.usuario_nome FROM clipping INNER JOIN orgaos ON clipping.clipping_orgao = orgaos.orgao_id INNER JOIN usuarios ON clipping_criado_por = usuarios.usuario_id;
-CREATE VIEW view_oficios AS SELECT oficios.*, usuarios.usuario_nome FROM oficios INNER JOIN usuarios ON oficios.oficio_criado_por = usuarios.usuario_id;
+CREATE VIEW view_oficios AS SELECT oficios.*, orgaos.orgao_nome, orgaos.orgao_id, usuarios.usuario_nome FROM oficios INNER JOIN orgaos ON oficios.oficio_orgao = orgaos.orgao_id INNER JOIN usuarios ON oficios.oficio_criado_por = usuarios.usuario_id;
 CREATE VIEW view_notas_tecnicas AS SELECT notas_tecnicas.*, usuarios.usuario_nome FROM notas_tecnicas INNER JOIN usuarios ON notas_tecnicas.nota_criada_por = usuarios.usuario_id;
 CREATE VIEW view_orgaos_tipos AS SELECT orgaos_tipos.*, usuarios.usuario_nome FROM orgaos_tipos INNER JOIN usuarios on orgaos_tipos.orgao_tipo_criado_por = usuarios.usuario_id;
 CREATE VIEW view_pessoas_tipos AS SELECT pessoas_tipos.*, usuarios.usuario_nome FROM pessoas_tipos INNER JOIN usuarios ON pessoas_tipos.pessoa_tipo_criado_por = usuarios.usuario_id ORDER BY pessoas_tipos.pessoa_tipo_nome ASC;
