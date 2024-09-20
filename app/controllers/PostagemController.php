@@ -2,17 +2,20 @@
 
 require_once dirname(__DIR__) . '/models/PostagemModel.php';
 
-class PostagemController {
+class PostagemController
+{
 
     private $postagemModel;
     private $usuario_id;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->postagemModel = new PostagemModel();
         $this->usuario_id = $_SESSION['usuario_id'];
     }
 
-    public function NovaPostagem($dados) {
+    public function NovaPostagem($dados)
+    {
 
         if (empty($dados['postagem_titulo']) || empty($dados['postagem_data']) || empty($dados['postagem_informacoes']) || !isset($dados['postagem_status'])) {
             return ['status' => 'bad_request', 'message' => 'Preencha todos os campos.'];
@@ -21,7 +24,7 @@ class PostagemController {
 
         $pasta = uniqid();
 
-        mkdir('./arquivos/postagens/'.uniqid(), 0755, true);
+        mkdir('./arquivos/postagens/' . $pasta, 0755, true);
 
         $dados['postagem_pasta'] = $pasta;
 
@@ -36,12 +39,13 @@ class PostagemController {
         }
 
         if ($result['status'] == 'error') {
-            unlink('./arquivos/postagens/'.$pasta);
+            unlink('./arquivos/postagens/' . $pasta);
             return ['status' => 'error', 'message' => 'Erro ao inserir a postagem.'];
         }
     }
 
-    public function AtualizarPostagem($id, $dados) {
+    public function AtualizarPostagem($id, $dados)
+    {
 
         $result = $this->postagemModel->AtualizarPostagem($id, $dados);
 
@@ -54,7 +58,8 @@ class PostagemController {
         }
     }
 
-    public function BuscarPostagem($coluna, $valor) {
+    public function BuscarPostagem($coluna, $valor)
+    {
         if (!in_array($coluna, ['postagem_id', 'postagem_titulo'])) {
             return ['status' => 'invalid_column', 'message' => 'A coluna selecionada é inválida'];
         }
@@ -74,7 +79,8 @@ class PostagemController {
         }
     }
 
-    public function ListarPostagens($itens = 10, $pagina = 1, $ordem = 'asc', $ordenarPor = 'postagem_data') {
+    public function ListarPostagens($itens = 10, $pagina = 1, $ordem = 'asc', $ordenarPor = 'postagem_data')
+    {
         $ordenarPor = in_array($ordenarPor, ['postagem_id', 'postagem_titulo', 'postagem_criada_em']) ? $ordenarPor : 'postagem_data';
         $ordem = strtoupper($ordem) === 'DESC' ? 'DESC' : 'ASC';
 
@@ -93,10 +99,34 @@ class PostagemController {
         }
     }
 
-    public function ApagarPostagem($id) {
+    public function ApagarPostagem($id, $pasta)
+    {
         $result = $this->postagemModel->BuscarPostagem('postagem_id', $id);
 
+
+        function apagarDiretorio($caminho)
+        {
+            if (is_dir($caminho)) {
+                $itens = scandir($caminho);
+                foreach ($itens as $item) {
+                    if ($item != "." && $item != "..") {
+                        $itemPath = $caminho . DIRECTORY_SEPARATOR . $item;
+                        if (is_dir($itemPath)) {
+                            apagarDiretorio($itemPath);
+                        } else {
+                            unlink($itemPath);
+                        }
+                    }
+                }
+                rmdir($caminho);
+            } else if (is_file($caminho)) {
+                unlink($caminho);
+            }
+        }
+
         $resultDelete = $this->postagemModel->ApagarPostagem($id);
+
+        apagarDiretorio('../public/arquivos/postagens/' . $pasta);
 
         if ($resultDelete['status'] == 'success') {
             return ['status' => 'success', 'message' => 'Postagem apagada com sucesso. Aguarde...', 'dados' => $result['dados']];

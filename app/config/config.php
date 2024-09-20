@@ -3,9 +3,9 @@
 return [
     'db' => [
         'host' => 'localhost',
-        'username' => 'root',
-        'password' => 'root',
-        'database' => 'gabinete_digital'
+        'username' => 'jairo',
+        'password' => 'intell01',
+        'database' => 'gab'
     ],
     'master_user' => [
         'name' => 'Administrador',
@@ -13,8 +13,8 @@ return [
         'pass' => 'intell01'
     ],
     'app' => [
-        'maximum_file_size' => 5,
-        'permitted_files' => ['png', 'jpg', 'jpeg', 'docx', 'pdf', 'doc']
+        'maximum_file_size' => 100,
+        'permitted_files' => ['png', 'jpg', 'jpeg', 'docx', 'pdf', 'doc', 'psd', 'ai', 'zip', 'mp4', 'mov']
     ],
     'deputado' => [
         'id_deputado' => 204379,

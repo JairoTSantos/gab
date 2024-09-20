@@ -2,6 +2,12 @@ RewriteEngine On
 
 Options -Indexes
 
+<FilesMatch "\.(jpg|jpeg|png|psd|ai|zip|mp4|mov)$">
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+</FilesMatch>
+
+
 <Files "config.php">
     Order Allow,Deny
     Deny from all
