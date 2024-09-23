@@ -173,7 +173,7 @@ if ($buscaClipping['status'] == 'empty' || $buscaClipping['status'] == 'error') 
                     <div class="col-12">
                         <div class="card shadow-sm mb-2 ">
                             <div class="card-body p-4">
-                                <img src="../<?php echo $buscaClipping['dados']['clipping_arquivo'] ?>" alt="" class="img-fluid"/>                
+                                <img src="../<?php echo $buscaClipping['dados']['clipping_arquivo'] ?>" alt="" class="img-fluid" />
                             </div>
                         </div>
                     </div>
