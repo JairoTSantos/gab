@@ -95,7 +95,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                 <form class="row g-2 form_custom" id="form_novo" method="POST" enctype="multipart/form-data">
 
                                     <div class="col-md-3 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="clipping_link" placeholder="Link" required>
+                                        <input type="url" class="form-control form-control-sm" name="clipping_link" placeholder="Link (http://...)" required>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <select class="form-select form-select-sm" name="clipping_orgao" id="clipping_orgao" required>
@@ -192,7 +192,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                     foreach ($clippings['dados'] as $clipping) {
                         $tabela[] = [
                             'Resumo' => '<a href="editar-clipping.php?id=' . $clipping['clipping_id'] . '">' . $clipping['clipping_resumo'] . '</a>',
-                            'Link' => $clipping['clipping_link'],
+                            'Link' => '<a href="' . $clipping['clipping_link'] . '" target="_blank">Ver página <i class="fa-solid fa-arrow-up-right-from-square"></i></a>',
                             'Órgão' => $clipping['orgao_nome'],
                             'Tipo' => $clipping['clipping_tipo_nome'],
                             'Criado em | por' => date('d/m/Y', strtotime($clipping['clipping_criado_em'])) . ' | ' . $clipping['usuario_nome']
