@@ -13,6 +13,12 @@ $clippingTipoController = new ClippingTipoController();
 require_once dirname(__DIR__) . '/app/controllers/OrgaoController.php';
 $orgaoController = new OrgaoController();
 
+$itens = isset($_GET['itens']) ? (int)$_GET['itens'] : 10;
+$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$ordenarPor = isset($_GET['ordenarPor']) ? htmlspecialchars($_GET['ordenarPor']) : 'clipping_criado_por';
+$ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 'asc';
+$termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +39,7 @@ $orgaoController = new OrgaoController();
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
                 <?php $layoutClass->navBar() ?>
-                <?php $layoutClass->cardDescription('<i class="fa-solid fa-plus"></i> Adicionar Clipping', '<p class="card-text mb-2">Seção para gerenciamento de clippings. <p class="card-text mb-0">Todos os campos são obrigatórios</p>') ?>
+                <?php $layoutClass->cardDescription('<i class="fa-solid fa-plus"></i> Adicionar Clipping', '<p class="card-text mb-2">Seção para gerenciamento de clippings.  <p class="card-text mb-2"> Arquivos permitidos: PDF, JPG, PNG</p><p class="card-text mb-0">Todos os campos são obrigatórios</p>') ?>
                 <div class="row ">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2 ">
@@ -51,7 +57,6 @@ $orgaoController = new OrgaoController();
                                                             <i class="fa-solid fa-circle-plus"></i> Novo órgão
                                                         </button>
                                                     </a>
-
                                                 </li>
                                             </ul>
                                         </div>
@@ -132,7 +137,7 @@ $orgaoController = new OrgaoController();
                                         <input type="file" class="form-control form-control-sm" name="clipping_arquivo" placeholder="Arquivo">
                                     </div>
                                     <div class="col-md-12 col-12">
-                                        <textarea class="form-control form-control-sm" name="clipping_resumo" rows="10" placeholder="Texto do clipping"></textarea>
+                                        <textarea class="form-control form-control-sm" name="clipping_resumo" rows="10" placeholder="Texto do clipping" required></textarea>
                                     </div>
                                     <div class="col-md-2 col-12">
                                         <button type="submit" class="btn btn-success btn-sm" name="btn_salvar"><i class="fa-regular fa-floppy-disk"></i> Salvar</button>
@@ -142,8 +147,45 @@ $orgaoController = new OrgaoController();
                         </div>
                     </div>
                 </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="card shadow-sm mb-2">
+                            <div class="card-body p-2">
+                                <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
+                                    <div class="col-md-2 col-6">
+                                        <select class="form-select form-select-sm" name="ordenarPor" required>
+                                            <option value="clipping_tipo" <?php echo $ordenarPor == 'clipping_tipo' ? 'selected' : ''; ?>>Ordenar por | Tipo</option>
+                                            <option value="clipping_criado_em" <?php echo $ordenarPor == 'clipping_criado_em' ? 'clipping_criado_em' : ''; ?>>Ordenar por | Estado</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-6">
+                                        <select class="form-select form-select-sm" name="ordem" required>
+                                            <option value="asc" <?php echo $ordem == 'asc' ? 'selected' : ''; ?>>Ordem Crescente</option>
+                                            <option value="desc" <?php echo $ordem == 'desc' ? 'selected' : ''; ?>>Ordem Decrescente</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-6">
+                                        <select class="form-select form-select-sm" name="itens" required>
+                                            <option value="5" <?php echo $itens == 5 ? 'selected' : ''; ?>>5 itens</option>
+                                            <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens</option>
+                                            <option value="25" <?php echo $itens == 25 ? 'selected' : ''; ?>>25 itens</option>
+                                            <option value="50" <?php echo $itens == 50 ? 'selected' : ''; ?>>50 itens</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3 col-12">
+                                        <input type="text" class="form-control form-control-sm" name="termo" placeholder="Buscar...">
+                                    </div>
+                                    <div class="col-md-1 col-6">
+                                        <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <?php
-                $clippings = $clippingController->ListarClippings();
+                $clippings = $clippingController->ListarClippings($itens, $pagina, $ordem, $ordenarPor, $termo);
                 $tabela = [];
 
                 if ($clippings['status'] == 'success' && $clippings['status'] != 'empty') {
@@ -163,6 +205,25 @@ $orgaoController = new OrgaoController();
                     echo $layoutClass->criarTabela([]);
                 }
                 ?>
+                <ul class="pagination custom-pagination mb-0">
+                    <?php
+                    if (isset($clippings['total_paginas'])) {
+                        $totalPagina = $clippings['total_paginas'];
+                    } else {
+                        $totalPagina = 0;
+                    }
+
+                    if ($totalPagina > 0 && $totalPagina != 1) {
+                        echo '<li class="page-item"><a class="page-link" href="clipping.php?itens=' . $itens . '&pagina=1&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Primeira</a></li>';
+
+                        for ($i = 1; $i < $totalPagina - 1; $i++) {
+                            echo '<li class="page-item"><a class="page-link" href="clipping.php?itens=' . $itens . '&pagina=' . ($i + 1) . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">' . ($i + 1) . '</a></li>';
+                        }
+
+                        echo '<li class="page-item"><a class="page-link" href="clipping.php?itens=' . $itens . '&pagina=' . $totalPagina . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Última</a></li>';
+                    }
+                    ?>
+                </ul>
             </div>
         </div>
     </div>

@@ -34,6 +34,8 @@ class Layout {
                                         <hr class="dropdown-divider">
                                          <a class="dropdown-item" href="postagens_status.php" style="font-size:0.8em"><i class="fa-regular fa-thumbs-up"></i> Status das postagens</a>
                                          <hr class="dropdown-divider">
+                                         <a class="dropdown-item" href="clipping-tipo.php" style="font-size:0.8em"><i class="fa-solid fa-clipboard"></i> Tipo de clipping</a>
+                                         <hr class="dropdown-divider">
                                          <a class="dropdown-item" href="usuarios.php" style="font-size:0.8em"><i class="fa-solid fa-users"></i> Usuários</a>
                                     </div>
                                    
@@ -63,7 +65,8 @@ class Layout {
                     <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão do gabinete</p> 
                     <a class="list-group-item list-group-item-action list-group-item-light px-4" href="oficios.php"><i class="fa-regular fa-file-lines"></i>  Ofícios</a>
                      <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Comunicação</p> 
-                    <a class="list-group-item list-group-item-action list-group-item-light px-4" href="postagens.php"><i class="fa-regular fa-file-lines"></i>  Postagens</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light px-4" href="postagens.php"><i class="fa-regular fa-newspaper"></i>  Postagens</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light px-4" href="clipping.php"><i class="fa-solid fa-clipboard"></i>  Clipping</a>
                 </div>
             </div>';
     }
