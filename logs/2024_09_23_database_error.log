@@ -1,0 +1,2 @@
+2024-09-23 15:17:28 - Usuário logado:  - Erro na conexão: SQLSTATE[HY000] [1045] Access denied for user 'jairo'@'localhost' (using password: YES)
+2024-09-23 15:17:49 - Usuário logado:  - Erro na conexão: SQLSTATE[HY000] [1049] Unknown database 'api'

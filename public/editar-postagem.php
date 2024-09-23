@@ -175,6 +175,7 @@ if ($busca_postagem['status'] == 'empty' || $busca_postagem['status'] == 'error'
                                     } else if ($uploadResult['status'] == 'error' || $uploadResult['status'] == 'forbidden') {
                                         $layoutClass->alert('danger', 'Erro interno do servidor.', 3);
                                     }
+                                    
                                 }
 
 
