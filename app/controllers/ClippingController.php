@@ -74,6 +74,8 @@ class ClippingController {
                 }
                 return ['status' => 'error', 'message' => 'Erro ao fazer upload do arquivo.'];
             }
+        }else {
+            $dados['clipping_arquivo'] = null;
         }
 
         $result = $this->clippingModel->AtualizarClipping($id, $dados);

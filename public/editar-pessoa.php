@@ -254,8 +254,6 @@ if ($buscaPessoa['status'] == 'empty' || $buscaPessoa['status'] == 'error') {
                                     <div class="col-md-2 col-6">
 
                                         <button type="submit" class="btn btn-success btn-sm" name="btn_salvar"><i class="fa-regular fa-floppy-disk"></i> Salvar</button>
-
-
                                         <button type="submit" class="btn btn-danger btn-sm" name="btn_apagar"><i class="fa-solid fa-trash"></i> Apagar</button>
                                     </div>
                                 </form>

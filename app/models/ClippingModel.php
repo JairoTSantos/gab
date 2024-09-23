@@ -41,22 +41,36 @@ class ClippingModel {
 
     public function AtualizarClipping($clipping_id, $dados) {
         try {
-            $query = "UPDATE clipping 
-                      SET clipping_resumo = :clipping_resumo, 
-                          clipping_link = :clipping_link, 
-                          clipping_orgao = :clipping_orgao, 
-                          clipping_arquivo = :clipping_arquivo, 
-                          clipping_tipo = :clipping_tipo 
-                      WHERE clipping_id = :clipping_id";
+
+            if (isset($dados['clipping_arquivo']) && !empty($dados['clipping_arquivo'])) {
+                $query = "UPDATE clipping 
+                SET clipping_resumo = :clipping_resumo, 
+                    clipping_link = :clipping_link, 
+                    clipping_orgao = :clipping_orgao, 
+                    clipping_arquivo = :clipping_arquivo, 
+                    clipping_tipo = :clipping_tipo 
+                WHERE clipping_id = :clipping_id";
+            } else {
+                $query = "UPDATE clipping 
+                SET clipping_resumo = :clipping_resumo, 
+                    clipping_link = :clipping_link, 
+                    clipping_orgao = :clipping_orgao,
+                    clipping_tipo = :clipping_tipo 
+                WHERE clipping_id = :clipping_id";
+            }
 
             $stmt = $this->db->prepare($query);
 
             $stmt->bindParam(':clipping_resumo', $dados['clipping_resumo'], PDO::PARAM_STR);
             $stmt->bindParam(':clipping_link', $dados['clipping_link'], PDO::PARAM_STR);
             $stmt->bindParam(':clipping_orgao', $dados['clipping_orgao'], PDO::PARAM_INT);
-            $stmt->bindParam(':clipping_arquivo', $dados['clipping_arquivo'], PDO::PARAM_STR);
             $stmt->bindParam(':clipping_tipo', $dados['clipping_tipo'], PDO::PARAM_INT);
             $stmt->bindParam(':clipping_id', $clipping_id, PDO::PARAM_INT);
+
+
+            if (isset($dados['clipping_arquivo']) && !empty($dados['clipping_arquivo'])) {
+                $stmt->bindParam(':clipping_arquivo', $dados['clipping_arquivo'], PDO::PARAM_STR);
+            }
 
             $stmt->execute();
 
