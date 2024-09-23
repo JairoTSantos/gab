@@ -44,7 +44,7 @@ if ($busca_postagem['status'] == 'empty' || $busca_postagem['status'] == 'error'
         <div id="page-content-wrapper">
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
-                <?php $layoutClass->navBar() ?>
+                <?php $layoutClass->navBar(true, 'postagens.php') ?>
                 <?php $layoutClass->cardDescription('<i class="fa-solid fa-plus"></i> Gerenciar Postagem', '<p class="card-text mb-2">Pasta para arquivamento da postagem. <p class="card-text mb-0">Salve os arquivos das postagens para arquivar.</p>') ?>
                 <div class="row ">
                     <div class="col-12">
