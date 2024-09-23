@@ -78,7 +78,7 @@ class TipoClippingModel {
 
     public function ListarClippingTipos() {
         try {
-            $query = "SELECT * FROM view_clipping_tipo ORDER BY clipping_tipo_nome ASC";
+            $query = "SELECT * FROM view_tipo_clipping ORDER BY clipping_tipo_nome ASC";
 
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -101,7 +101,7 @@ class TipoClippingModel {
 
     public function BuscarClippingTipo($coluna, $valor) {
         try {
-            $query = "SELECT * FROM view_clipping_tipo WHERE $coluna = :valor AND clipping_tipo_id <> 1000";
+            $query = "SELECT * FROM view_tipo_clipping WHERE $coluna = :valor AND clipping_tipo_id <> 1000";
 
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':valor', $valor);

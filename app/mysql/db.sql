@@ -211,6 +211,7 @@ CREATE TABLE clipping_tipos (
     CONSTRAINT fk_clipping_tipo_criado_por FOREIGN KEY (clipping_tipo_criado_por) REFERENCES usuarios(usuario_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+INSERT INTO clipping_tipos (clipping_tipo_id, clipping_tipo_nome, clipping_tipo_descricao, clipping_tipo_criado_por) VALUES (1000, 'Sem tipo definido', 'Sem tipo definido', 1000);
 
 CREATE TABLE clipping (
     clipping_id INT NOT NULL AUTO_INCREMENT,
@@ -227,6 +228,7 @@ CREATE TABLE clipping (
     CONSTRAINT fk_clipping_orgao FOREIGN KEY (clipping_orgao) REFERENCES orgaos(orgao_id),
     CONSTRAINT fk_clipping_tipo FOREIGN KEY (clipping_tipo) REFERENCES clipping_tipos(clipping_tipo_id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
 
 /*-----------------------TABELA OFICIOS-----------------------*/
 CREATE TABLE oficios(
@@ -289,4 +291,4 @@ CREATE VIEW view_pessoas_tipos AS SELECT pessoas_tipos.*, usuarios.usuario_nome 
 CREATE VIEW view_profissoes AS SELECT pessoas_profissoes.*, usuarios.usuario_nome FROM pessoas_profissoes INNER JOIN usuarios ON pessoas_profissoes.pessoas_profissoes_criado_por = usuarios.usuario_id ORDER BY pessoas_profissoes.pessoas_profissoes_nome ASC;
 CREATE VIEW view_postagens AS SELECT postagens.*, usuarios.usuario_nome, postagem_status.postagem_status_id, postagem_status.postagem_status_nome, postagem_status.postagem_status_descricao FROM postagens INNER JOIN usuarios ON postagens.postagem_criada_por = usuarios.usuario_id INNER JOIN postagem_status ON postagens.postagem_status = postagem_status.postagem_status_id;
 CREATE VIEW view_postagens_status AS SELECT postagem_status.*, usuarios.usuario_nome FROM postagem_status INNER JOIN usuarios ON postagem_status.postagem_status_criado_por = usuarios.usuario_id ORDER BY postagem_status.postagem_status_nome ASC;
-CREATE VIEW view_tipo_clipping AS SELECT clipping_tipo.*, usuarios_usuario_nome FROM clipping_tipo INNER JOIN usuarios ON clipping_tipos.clipping_tipo_criado_por = usuarios.usuario_id
+CREATE VIEW view_tipo_clipping AS SELECT clipping_tipos.*, usuarios.usuario_nome FROM clipping_tipos INNER JOIN usuarios ON clipping_tipos.clipping_tipo_criado_por = usuarios.usuario_id

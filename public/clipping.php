@@ -164,7 +164,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                             <option value="desc" <?php echo $ordem == 'desc' ? 'selected' : ''; ?>>Ordem Decrescente</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" name="itens" required>
                                             <option value="5" <?php echo $itens == 5 ? 'selected' : ''; ?>>5 itens</option>
                                             <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens</option>
