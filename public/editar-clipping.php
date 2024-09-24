@@ -75,6 +75,7 @@ if ($buscaClipping['status'] == 'empty' || $buscaClipping['status'] == 'error') 
                                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
                                     $clipping = [
                                         'clipping_resumo' => $_POST['clipping_resumo'],
+                                        'clipping_titulo' => $_POST['clipping_titulo'],
                                         'clipping_link' => $_POST['clipping_link'],
                                         'clipping_orgao' => $_POST['clipping_orgao'],
                                         'arquivo' => $_FILES['clipping_arquivo'],
@@ -119,6 +120,9 @@ if ($buscaClipping['status'] == 'empty' || $buscaClipping['status'] == 'error') 
                                         <input type="text" class="form-control form-control-sm" name="clipping_link" placeholder="Link" value="<?php echo $buscaClipping['dados']['clipping_link'] ?>" required>
                                     </div>
                                     <div class="col-md-3 col-12">
+                                        <input type="text" class="form-control form-control-sm" name="clipping_titulo" placeholder="Titulo" value="<?php echo $buscaClipping['dados']['clipping_titulo'] ?>" required>
+                                    </div>
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" name="clipping_orgao" id="clipping_orgao" required>
                                             <option value="1000">Órgão não informado</option>
                                             <?php
@@ -136,7 +140,7 @@ if ($buscaClipping['status'] == 'empty' || $buscaClipping['status'] == 'error') 
                                             <option value="+">Novo órgão + </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" name="clipping_tipo" id="clipping_tipo" required>
                                             <?php
                                             $buscaTipos = $clippingTipoController->ListarClippingTipos();
@@ -153,7 +157,7 @@ if ($buscaClipping['status'] == 'empty' || $buscaClipping['status'] == 'error') 
                                             <option value="+">Novo tipo + </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-2 col-12">
                                         <input type="file" class="form-control form-control-sm" name="clipping_arquivo" placeholder="Arquivo">
                                     </div>
                                     <div class="col-md-12 col-12">
@@ -173,7 +177,9 @@ if ($buscaClipping['status'] == 'empty' || $buscaClipping['status'] == 'error') 
                     <div class="col-12">
                         <div class="card shadow-sm mb-2 ">
                             <div class="card-body p-4">
-                                <img src="../<?php echo $buscaClipping['dados']['clipping_arquivo'] ?>" alt="" class="img-fluid" />
+                                <div style="width: 350px; height: auto;">
+                                    <a href="..<?php echo $buscaClipping['dados']['clipping_arquivo'] ?>"><img src="../<?php echo $buscaClipping['dados']['clipping_arquivo'] ?>" style="width: 100%; height: auto; object-fit: contain;" alt="" class="img-fluid" /></a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -74,6 +74,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
                                     $clipping = [
                                         'clipping_resumo' => $_POST['clipping_resumo'],
+                                        'clipping_titulo' => $_POST['clipping_titulo'],
                                         'clipping_link' => $_POST['clipping_link'],
                                         'clipping_orgao' => $_POST['clipping_orgao'],
                                         'arquivo' => $_FILES['clipping_arquivo'],
@@ -98,6 +99,9 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                         <input type="url" class="form-control form-control-sm" name="clipping_link" placeholder="Link (http://...)" required>
                                     </div>
                                     <div class="col-md-3 col-12">
+                                        <input type="text" class="form-control form-control-sm" name="clipping_titulo" placeholder="Titulo"  required>
+                                    </div>
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" name="clipping_orgao" id="clipping_orgao" required>
                                             <option value="1000">Órgão não informado</option>
                                             <?php
@@ -116,7 +120,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                         </select>
                                     </div>
 
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" name="clipping_tipo" id="clipping_tipo" required>
                                             <?php
                                             $buscaTipos = $clippingTipoController->ListarClippingTipos();
@@ -133,7 +137,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                             <option value="+">Novo tipo + </option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-2 col-12">
                                         <input type="file" class="form-control form-control-sm" name="clipping_arquivo" placeholder="Arquivo">
                                     </div>
                                     <div class="col-md-12 col-12">
@@ -191,7 +195,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                 if ($clippings['status'] == 'success' && $clippings['status'] != 'empty') {
                     foreach ($clippings['dados'] as $clipping) {
                         $tabela[] = [
-                            'Resumo' => '<a href="editar-clipping.php?id=' . $clipping['clipping_id'] . '">' . $clipping['clipping_resumo'] . '</a>',
+                            'Titulo' => '<a href="editar-clipping.php?id=' . $clipping['clipping_id'] . '">' . $clipping['clipping_titulo'] . '</a>',
                             'Link' => '<a href="' . $clipping['clipping_link'] . '" target="_blank">Ver página <i class="fa-solid fa-arrow-up-right-from-square"></i></a>',
                             'Órgão' => $clipping['orgao_nome'],
                             'Tipo' => $clipping['clipping_tipo_nome'],

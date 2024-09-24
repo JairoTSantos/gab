@@ -216,6 +216,7 @@ INSERT INTO clipping_tipos (clipping_tipo_id, clipping_tipo_nome, clipping_tipo_
 CREATE TABLE clipping (
     clipping_id INT NOT NULL AUTO_INCREMENT,
     clipping_resumo TEXT NOT NULL,
+    clipping_titulo TEXT NOT NULL,
     clipping_link VARCHAR(255) NOT NULL UNIQUE,
     clipping_orgao INT NOT NULL,
     clipping_arquivo VARCHAR(255),

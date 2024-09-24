@@ -15,12 +15,13 @@ class ClippingModel {
 
     public function NovoClipping($dados) {
         try {
-            $query = "INSERT INTO clipping (clipping_resumo, clipping_link, clipping_orgao, clipping_arquivo, clipping_tipo, clipping_criado_por) 
-                      VALUES (:clipping_resumo, :clipping_link, :clipping_orgao, :clipping_arquivo, :clipping_tipo, :clipping_criado_por)";
+            $query = "INSERT INTO clipping (clipping_resumo, clipping_titulo, clipping_link, clipping_orgao, clipping_arquivo, clipping_tipo, clipping_criado_por) 
+                      VALUES (:clipping_resumo, :clipping_titulo, :clipping_link, :clipping_orgao, :clipping_arquivo, :clipping_tipo, :clipping_criado_por)";
 
             $stmt = $this->db->prepare($query);
 
             $stmt->bindParam(':clipping_resumo', $dados['clipping_resumo'], PDO::PARAM_STR);
+            $stmt->bindParam(':clipping_titulo', $dados['clipping_titulo'], PDO::PARAM_STR);
             $stmt->bindParam(':clipping_link', $dados['clipping_link'], PDO::PARAM_STR);
             $stmt->bindParam(':clipping_orgao', $dados['clipping_orgao'], PDO::PARAM_INT);
             $stmt->bindParam(':clipping_arquivo', $dados['clipping_arquivo'], PDO::PARAM_STR);
@@ -47,12 +48,14 @@ class ClippingModel {
                 SET clipping_resumo = :clipping_resumo, 
                     clipping_link = :clipping_link, 
                     clipping_orgao = :clipping_orgao, 
+                    clipping_titulo = :clipping_titulo,
                     clipping_arquivo = :clipping_arquivo, 
                     clipping_tipo = :clipping_tipo 
                 WHERE clipping_id = :clipping_id";
             } else {
                 $query = "UPDATE clipping 
                 SET clipping_resumo = :clipping_resumo, 
+                 clipping_titulo = :clipping_titulo,
                     clipping_link = :clipping_link, 
                     clipping_orgao = :clipping_orgao,
                     clipping_tipo = :clipping_tipo 
@@ -63,6 +66,7 @@ class ClippingModel {
 
             $stmt->bindParam(':clipping_resumo', $dados['clipping_resumo'], PDO::PARAM_STR);
             $stmt->bindParam(':clipping_link', $dados['clipping_link'], PDO::PARAM_STR);
+            $stmt->bindParam(':clipping_titulo', $dados['clipping_titulo'], PDO::PARAM_STR);
             $stmt->bindParam(':clipping_orgao', $dados['clipping_orgao'], PDO::PARAM_INT);
             $stmt->bindParam(':clipping_tipo', $dados['clipping_tipo'], PDO::PARAM_INT);
             $stmt->bindParam(':clipping_id', $clipping_id, PDO::PARAM_INT);
