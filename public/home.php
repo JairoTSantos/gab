@@ -23,9 +23,83 @@ $layoutClass = new Layout();
         <div id="page-content-wrapper">
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <div class="card shadow-sm mb-2" style="height: 320px;">
+                            <div class="card-header bg-primary text-white px-2 py-1  card-background">Aniversariantes</div>
+                            <div class="card-body p-2">
+                                <?php
 
+                                $dados = [
+                                    [
+                                        'nome' => 'João Silva',
+                                        'municipio' => 'São Paulo',
+                                        'estado' => 'SP',
+                                        'tipo' => 'Residencial',
+                                    ],
+                                    [
+                                        'nome' => 'Maria Oliveira',
+                                        'municipio' => 'Rio de Janeiro',
+                                        'estado' => 'RJ',
+                                        'tipo' => 'Comercial',
+                                    ],
+
+                                    [
+                                        'nome' => 'Maria Oliveira',
+                                        'municipio' => 'Rio de Janeiro',
+                                        'estado' => 'RJ',
+                                        'tipo' => 'Comercial',
+                                    ],
+                                    [
+                                        'nome' => 'Carlos Souza',
+                                        'municipio' => 'Belo Horizonte',
+                                        'estado' => 'MG',
+                                        'tipo' => 'Residencial',
+                                    ],
+                                    [
+                                        'nome' => 'Ana Costa',
+                                        'municipio' => 'Porto Alegre',
+                                        'estado' => 'RS',
+                                        'tipo' => 'Industrial',
+                                    ],
+                                    [
+                                        'nome' => 'Pedro Santos',
+                                        'municipio' => 'Salvador',
+                                        'estado' => 'BA',
+                                        'tipo' => 'Residencial',
+                                    ],
+                                ];
+
+                                echo $layoutClass->criarTabela($dados);
+
+
+                                ?>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="card shadow-sm mb-2" style="height: 320px;">
+                            <div class="card-header bg-primary text-white px-2 py-1  card-background">Postagens agendadas</div>
+                            <div class="card-body p-2">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="card shadow-sm mb-2" style="height: 320px;">
+                            <div class="card-header bg-primary text-white px-2 py-1  card-background">Agenda parlamentar</div>
+                            <div class="card-body p-2">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </div>
+    </div>
     </div>
 </body>
 

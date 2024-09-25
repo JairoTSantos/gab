@@ -316,17 +316,29 @@ $depConfig = $config['deputado'];
                         $totalPagina = 0;
                     }
 
-                    if ($totalPagina > 0 && $totalPagina != 1) {
-                        echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&pagina=1&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Primeira</a></li>';
+                    $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+                    $maxLinks = 6; // Máximo de links a serem exibidos
 
-                        for ($i = 1; $i < $totalPagina - 1; $i++) {
-                            echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&pagina=' . ($i + 1) . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">' . ($i + 1) . '</a></li>';
+                    if ($totalPagina > 0 && $totalPagina != 1) {
+                        echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro=' . $filtro . '&pagina=1&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Primeira</a></li>';
+
+                        // Calcular o início e o fim dos links a serem exibidos
+                        $inicio = max(1, $paginaAtual - floor($maxLinks / 2));
+                        $fim = min($totalPagina, $inicio + $maxLinks - 1);
+
+                        if ($fim - $inicio < $maxLinks - 1) {
+                            $inicio = max(1, $fim - $maxLinks + 1);
                         }
 
-                        echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&pagina=' . $totalPagina . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Última</a></li>';
+                        for ($i = $inicio; $i <= $fim; $i++) {
+                            echo '<li class="page-item' . ($i == $paginaAtual ? ' active' : '') . '"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro=' . $filtro . '&pagina=' . $i . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">' . $i . '</a></li>';
+                        }
+
+                        echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro=' . $filtro . '&pagina=' . $totalPagina . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Última</a></li>';
                     }
                     ?>
                 </ul>
+
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 require_once dirname(__DIR__) . '/models/PessoaModel.php';
 require_once dirname(__DIR__) . '/core/UploadFile.php';
+require_once dirname(__DIR__) . '/core/GetJson.php';
 
 class PessoaController {
 
@@ -174,5 +175,63 @@ class PessoaController {
         if ($resultDelete['status'] == 'error') {
             return ['status' => 'error', 'message' => 'Erro ao buscar pessoa.'];
         }
+    }
+
+    public function InserirDeputados() {
+        $config = require dirname(__DIR__) . '/config/config.php';
+        $depConfig = $config['deputado'];
+
+        $dados = getJson('https://dadosabertos.camara.leg.br/arquivos/deputados/json/deputados.json');
+        $depsArray = [];
+        $contador = 0;
+
+        foreach ($dados['dados'] as $dep) {
+            if ($dep['idLegislaturaFinal'] == $depConfig['legislatura_atual']) {
+                $deputado = [
+                    'pessoa_nome' => $dep['nome'],
+                    'pessoa_email' => $this->gerarEmail($dep['nome']),
+                    'pessoa_aniversario' => $dep['dataNascimento'],
+                    'pessoa_municipio' => $dep['municipioNascimento'],
+                    'pessoa_estado' => $dep['ufNascimento'],
+                    'pessoa_tipo' => 1008,
+                    'pessoa_orgao' => 1001,
+                    'pessoa_profissao' => 1041
+                ];
+
+                if (!empty($dep['urlRedeSocial'])) {
+                    foreach ($dep['urlRedeSocial'] as $url) {
+                        if (strpos($url, 'instagram.com') !== false) {
+                            $deputado['pessoa_instagram'] = $url;
+                        } elseif (strpos($url, 'facebook.com') !== false) {
+                            $deputado['pessoa_facebook'] = $url;
+                        } elseif (strpos($url, 'twitter.com') !== false) {
+                            $deputado['pessoa_x'] = $url;
+                        } elseif (strpos($url, 'x.com') !== false) {
+                            $deputado['pessoa_x'] = $url;
+                        }
+                    }
+                }
+                $depsArray[] = $deputado;
+            }
+        }
+
+        $totalDeps = count($depsArray);
+
+        foreach ($depsArray as $dep) {
+            $this->NovaPessoa($dep);
+            $contador++;
+        }
+
+        if ($totalDeps === $contador) {
+            return ['status' => 'success', 'message' => 'Deputados inseridos com sucesso.'];
+        }
+    }
+
+    public function gerarEmail($nome) {
+        $nome = strtolower($nome);
+        $nome = iconv('UTF-8', 'ASCII//TRANSLIT', $nome);
+        $nome = str_replace(' ', '.', $nome);
+        $nome = preg_replace('/[^a-z0-9.]/', '', $nome);
+        return 'dep.' . $nome . '@camara.leg.br';
     }
 }

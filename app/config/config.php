@@ -19,6 +19,7 @@ return [
     'deputado' => [
         'id_deputado' => 204379,
         'nome_deputado' => 'Acácio Favacho',
-        'estado_deputado' => 'AP'
+        'estado_deputado' => 'AP',
+        'legislatura_atual' => 57
     ]
 ];

@@ -68,7 +68,8 @@ CREATE TABLE orgaos (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO orgaos (orgao_id, orgao_nome, orgao_email, orgao_municipio, orgao_estado, orgao_tipo, orgao_criado_por) VALUE (1000, 'Órgão não informado', 'email@email', 'municipio', 'estado', 1000, 1000);
-
+INSERT INTO orgaos (orgao_id, orgao_nome, orgao_email, orgao_municipio, orgao_estado, orgao_site, orgao_tipo, orgao_criado_por) VALUE (1001, 'Câmara dos Deputados', 'fale@camara.leg.br', 'Brasília', 'DF', 'camara.leg.br', 1000, 1000);
+INSERT INTO orgaos (orgao_id, orgao_nome, orgao_email, orgao_municipio, orgao_estado, orgao_site, orgao_tipo, orgao_criado_por) VALUE (1002, 'Senado Federal', 'fale@senado.leg.br', 'Brasília', 'DF', 'camara.leg.br', 1000, 1000);
 /*-----------------------TABELAS DE PESSOAS-----------------------*/
 CREATE TABLE pessoas_tipos (
     pessoa_tipo_id int NOT NULL AUTO_INCREMENT,
@@ -88,6 +89,7 @@ INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descric
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1005, 'Imprensa', 'Jornalistas, diretores de jornais, assessoria', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1006, 'Site', 'Pessoas registradas no site', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1007, 'Amigos', 'Amigos pessoais do deputado', 1000);
+INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1008, 'Parlamentar', 'Parlamentar municipal, estadual ou federal', 1000);
 
 CREATE TABLE pessoas_profissoes (
     pessoas_profissoes_id int NOT NULL AUTO_INCREMENT,
@@ -147,7 +149,8 @@ VALUES
 (1037, 'Artista Plástico', 'Profissional que cria obras de arte em diversos meios e materiais', 1000),
 (1038, 'Logístico', 'Profissional que coordena e gerencia operações de logística e cadeia de suprimentos', 1000),
 (1039, 'Fonoaudiólogo', 'Profissional que avalia e trata problemas de comunicação e linguagem', 1000),
-(1040, 'Corretor de Imóveis', 'Profissional que facilita a compra, venda e aluguel de propriedades', 1000);
+(1040, 'Corretor de Imóveis', 'Profissional que facilita a compra, venda e aluguel de propriedades', 1000),
+(1041, 'Deputado Federal', 'Deputado Federal', 1000);
 
 
 
@@ -280,23 +283,6 @@ CREATE TABLE postagens(
     CONSTRAINT fk_postagem_criada_por FOREIGN KEY (postagem_criada_por) REFERENCES usuarios(usuario_id),
     CONSTRAINT fk_postagem_status FOREIGN KEY (postagem_status) REFERENCES postagem_status(postagem_status_id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-
-
-
-/*-----------------------TABELA PROPOSICOES DO DEPUTADO-----------------------*/
-CREATE TABLE proposicoes_deputado(
-    proposicao_id INT NOT NULL,
-    proposicao_ano INT NOT NULL,
-    proposicao_numero INT NOT NULL,
-    proposicao_sigla TEXT NOT NULL,
-    proposicao_ementa TEXT,
-    proposicao_apresentacao DATE NOT NULL,
-    proposicao_arquivada BOOL,
-    proposicao_autoria_unica BOOL,
-    PRIMARY KEY(proposicao_id)
-)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-
-
 
 
 /*-----------------------VIEWS-----------------------*/
