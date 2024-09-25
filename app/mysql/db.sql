@@ -281,6 +281,23 @@ CREATE TABLE postagens(
     CONSTRAINT fk_postagem_status FOREIGN KEY (postagem_status) REFERENCES postagem_status(postagem_status_id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+
+
+CREATE TABLE proposicoes_deputado(
+    proposicao_id INT NOT NULL,
+    proposicao_ano INT NOT NULL,
+    proposicao_numero INT NOT NULL,
+    proposicao_sigla TEXT NOT NULL,
+    proposicao_ementa TEXT,
+    proposicao_apresentacao DATE NOT NULL,
+    proposicao_arquivada BOOL,
+    proposicao_autoria_unica BOOL,
+    PRIMARY KEY(proposicao_id)
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+
+
 /*-----------------------VIEWS-----------------------*/
 CREATE VIEW view_orgaos AS SELECT orgaos.*, orgaos_tipos.orgao_tipo_nome, usuarios.usuario_nome FROM orgaos INNER JOIN orgaos_tipos ON orgaos.orgao_tipo = orgaos_tipos.orgao_tipo_id INNER JOIN usuarios ON orgaos.orgao_criado_por = usuarios.usuario_id;
 CREATE VIEW view_pessoas AS SELECT pessoas.*, pessoas_profissoes.pessoas_profissoes_nome,  pessoas_tipos.pessoa_tipo_nome, orgaos.orgao_nome, usuarios.usuario_nome FROM pessoas INNER JOIN pessoas_tipos ON pessoas.pessoa_tipo = pessoas_tipos.pessoa_tipo_id INNER JOIN orgaos ON pessoas.pessoa_orgao = orgaos.orgao_id INNER JOIN pessoas_profissoes ON pessoas.pessoa_profissao = pessoas_profissoes.pessoas_profissoes_id INNER JOIN usuarios ON pessoas.pessoa_criada_por = usuarios.usuario_id;
