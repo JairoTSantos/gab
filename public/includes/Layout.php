@@ -58,7 +58,7 @@ class Layout {
 
     public function MontarSideMenu() {
         echo ' <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Gabinete Digital</div>
+                <div class="sidebar-heading border-bottom bg-light"><img src="img/logo.png" style="width:25px" />&nbsp;&nbsp;Gabinete Digital</div>
                 <div class="list-group list-group-flush">
 
                     <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão de pessoas</p> 
