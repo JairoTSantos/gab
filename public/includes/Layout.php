@@ -10,6 +10,7 @@ class Layout {
               <link href="vendor/startbootstrap-simple-sidebar-gh-pages/css/styles.css" rel="stylesheet" />
                <link href="css/custom.css" rel="stylesheet" />
                 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
               <script src="vendor/startbootstrap-simple-sidebar-gh-pages/js/scripts.js"></script>
              
@@ -176,13 +177,13 @@ class Layout {
     function alert($type, $message, $time = 3, $rounded = false) {
         // Exibe o alerta com a classe Bootstrap
 
-        if($rounded){
+        if ($rounded) {
             echo '<div id="alert-box" style="border: none; border-radius: 20px;" class="alert alert-' . $type . ' custom_alert alert-dismissible fade show px-2 py-1 mb-2" role="alert"><b>' . $message . '</b></div>';
-        }else{
+        } else {
             echo '<div id="alert-box" class="alert alert-' . $type . ' custom_alert alert-dismissible fade show px-2 py-1 mb-2" role="alert"><b>' . $message . '</b></div>';
         }
 
-       
+
 
         // Adiciona o script para remover o alerta após o tempo especificado
         if ($time > 0) {

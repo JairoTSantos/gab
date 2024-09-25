@@ -175,7 +175,9 @@ $depConfig = $config['deputado'];
                                             <option value="1000" selected>Órgão não informado</option>
                                             <?php
 
-                                            $buscaOrgao = $orgaoController->listarOrgaos(1, 1000);
+                                            $buscaOrgao = $orgaoController->listarOrgaos(1000, 1);
+
+                                            print_r($buscaOrgao);
                                             if ($buscaOrgao['status'] === 'success') {
                                                 foreach ($buscaOrgao['dados'] as $orgao) {
                                                     echo '<option value="' . $orgao['orgao_id'] . '">' . $orgao['orgao_nome'] . '</option>';

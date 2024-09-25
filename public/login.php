@@ -119,21 +119,21 @@ $login = new Login();
 
                 $resultado = $login->Logar($dados);
 
-                if ($resultado['status'] === 'not_found' || $resultado['status'] === 'deactivated') {
+                if ($resultado['status'] === 'not_found' || $resultado['status'] === 'deactivated' || $resultado['status'] === 'invalid_email') {
                     $layoutClass->alert('warning', $resultado['message'], 3, true);
                 } else if ($resultado['status'] === 'error' || $resultado['status'] === 'wrong_password') {
                     $layoutClass->alert('danger', $resultado['message'], 3, true);
-                } else {
+                } else if($resultado['status'] === 'success') {
                     header('Location: home.php');
                 }
             }
             ?>
             <form id="form_login" method="post" enctype="application/x-www-form-urlencoded" class="form-group">
                 <div class="form-group">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="E-mail" required>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="E-mail" value="jairojeffersont@gmail.com" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" required>
+                    <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="intell01" required>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center">

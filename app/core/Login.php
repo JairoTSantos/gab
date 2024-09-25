@@ -16,12 +16,18 @@ class Login {
         $userConfig = $config['master_user'];
 
 
+        if (!filter_var($dados['email'], FILTER_VALIDATE_EMAIL)) {
+            return ['status' => 'invalid_email', 'message' => 'Formato de email inválido.'];
+        }
+        
         if (!isset($dados['email']) || !isset($dados['senha']) || empty($dados['email']) || empty($dados['senha'])) {
             return ['status' => 'bad_request', 'message' => 'Preencha todos os campos.'];
         }
 
         $email =  $dados['email'];
         $senha =  $dados['senha'];
+
+
 
         if ($userConfig['email'] === $email && $userConfig['pass'] === $senha) {
             session_set_cookie_params([
@@ -42,10 +48,6 @@ class Login {
             return ['status' => 'success', 'message' => 'Login feito com sucesso.'];
         }
 
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return ['status' => 'invalid_email', 'message' => 'Formato de email inválido.'];
-        }
 
         $busca = $usuario->buscarUsuario('usuario_email', $email);
 
