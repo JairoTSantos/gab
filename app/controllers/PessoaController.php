@@ -193,7 +193,7 @@ class PessoaController {
                     'pessoa_aniversario' => $dep['dataNascimento'],
                     'pessoa_municipio' => $dep['municipioNascimento'],
                     'pessoa_estado' => $dep['ufNascimento'],
-                    'pessoa_tipo' => 1008,
+                    'pessoa_tipo' => 1001,
                     'pessoa_orgao' => 1001,
                     'pessoa_profissao' => 1041
                 ];
