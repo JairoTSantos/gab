@@ -31,7 +31,6 @@ $login = new Login();
 
         /* Estilo customizado para arredondar os inputs e o botão */
         input[type="email"],
-        
         input[type="password"] {
             border-radius: 20px;
             /* Aqui você define o nível de arredondamento */
@@ -55,7 +54,6 @@ $login = new Login();
             font-size: 1.2em;
             font-weight: 500;
         }
-
 
         button[type="submit"]:hover {
             background-color: green;
@@ -87,7 +85,8 @@ $login = new Login();
             margin-bottom: 30px;
             font-weight: 300;
         }
-        .copyright{
+
+        .copyright {
             color: #e3e3e8;
             font-size: 0.8em;
             font-weight: 100;
@@ -101,7 +100,6 @@ $login = new Login();
             <img src="img/logo_white.png" alt="" class="img_logo" />
             <h2 class="login_title">Gabinete Digital</h2>
             <?php
-
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_login'])) {
                 $email = isset($_POST['email']) ? filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL) : '';
                 $senha = isset($_POST['senha']) ? trim($_POST['senha']) : '';
@@ -121,25 +119,50 @@ $login = new Login();
                     header('Location: home.php');
                 }
             }
-
             ?>
             <form id="form_login" method="post" enctype="application/x-www-form-urlencoded" class="form-group">
                 <div class="form-group">
-                    <input type="email" class="form-control " name="email" id="email" placeholder="E-mail" required>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="E-mail" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control " name="senha" id="senha" placeholder="Senha" required>
+                    <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" required>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="submit" name="btn_login" class="btn ">Entrar</button>
+                    <button type="submit" name="btn_login" class="btn">Entrar</button>
                 </div>
             </form>
-            <p class="mt-3 link">Esqueceu a senha? | <a href="cadastro.php">Faça seu cadastro</a></p>
+            <p class="mt-3 link">Esqueceu a senha? | <a href="#" data-toggle="modal" data-target="#cadastroModal">Faça seu cadastro</a></p>
             <p class="mt-3 copyright">2024 | JS Digital System</p>
-
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="cadastroModal" tabindex="-1" role="dialog" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="cadastroModalLabel"><i class="fa-solid fa-circle-exclamation"></i> Aviso</h6>
+
+                </div>
+                <div class="modal-body">
+                    <p class="text-center mb-0">Sua conta será criada e enviada para o administrador. <br>Até que seja ativada, você não poderá usá-la.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="confirmarCadastro">Aceitar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.getElementById('confirmarCadastro').addEventListener('click', function() {
+            window.location.href = 'cadastro.php';
+        });
+    </script>
 </body>
 
 </html>
