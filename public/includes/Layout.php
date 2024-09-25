@@ -12,6 +12,8 @@ class Layout {
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
               <script src="vendor/startbootstrap-simple-sidebar-gh-pages/js/scripts.js"></script>
               <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+
 
         <script src="https://kit.fontawesome.com/632988d903.js" crossorigin="anonymous"></script>';
     }
@@ -170,9 +172,16 @@ class Layout {
     }
 
 
-    function alert($type, $message, $time = 3) {
+    function alert($type, $message, $time = 3, $rounded = false) {
         // Exibe o alerta com a classe Bootstrap
-        echo '<div id="alert-box" class="alert alert-' . $type . ' custom_alert alert-dismissible fade show px-2 py-1 mb-2" role="alert"><b>' . $message . '</b></div>';
+
+        if($rounded){
+            echo '<div id="alert-box" style="border: none; border-radius: 20px;" class="alert alert-' . $type . ' custom_alert alert-dismissible fade show px-2 py-1 mb-2" role="alert"><b>' . $message . '</b></div>';
+        }else{
+            echo '<div id="alert-box" class="alert alert-' . $type . ' custom_alert alert-dismissible fade show px-2 py-1 mb-2" role="alert"><b>' . $message . '</b></div>';
+        }
+
+       
 
         // Adiciona o script para remover o alerta após o tempo especificado
         if ($time > 0) {
