@@ -79,6 +79,24 @@ class PostagemController
         }
     }
 
+    public function BuscarPostagemdoDia($mes, $dia = null) {
+
+
+        $result = $this->postagemModel->BuscarPostagemdoDia($mes, $dia);
+
+        if ($result['status'] == 'success') {
+            return ['status' => 'success', 'dados' => $result['dados']];
+        }
+
+        if ($result['status'] == 'empty') {
+            return ['status' => 'empty', 'message' => 'Nenhuma postagem registrada.'];
+        }
+
+        if ($result['status'] == 'error') {
+            return ['status' => 'error', 'message' => 'Erro ao buscar postagem.'];
+        }
+    }
+
     public function ListarPostagens($itens = 10, $pagina = 1, $ordem = 'asc', $ordenarPor = 'postagem_data')
     {
         $ordenarPor = in_array($ordenarPor, ['postagem_id', 'postagem_titulo', 'postagem_criada_em']) ? $ordenarPor : 'postagem_data';

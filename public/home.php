@@ -8,6 +8,13 @@ $layoutClass = new Layout();
 require_once dirname(__DIR__) . '/app/controllers/PessoaController.php';
 $pessoaController = new PessoaController();
 
+
+require_once dirname(__DIR__) . '/app/controllers/PostagemController.php';
+$postagemController = new PostagemController();
+
+$paginaPostagem = isset($_GET['paginaPostagem']) ? (int)$_GET['paginaPostagem'] : 1;
+$paginaAniversariante = isset($_GET['paginaAniversariante']) ? (int)$_GET['paginaAniversariante'] : 1;
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -28,9 +35,20 @@ $pessoaController = new PessoaController();
             <div class="container-fluid p-2">
                 <div class="row">
                     <div class="col-md-4 col-12">
-                        <div class="card shadow-sm mb-2" style="min-height: 320px; height: auto;">
-                            <div class="card-header bg-primary text-white px-2 py-1  card-background">Aniversariantes - <?php echo date('d/m') ?></div>
-                            <div class="card-body p-1 bg-image" style="background-image: url('img/bg_cake.png'); ">
+                        <div class="card shadow-sm mb-2 card_home">
+                            <div class="card-header bg-primary text-white px-2 py-1 card-background">Agenda parlamentar</div>
+                            <div class="card-body p-1 bg-image" style="background-image: url('img/bg_agenda.png'); ">
+                                <div class="table-responsive mb-2">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="card shadow-sm mb-2  card_home">
+                            <div class="card-header bg-primary text-white px-2 py-1 card-background">Aniversariantes</div>
+                            <div class="card-body p-2 bg-image" style="background-image: url('img/bg_cake.png'); ">
                                 <div class="table-responsive mb-2">
                                     <table class="table table-striped table-bordered mb-0 custom_table">
                                         <thead>
@@ -44,78 +62,99 @@ $pessoaController = new PessoaController();
                                             <?php
                                             $aniversariantes = $pessoaController->BuscarAniversariante(date('m'), date('d'));
 
+                                            $totalPaginasAniversariante = 5;
+                                            $totalPaginas = 0;
+                                            $offsetAniversariante = ($paginaAniversariante - 1) * $totalPaginasAniversariante;
+
                                             if ($aniversariantes['status'] == 'success') {
                                                 $totalAniversariantes = count($aniversariantes['dados']);
-                                                $linhasPorPagina = 6;
-                                                $totalPaginas = ceil($totalAniversariantes / $linhasPorPagina);
-
-                                                $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-                                                if ($paginaAtual < 1) {
-                                                    $paginaAtual = 1;
-                                                } elseif ($paginaAtual > $totalPaginas) {
-                                                    $paginaAtual = $totalPaginas;
-                                                }
-
-                                                $indiceInicial = ($paginaAtual - 1) * $linhasPorPagina;
-                                                $aniversariantesParaExibir = array_slice($aniversariantes['dados'], $indiceInicial, $linhasPorPagina);
-
-                                                if (!empty($aniversariantesParaExibir)) {
-                                                    foreach ($aniversariantesParaExibir as $pessoa) {
-                                                        echo '<tr>';
-                                                        echo '<td><a href="editar-pessoa.php?id=' . $pessoa['pessoa_id'] . '">' . $pessoa['pessoa_nome'] . '</a></td>'; // Nome
-                                                        echo '<td>' . $pessoa['pessoa_tipo_nome'] . '</td>'; // Tipo
-                                                        echo '<td>' . $pessoa['pessoa_municipio'] . ' | ' . $pessoa['pessoa_estado'] . '</td>'; // Município/UF
-                                                        echo '</tr>';
-                                                    }
-                                                } else {
-                                                    echo '<tr><td colspan="3">Nenhum aniversariante encontrado.</td></tr>'; // Mensagem caso não haja aniversariantes
+                                                $totalPaginas = ceil($totalAniversariantes / $totalPaginasAniversariante); // Total de páginas
+                                                foreach (array_slice($aniversariantes['dados'], $offsetAniversariante, $totalPaginasAniversariante) as $pessoa) {
+                                                    echo '<tr>';
+                                                    echo '<td><a href="editar-pessoa.php?id=' . $pessoa['pessoa_id'] . '">' . htmlspecialchars($pessoa['pessoa_nome']) . '</a></td>';
+                                                    echo '<td>' . htmlspecialchars($pessoa['pessoa_tipo_nome']) . '</td>';
+                                                    echo '<td>' . htmlspecialchars($pessoa['pessoa_municipio']) . ' | ' . htmlspecialchars($pessoa['pessoa_estado']) . '</td>';
+                                                    echo '</tr>';
                                                 }
                                             } else {
-                                                echo '<tr><td colspan="3">Nenhum aniversariante encontrado.</td></tr>'; // Mensagem caso não haja aniversariantes
+                                                echo '<tr><td colspan="3"><b>Nenhum aniversariante para hoje</b></td></tr>';
                                             }
                                             ?>
                                         </tbody>
                                     </table>
                                 </div>
-
-                                <ul class="pagination mb-0" style="font-size: 0.7em;">
+                                <ul class="pagination mb-0" style="font-size: 0.8em;">
                                     <?php
-                                    if (isset($totalPaginas)) {
+                                    if ($totalPaginas > 1) {
                                         for ($i = 1; $i <= $totalPaginas; $i++) {
-                                            echo '<li class="page-item ' . ($i == $paginaAtual ? 'active' : '') . '">';
-                                            echo '<a class="page-link" style="font-size: 0.9em;" href="?pagina=' . $i . '">' . $i . '</a>';
-                                            echo '</li>';
+                                            $activeClass = ($i === $paginaAniversariante) ? 'active' : '';
+                                            echo '<li class="page-item ' . $activeClass . '"><a class="page-link"  style="font-size: 0.8em" href="?paginaAniversariante=' . $i . '&paginaPostagem=' . $paginaPostagem . '">' . $i . '</a></li>';
                                         }
                                     }
-
                                     ?>
                                 </ul>
-
-
-
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-4 col-12">
-                        <div class="card shadow-sm mb-2" style="height: 320px;">
-                            <div class="card-header bg-primary text-white px-2 py-1  card-background">Postagens agendadas</div>
-                            <div class="card-body p-2">
+                        <div class="card shadow-sm mb-2 card_home">
+                            <div class="card-header bg-primary text-white px-2 py-1 card-background">Postagens</div>
+                            <div class="card-body p-1 bg-image" style="background-image: url('img/bg_social.png'); ">
+                                <div class="table-responsive mb-2">
+                                    <table class="table table-striped table-bordered mb-0 custom_table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Midia</th>
+                                                <th>Situação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $postagens = $postagemController->BuscarPostagemdoDia(date('m'), date('d'));
 
+                                            $totalPaginasPostagem = 5;
+                                            $totalPaginas = 0;
+                                            $offsetPostagem = ($paginaPostagem - 1) * $totalPaginasPostagem;
+
+                                            if ($postagens['status'] == 'success') {
+                                                // Número de itens por página
+                                                $totalPostagens = count($postagens['dados']); // Total de postagens
+                                                $totalPaginas = ceil($totalPostagens / $totalPaginasPostagem); // Total de páginas
+
+
+
+                                                foreach (array_slice($postagens['dados'], $offsetPostagem, $totalPaginasPostagem) as $postagem) {
+                                                    echo '<tr>';
+                                                    echo '<td><b><a href="editar-postagem.php?id=' . $postagem['postagem_id'] . '">' . htmlspecialchars($postagem['postagem_titulo']) . '</b></a></td>';
+                                                    echo '<td>' . htmlspecialchars($postagem['postagem_midias']) . '</td>';
+                                                    echo '<td><b>' . htmlspecialchars($postagem['postagem_status_nome']) . '</b></td>';
+                                                    echo '</tr>';
+                                                }
+                                            } else {
+                                                echo '<tr><td colspan="3"><b>Nenhuma postagem para hoje</b></td></tr>';
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ul class="pagination mb-0" style="font-size: 0.8em;">
+                                    <?php
+                                    if ($totalPaginas > 1) {
+                                        for ($i = 1; $i <= $totalPaginas; $i++) {
+                                            $activeClass = ($i === $paginaPostagem) ? 'active' : ''; // Classe ativa na página atual
+                                            echo '<li class="page-item ' . $activeClass . '"><a class="page-link"  style="font-size: 0.8em;" href="?paginaPostagem=' . $i . '&paginaAniversariante=' . $paginaAniversariante . '">' . $i . '</a></li>';
+                                        }
+                                    }
+                                    ?>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
-                        <div class="card shadow-sm mb-2" style="height: 320px;">
-                            <div class="card-header bg-primary text-white px-2 py-1  card-background">Agenda parlamentar</div>
-                            <div class="card-body p-2">
 
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
     </div>

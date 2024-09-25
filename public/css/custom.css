@@ -31,7 +31,7 @@ a {
 .form_custom select,
 .form_custom textarea,
 .form_custom button,
-.form_custom a  {
+.form_custom a {
     font-size: inherit;
 }
 
@@ -45,7 +45,7 @@ a {
     font-size: 0.9em;
 }
 
-.card-header{
+.card-header {
     font-size: 1.115em;
     font-weight: 500;
 }
@@ -55,12 +55,29 @@ a {
 }
 
 .bg-image {
-    background-size: cover; /* Para cobrir todo o espaço do card */
-    background-position: center; /* Para centralizar a imagem */
-    color: white; /* Para garantir que o texto seja legível */
-  }
-  
+    background-size: cover;
+    /* Para cobrir todo o espaço do card */
+    background-position: center;
+    /* Para centralizar a imagem */
+    color: white;
+    /* Para garantir que o texto seja legível */
+}
 
+
+.card_home {
+    height: auto;
+    
+    /* Para dispositivos móveis, a altura é automática */
+}
+
+@media (min-width: 768px) {
+
+    /* Altera a altura apenas para telas maiores que 768px */
+    .card_home {
+        min-height: 300px;
+        /* Define a altura mínima de 300px para desktop */
+    }
+}
 
 
 .card-background {
@@ -83,7 +100,7 @@ a {
 /* No modo mobile, desativamos o crop */
 @media (max-width: 768px) {
 
-   
+
 
     /* Ajuste conforme a largura que você deseja definir como mobile */
     .img-crop {
