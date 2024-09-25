@@ -31,6 +31,7 @@ $login = new Login();
 
         /* Estilo customizado para arredondar os inputs e o botão */
         input[type="email"],
+        
         input[type="password"] {
             border-radius: 20px;
             /* Aqui você define o nível de arredondamento */
@@ -86,6 +87,11 @@ $login = new Login();
             margin-bottom: 30px;
             font-weight: 300;
         }
+        .copyright{
+            color: #e3e3e8;
+            font-size: 0.8em;
+            font-weight: 100;
+        }
     </style>
 </head>
 
@@ -108,7 +114,7 @@ $login = new Login();
                 $resultado = $login->Logar($dados);
 
                 if ($resultado['status'] === 'not_found' || $resultado['status'] === 'deactivated') {
-                    $layoutClass->alert('info', $resultado['message'], 3, true);
+                    $layoutClass->alert('warning', $resultado['message'], 3, true);
                 } else if ($resultado['status'] === 'error' || $resultado['status'] === 'wrong_password') {
                     $layoutClass->alert('danger', $resultado['message'], 3, true);
                 } else {
@@ -119,10 +125,10 @@ $login = new Login();
             ?>
             <form id="form_login" method="post" enctype="application/x-www-form-urlencoded" class="form-group">
                 <div class="form-group">
-                    <input type="email" class="form-control " name="email" id="email" placeholder="E-mail" value="jairojeffersont@gmail.com2" required>
+                    <input type="email" class="form-control " name="email" id="email" placeholder="E-mail" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control " name="senha" id="senha" placeholder="Senha" value="intell01" required>
+                    <input type="password" class="form-control " name="senha" id="senha" placeholder="Senha" required>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center">
@@ -130,6 +136,8 @@ $login = new Login();
                 </div>
             </form>
             <p class="mt-3 link">Esqueceu a senha? | <a href="cadastro.php">Faça seu cadastro</a></p>
+            <p class="mt-3 copyright">2024 | JS Digital System</p>
+
         </div>
     </div>
 </body>
