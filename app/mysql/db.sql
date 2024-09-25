@@ -283,6 +283,7 @@ CREATE TABLE postagens(
 
 
 
+/*-----------------------TABELA PROPOSICOES DO DEPUTADO-----------------------*/
 CREATE TABLE proposicoes_deputado(
     proposicao_id INT NOT NULL,
     proposicao_ano INT NOT NULL,
