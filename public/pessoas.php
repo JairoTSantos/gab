@@ -26,7 +26,7 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
 $config = require dirname(__DIR__) . '/app/config/config.php';
 $depConfig = $config['deputado'];
 
-print_r($pessoaController->InserirDeputados());
+//print_r($pessoaController->InserirDeputados());
 
 ?>
 <!DOCTYPE html>
