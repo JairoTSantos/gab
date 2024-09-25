@@ -78,7 +78,7 @@ class Layout {
     function navBar($voltar = false, $url = 'home.php', $print = false) {
         echo '<div class="card mb-2 ">
                 <div class="card-body p-1">
-                    <a class="btn btn-primary btn-sm custom-nav " href="' . $url . '" role="button"><i class="fa-solid fa-house"></i> Início</a>&nbsp;';
+                    <a class="btn btn-primary btn-sm custom-nav " href="home.php" role="button"><i class="fa-solid fa-house"></i> Início</a>&nbsp;';
 
         if ($voltar) {
             echo '<a class="btn btn-success btn-sm custom-nav" href="' . $url . '"role="button"><i class="fa-solid fa-arrow-left"></i> Voltar</a>&nbsp;';

@@ -26,6 +26,8 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
 $config = require dirname(__DIR__) . '/app/config/config.php';
 $depConfig = $config['deputado'];
 
+print_r($pessoaController->InserirDeputados());
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -322,7 +324,6 @@ $depConfig = $config['deputado'];
                     if ($totalPagina > 0 && $totalPagina != 1) {
                         echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro='.$filtro.'&pagina=1&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Primeira</a></li>';
 
-                        // Calcular o início e o fim dos links a serem exibidos
                         $inicio = max(1, $paginaAtual - floor($maxLinks / 2));
                         $fim = min($totalPagina, $inicio + $maxLinks - 1);
 

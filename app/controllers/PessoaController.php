@@ -238,10 +238,18 @@ class PessoaController {
     }
 
     public function gerarEmail($nome) {
+        // Converte o nome para minúsculas
         $nome = strtolower($nome);
+        // Remove o ponto da abreviação "Dr"
+        $nome = preg_replace('/\bdr\.\s*/', 'dr ', $nome);
+        // Converte caracteres especiais para ASCII
         $nome = iconv('UTF-8', 'ASCII//TRANSLIT', $nome);
+        // Substitui espaços por pontos
         $nome = str_replace(' ', '.', $nome);
+        // Remove caracteres não permitidos
         $nome = preg_replace('/[^a-z0-9.]/', '', $nome);
+        
         return 'dep.' . $nome . '@camara.leg.br';
     }
+    
 }
