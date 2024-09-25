@@ -82,8 +82,15 @@ $login = new Login();
 
         .login_title {
             color: white;
+            margin-bottom: 5px;
+            font-weight: 300;
+        }
+
+        .host {
+            color: white;
             margin-bottom: 30px;
             font-weight: 300;
+            font-size: 0.9em;
         }
 
         .copyright {
@@ -99,6 +106,7 @@ $login = new Login();
         <div class="centralizada text-center">
             <img src="img/logo_white.png" alt="" class="img_logo" />
             <h2 class="login_title">Gabinete Digital</h2>
+            <h6 class="host"><?php echo $_SERVER['HTTP_HOST'] ?></h6>
             <?php
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_login'])) {
                 $email = isset($_POST['email']) ? filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL) : '';

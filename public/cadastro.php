@@ -56,7 +56,7 @@ $layoutClass = new Layout();
         }
 
         a[type="button"] {
-            background-color: green;
+            background-color: #29ad24;
             color: white;
             border: none;
             border-radius: 20px;
@@ -97,8 +97,15 @@ $layoutClass = new Layout();
 
         .login_title {
             color: white;
+            margin-bottom: 5px;
+            font-weight: 300;
+        }
+
+        .host {
+            color: white;
             margin-bottom: 30px;
             font-weight: 300;
+            font-size: 0.9em;
         }
 
         .copyright {
@@ -114,8 +121,9 @@ $layoutClass = new Layout();
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="centralizada text-center">
 
-            <img src="img/logo_white.png" alt="" class="img_logo" />
+        <img src="img/logo_white.png" alt="" class="img_logo" />
             <h2 class="login_title">Gabinete Digital</h2>
+            <h6 class="host"><?php echo $_SERVER['HTTP_HOST'] ?></h6>
 
             <?php
 
