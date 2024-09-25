@@ -295,7 +295,7 @@ $depConfig = $config['deputado'];
                             'Telefone' =>  $pessoa['pessoa_telefone'],
                             'Endereço' =>  $pessoa['pessoa_telefone'] . ' - ' . $pessoa['pessoa_bairro'],
                             'Município/UF' =>  $pessoa['pessoa_municipio'] . ' - ' . $pessoa['pessoa_estado'],
-                            'Tipo' =>  $pessoa['pessoa_tipo_nome'],
+                            'Tipo' =>  '<b>'.$pessoa['pessoa_tipo_nome'].'</b>',
                             'Órgão' =>  $pessoa['orgao_nome'],
                             'Criado em | por' => date('d/m', strtotime($pessoa['pessoa_criada_em'])) . ' | ' . $pessoa['usuario_nome'],
                         ];
@@ -320,7 +320,7 @@ $depConfig = $config['deputado'];
                     $maxLinks = 6; // Máximo de links a serem exibidos
 
                     if ($totalPagina > 0 && $totalPagina != 1) {
-                        echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro=' . $filtro . '&pagina=1&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Primeira</a></li>';
+                        echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro='.$filtro.'&pagina=1&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Primeira</a></li>';
 
                         // Calcular o início e o fim dos links a serem exibidos
                         $inicio = max(1, $paginaAtual - floor($maxLinks / 2));
@@ -331,10 +331,10 @@ $depConfig = $config['deputado'];
                         }
 
                         for ($i = $inicio; $i <= $fim; $i++) {
-                            echo '<li class="page-item' . ($i == $paginaAtual ? ' active' : '') . '"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro=' . $filtro . '&pagina=' . $i . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">' . $i . '</a></li>';
+                            echo '<li class="page-item' . ($i == $paginaAtual ? ' active' : '') . '"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro='.$filtro.'&pagina=' . $i . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">' . $i . '</a></li>';
                         }
 
-                        echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro=' . $filtro . '&pagina=' . $totalPagina . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Última</a></li>';
+                        echo '<li class="page-item"><a class="page-link" href="pessoas.php?itens=' . $itens . '&filtro='.$filtro.'&pagina=' . $totalPagina . '&ordenarPor=' . $ordenarPor . '&ordem=' . $ordem . (isset($termo) ? '&termo=' . $termo : '') . '">Última</a></li>';
                     }
                     ?>
                 </ul>

@@ -211,6 +211,16 @@ class PessoaController {
                         }
                     }
                 }
+
+                if($dep['siglaSexo'] == 'M'){
+                    $deputado['pessoa_sexo'] = 'Masculino';
+                }else if($dep['siglaSexo'] == 'F'){
+                    $deputado['pessoa_sexo'] = 'Feminino';
+                }else{
+                    $deputado['pessoa_sexo'] = 'Outro';
+                }
+
+
                 $depsArray[] = $deputado;
             }
         }

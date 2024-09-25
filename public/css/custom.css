@@ -38,6 +38,7 @@ a {
 
 .custom_table {
     font-size: 0.9em;
+    background-color: white;
 }
 
 .card_description {
@@ -52,6 +53,13 @@ a {
 .custom_alert {
     font-size: 0.9em;
 }
+
+.bg-image {
+    background-size: cover; /* Para cobrir todo o espaço do card */
+    background-position: center; /* Para centralizar a imagem */
+    color: white; /* Para garantir que o texto seja legível */
+  }
+  
 
 
 
