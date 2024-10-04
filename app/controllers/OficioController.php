@@ -135,7 +135,6 @@ class OficioController {
 
     public function ApagarOficio($id) {
 
-        $result = $this->oficioModel->ApagarOficio('usuario_id', $id);
 
         $result = $this->oficioModel->BuscarOfício('oficio_id', $id);
 
