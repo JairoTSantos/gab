@@ -22,6 +22,7 @@ function getJson($url) {
 
     // Decodifica o JSON
     $data = json_decode($response, true);
+   
 
     // Verifica se a decodificação foi bem-sucedida
     if (json_last_error() === JSON_ERROR_NONE) {
