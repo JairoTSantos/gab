@@ -1,22 +1,40 @@
 <?php
 
+require_once dirname(__DIR__) . '/models/EleicoesModel.php';
+
 class EleicoesController
 {
+
+    private $eleicoesModel;
     private $arquivo;
     private $nomeProcurado;
+    private $ano;
 
-    public function __construct($ano)
+
+    public function __construct()
     {
+        $this->ano = 2018;
+        $this->eleicoesModel = new EleicoesModel();
         $config = require dirname(__DIR__) . '/config/config.php';
-
-        $this->nomeProcurado = 'ACÁCIO DA SILVA FAVACHO NETO';
-        $this->arquivo = dirname(__DIR__) . '/csv/votacao_2022_municipio.csv'; // Use '/' para garantir portabilidade
+        $this->nomeProcurado = $config['deputado']['nome_completo'];
+        $this->arquivo = dirname(__DIR__) . '/csv/votacao_' . $this->ano . '_municipio.csv'; // Use '/' para garantir portabilidade
     }
 
-    public function PorMunicipio()
+
+
+    public function inserirMunicipiosGeral()
+    {
+        $dados = $this->getCsv();
+        foreach ($dados as $municipio) {
+            $result = $this->eleicoesModel->inserirMunicipiosGeral($municipio);
+        }
+        return ['status' => 'success'];
+    }
+
+
+    public function getCsv()
     {
         $resultados = [];
-        $total_votos = 0;
 
         if (($handle = fopen($this->arquivo, 'r')) !== FALSE) {
 
@@ -27,33 +45,56 @@ class EleicoesController
                     return mb_convert_encoding($campo, 'UTF-8', 'ISO-8859-1');
                 }, $dados);
 
-
                 if (isset($dados[20]) && trim($dados[20]) === $this->nomeProcurado) {
                     $municipio = $dados[14];
-                    $id_municipio = $dados[13];
                     $votos = (int) $dados[21];
+                    $cargo = $dados[18];
 
-                    if (!isset($resultados[$municipio])) {
-                        $resultados[$municipio] = [
-                            'NM_MUNICIPIO' => $municipio,
-                            'QT_VOTOS' => $votos,
-                            'CD_MUNICIPIO' => $id_municipio
+                    $encontrado = false;
+                    foreach ($resultados as &$resultado) {
+                        if ($resultado['municipio_nome'] === $municipio) {
+                            $resultado['municipio_votos'] += $votos;
+                            $encontrado = true;
+                            break;
+                        }
+                    }
+
+                    if (!$encontrado) {
+                        $resultados[] = [
+                            'municipio_nome' => $municipio,
+                            'municipio_votos' => $votos,
+                            'municipio_ano_eleicao' => $this->ano,
+                            'municipio_cargo' => ucwords(strtolower($cargo))
                         ];
-
-                        $total_votos += $votos;
-                    } else {
-                        $resultados[$municipio]['QT_VOTOS'] += $votos;
-                        $total_votos += $votos;
                     }
                 }
             }
-            
+
             fclose($handle);
-            $resultados['total_votos'] = $total_votos;
-            
             return $resultados;
         } else {
             throw new Exception("Erro ao abrir o arquivo: {$this->arquivo}.");
         }
     }
+
+    public function buscarPorMunicipio($ano) {
+
+        $result = $this->eleicoesModel->buscarPorMunicipio($ano);
+
+        if ($result['status'] == 'success') {
+            return $result;
+        }
+
+        if ($result['status'] == 'empty') {
+            return ['status' => 'empty', 'message' => 'Nada encontrado.'];
+        }
+
+        if ($result['status'] == 'error') {
+            return ['status' => 'error', 'message' => 'Erro ao listar resultados.'];
+        }
+    }
+
+
+
+
 }

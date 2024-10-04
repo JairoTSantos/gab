@@ -27,7 +27,7 @@ return [
     'deputado' => [
         'id_deputado' => 204379,
         'nome_deputado' => 'Acácio Favacho',
-        'nome_completo' => 'Acácio da Silva Favacho Neto',
+        'nome_completo' => 'ACÁCIO DA SILVA FAVACHO NETO',
         'estado_deputado' => 'AP',
         'legislatura_atual' => $legislaturaAtual
     ]
