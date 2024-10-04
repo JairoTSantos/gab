@@ -11,9 +11,9 @@ $legislaturaAtual = $legislatura + floor(($ano - $inicioLegislatura55) / $duraca
 return [
     'db' => [
         'host' => 'localhost',
-        'username' => 'root',
-        'password' => 'root',
-        'database' => 'gabinete_digital'
+        'username' => 'jairo',
+        'password' => 'intell01',
+        'database' => 'gab'
     ],
     'master_user' => [
         'name' => 'Administrador',

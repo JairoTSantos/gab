@@ -12,8 +12,8 @@ require_once dirname(__DIR__) . '/app/controllers/OrgaoTipoController.php';
 $orgaoTipoController = new OrgaoTipoController();
 
 
-$itens = isset($_GET['itens']) ? (int)$_GET['itens'] : 10;
-$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$itens = isset($_GET['itens']) ? (int) $_GET['itens'] : 10;
+$pagina = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
 $ordenarPor = isset($_GET['ordenarPor']) ? htmlspecialchars($_GET['ordenarPor']) : 'orgao_nome';
 $ordem = isset($_GET['ordem']) ? strtolower(htmlspecialchars($_GET['ordem'])) : 'asc';
 $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
@@ -54,7 +54,9 @@ $depConfig = $config['deputado'];
                                             <ul class="navbar-nav me-auto mb-0 mb-lg-0">
                                                 <li class="nav-item">
                                                     <a class="nav-link active p-1" aria-current="page" href="#">
-                                                        <button class="btn btn-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
+                                                        <button class="btn btn-success btn-sm"
+                                                            style="font-size: 0.850em;" id="btn_novo_tipo"
+                                                            type="button">
                                                             <i class="fa-solid fa-circle-plus"></i> Novo tipo
                                                         </button>
                                                         <!--<button class="btn btn-secondary btn-sm" style="font-size: 0.850em;" id="btn_imprimir" type="button">
@@ -104,24 +106,31 @@ $depConfig = $config['deputado'];
                                 }
 
                                 ?>
-                                <form class="row g-2 form_custom " id="form_novo" method="POST" enctype="application/x-www-form-urlencoded">
+                                <form class="row g-2 form_custom " id="form_novo" method="POST"
+                                    enctype="application/x-www-form-urlencoded">
                                     <div class="col-md-5 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="nome" placeholder="Nome " required>
+                                        <input type="text" class="form-control form-control-sm" name="nome"
+                                            placeholder="Nome " required>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <input type="email" class="form-control form-control-sm" name="email" placeholder="Email " required>
+                                        <input type="email" class="form-control form-control-sm" name="email"
+                                            placeholder="Email " required>
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="telefone" placeholder="Telefone (somente números)" maxlength="11">
+                                        <input type="text" class="form-control form-control-sm" name="telefone"
+                                            placeholder="Telefone (somente números)" maxlength="11">
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="endereco" placeholder="Endereço ">
+                                        <input type="text" class="form-control form-control-sm" name="endereco"
+                                            placeholder="Endereço ">
                                     </div>
                                     <div class="col-md-2 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP (somente números)" maxlength="8">
+                                        <input type="text" class="form-control form-control-sm" name="cep"
+                                            placeholder="CEP (somente números)" maxlength="8">
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="bairro" placeholder="Bairro">
+                                        <input type="text" class="form-control form-control-sm" name="bairro"
+                                            placeholder="Bairro">
                                     </div>
                                     <div class="col-md-1 col-6">
                                         <select class="form-select form-select-sm" id="estado" name="estado" required>
@@ -129,7 +138,8 @@ $depConfig = $config['deputado'];
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-6">
-                                        <select class="form-select form-select-sm" id="municipio" name="municipio" required>
+                                        <select class="form-select form-select-sm" id="municipio" name="municipio"
+                                            required>
                                             <option value="" selected>Município</option>
                                         </select>
                                     </div>
@@ -155,13 +165,16 @@ $depConfig = $config['deputado'];
                                         </select>
                                     </div>
                                     <div class="col-md-9 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="site" placeholder="Site ou rede sociais">
+                                        <input type="text" class="form-control form-control-sm" name="site"
+                                            placeholder="Site ou rede sociais">
                                     </div>
                                     <div class="col-md-12 col-12">
-                                        <textarea class="form-control form-control-sm" name="informacoes" rows="5" placeholder="Informações importantes desse órgão"></textarea>
+                                        <textarea class="form-control form-control-sm" name="informacoes" rows="5"
+                                            placeholder="Informações importantes desse órgão"></textarea>
                                     </div>
                                     <div class="col-md-4 col-6">
-                                        <button type="submit" class="btn btn-success btn-sm" name="btn_salvar"><i class="fa-regular fa-floppy-disk"></i> Salvar</button>
+                                        <button type="submit" class="btn btn-success btn-sm" name="btn_salvar"><i
+                                                class="fa-regular fa-floppy-disk"></i> Salvar</button>
                                     </div>
                                 </form>
                             </div>
@@ -172,7 +185,8 @@ $depConfig = $config['deputado'];
                     <div class="col-12">
                         <div class="card shadow-sm mb-2">
                             <div class="card-body p-2">
-                                <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
+                                <form class="row g-2 form_custom mb-0" method="GET"
+                                    enctype="application/x-www-form-urlencoded">
                                     <div class="col-md-2 col-6">
                                         <select class="form-select form-select-sm" name="ordenarPor" required>
                                             <option value="orgao_nome" <?php echo $ordenarPor == 'orgao_nome' ? 'selected' : ''; ?>>Ordenar por | Nome</option>
@@ -184,29 +198,39 @@ $depConfig = $config['deputado'];
                                     </div>
                                     <div class="col-md-2 col-6">
                                         <select class="form-select form-select-sm" name="ordem" required>
-                                            <option value="asc" <?php echo $ordem == 'asc' ? 'selected' : ''; ?>>Ordem Crescente</option>
-                                            <option value="desc" <?php echo $ordem == 'desc' ? 'selected' : ''; ?>>Ordem Decrescente</option>
+                                            <option value="asc" <?php echo $ordem == 'asc' ? 'selected' : ''; ?>>Ordem
+                                                Crescente</option>
+                                            <option value="desc" <?php echo $ordem == 'desc' ? 'selected' : ''; ?>>Ordem
+                                                Decrescente</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-6">
                                         <select class="form-select form-select-sm" name="itens" required>
-                                            <option value="5" <?php echo $itens == 5 ? 'selected' : ''; ?>>5 itens</option>
-                                            <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens</option>
-                                            <option value="5" <?php echo $itens == 25 ? 'selected' : ''; ?>>25 itens</option>
-                                            <option value="10" <?php echo $itens == 59 ? 'selected' : ''; ?>>50 itens</option>
+                                            <option value="5" <?php echo $itens == 5 ? 'selected' : ''; ?>>5 itens
+                                            </option>
+                                            <option value="10" <?php echo $itens == 10 ? 'selected' : ''; ?>>10 itens
+                                            </option>
+                                            <option value="25" <?php echo $itens == 25 ? 'selected' : ''; ?>>25 itens
+                                            </option>
+                                            <option value="50" <?php echo $itens == 50 ? 'selected' : ''; ?>>50 itens
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-6">
                                         <select class="form-select form-select-sm" name="filtro" required>
-                                            <option value="0" <?php echo $filtro == 0 ? 'selected' : ''; ?>>Todos os estados</option>
-                                            <option value="1" <?php echo $filtro == 1 ? 'selected' : ''; ?>>Somente <?php echo $depConfig['estado_deputado'] ?></option>
+                                            <option value="0" <?php echo $filtro == 0 ? 'selected' : ''; ?>>Todos os
+                                                estados</option>
+                                            <option value="1" <?php echo $filtro == 1 ? 'selected' : ''; ?>>Somente
+                                                <?php echo $depConfig['estado_deputado'] ?></option>
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="termo" placeholder="Buscar...">
+                                        <input type="text" class="form-control form-control-sm" name="termo"
+                                            placeholder="Buscar...">
                                     </div>
                                     <div class="col-md-1 col-6">
-                                        <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                        <button type="submit" class="btn btn-success btn-sm"><i
+                                                class="fa-solid fa-magnifying-glass"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -259,12 +283,12 @@ $depConfig = $config['deputado'];
         </div>
     </div>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             carregarEstados();
         });
 
         function carregarEstados() {
-            $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome', function(data) {
+            $.getJSON('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome', function (data) {
                 const selectEstado = $('#estado');
                 selectEstado.empty();
                 selectEstado.append('<option value="" selected>UF</option>');
@@ -275,7 +299,7 @@ $depConfig = $config['deputado'];
         }
 
         function carregarMunicipios(estadoId) {
-            $.getJSON(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoId}/municipios?orderBy=nome`, function(data) {
+            $.getJSON(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoId}/municipios?orderBy=nome`, function (data) {
                 const selectMunicipio = $('#municipio');
                 selectMunicipio.empty();
                 selectMunicipio.append('<option value="" selected>Município</option>');
@@ -286,7 +310,7 @@ $depConfig = $config['deputado'];
         }
 
 
-        $('#estado').change(function() {
+        $('#estado').change(function () {
             const estadoId = $(this).val();
             if (estadoId) {
                 $('#municipio').empty().append('<option value="">Aguarde...</option>');
@@ -296,16 +320,16 @@ $depConfig = $config['deputado'];
             }
         });
 
-        $('#btn_novo_tipo').click(function() {
+        $('#btn_novo_tipo').click(function () {
             if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
                 window.location.href = "orgaos-tipos.php";
-            }else{
+            } else {
                 return false;
             }
         });
 
 
-        $('#tipo').change(function() {
+        $('#tipo').change(function () {
             if ($('#tipo').val() == '+') {
                 if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
                     window.location.href = "orgaos-tipos.php";

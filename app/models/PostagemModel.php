@@ -137,40 +137,4 @@ class PostagemModel {
             return ['status' => 'error'];
         }
     }
-
-
-    public function BuscarPostagemdoDia($mes, $dia) {
-        if ($dia !== null) {
-            $query = "SELECT * FROM view_postagens WHERE MONTH(postagem_data) = :mes AND DAY(postagem_data) = :dia ORDER BY DAY(postagem_data) ASC";
-        } else {
-            $query = "SELECT * FROM view_postagens WHERE MONTH(postagem_data) = :mes ORDER BY DAY(postagem_data) ASC";
-        }
-    
-        try {
-            $stmt = $this->db->prepare($query);
-            
-            $stmt->bindParam(':mes', $mes, PDO::PARAM_INT);
-    
-            if ($dia !== null) {
-                $stmt->bindParam(':dia', $dia, PDO::PARAM_INT);
-            }
-            
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-            if (empty($result)) {
-                return ['status' => 'empty'];
-            }
-            
-            return [
-                'status' => 'success',
-                'dados' => $result
-            ];
-        } catch (PDOException $e) {
-            $this->logger->novoLog('postagem_error', $e->getMessage());
-            return [
-                'status' => 'error',
-            ];
-        }
-    }
 }
