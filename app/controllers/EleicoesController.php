@@ -1,98 +1,90 @@
 <?php
 
-require_once dirname(__DIR__) . '/models/EleicoesModel.php';
+
 
 class EleicoesController
 {
 
-    private $eleicoesModel;
-    private $arquivo;
-    private $nomeProcurado;
-    private $ano;
-
-
-    public function __construct()
+    //CRIAR UM MEIO DE BUSCAR PELO BIGQUERY
+    public function getEleicoes()
     {
-        $this->ano = 2018;
-        $this->eleicoesModel = new EleicoesModel();
-        $config = require dirname(__DIR__) . '/config/config.php';
-        $this->nomeProcurado = $config['deputado']['nome_completo'];
-        $this->arquivo = dirname(__DIR__) . '/csv/votacao_' . $this->ano . '_municipio.csv'; // Use '/' para garantir portabilidade
-    }
+        $caminhoArquivo = dirname(__DIR__) . '/json/resultado_eleicoes.json';
 
-
-
-    public function inserirMunicipiosGeral()
-    {
-        $dados = $this->getCsv();
-        foreach ($dados as $municipio) {
-            $result = $this->eleicoesModel->inserirMunicipiosGeral($municipio);
+        if (!file_exists($caminhoArquivo)) {
+            return []; // Retorna um array vazio se o arquivo não existir
         }
-        return ['status' => 'success'];
+
+        $conteudo = file_get_contents($caminhoArquivo);
+        $dados = json_decode($conteudo, true); // Decodifica o JSON em um array
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return []; // Retorna um array vazio se houver erro na decodificação
+        }
+
+        // Ordena os dados pelo campo 'ano' em ordem decrescente
+        usort($dados, function ($a, $b) {
+            return (isset($b['ano']) && isset($a['ano'])) ? $b['ano'] <=> $a['ano'] : 0; // Ordena por 'ano'
+        });
+
+        return $dados; // Retorna os dados ordenados
     }
 
 
-    public function getCsv()
+    public function getEleicoesMunicipios($ano)
     {
-        $resultados = [];
+        $caminhoArquivoJson = dirname(__DIR__) . '/json/resultado_eleicoes_municipio.json';
+        $caminhoArquivoCsv = dirname(__DIR__) . '/json/br_bd_diretorios_brasil_municipio.csv';
 
-        if (($handle = fopen($this->arquivo, 'r')) !== FALSE) {
+        // Verifica se o arquivo JSON existe
+        if (!file_exists($caminhoArquivoJson)) {
+            return []; // Retorna um array vazio se o arquivo não existir
+        }
 
-            $header = fgetcsv($handle, 1000000, ";");
+        // Lê e decodifica o arquivo JSON
+        $conteudoJson = file_get_contents($caminhoArquivoJson);
+        $dadosJson = json_decode($conteudoJson, true);
 
-            while (($dados = fgetcsv($handle, 1000000, ";")) !== FALSE) {
-                $dados = array_map(function ($campo) {
-                    return mb_convert_encoding($campo, 'UTF-8', 'ISO-8859-1');
-                }, $dados);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return []; // Retorna um array vazio se houver erro na decodificação do JSON
+        }
 
-                if (isset($dados[20]) && trim($dados[20]) === $this->nomeProcurado) {
-                    $municipio = $dados[14];
-                    $votos = (int) $dados[21];
-                    $cargo = $dados[18];
+        // Cria um array associativo do arquivo CSV
+        $municipios = [];
+        if (($handle = fopen($caminhoArquivoCsv, 'r')) !== FALSE) {
+            // Lê o cabeçalho
+            $cabecalho = fgetcsv($handle, 1000, ',');
 
-                    $encontrado = false;
-                    foreach ($resultados as &$resultado) {
-                        if ($resultado['municipio_nome'] === $municipio) {
-                            $resultado['municipio_votos'] += $votos;
-                            $encontrado = true;
-                            break;
-                        }
-                    }
-
-                    if (!$encontrado) {
-                        $resultados[] = [
-                            'municipio_nome' => $municipio,
-                            'municipio_votos' => $votos,
-                            'municipio_ano_eleicao' => $this->ano,
-                            'municipio_cargo' => ucwords(strtolower($cargo))
-                        ];
-                    }
-                }
+            // Lê cada linha do CSV
+            while (($linha = fgetcsv($handle, 1000, ',')) !== FALSE) {
+                $municipio = array_combine($cabecalho, $linha); // Combina cabeçalho com dados da linha
+                $municipios[$municipio['id_municipio']] = $municipio['nome']; // Mapeia id_municipio para nome
             }
-
             fclose($handle);
-            return $resultados;
-        } else {
-            throw new Exception("Erro ao abrir o arquivo: {$this->arquivo}.");
         }
+
+        // Filtra os dados do JSON com base no ano
+        $resultadosFiltrados = array_filter($dadosJson, function ($item) use ($ano) {
+            return isset($item['ano']) && $item['ano'] == $ano; // Verifica se 'ano' existe e é igual ao ano desejado
+        });
+
+        // Adiciona o nome do município ao array de resultados filtrados
+        foreach ($resultadosFiltrados as &$resultado) {
+            if (isset($resultado['id_municipio']) && isset($municipios[$resultado['id_municipio']])) {
+                $resultado['nome_municipio'] = $municipios[$resultado['id_municipio']]; // Adiciona o nome ao resultado
+            }
+        }
+
+        // Ordena os resultados filtrados por votos em ordem decrescente
+        usort($resultadosFiltrados, function ($a, $b) {
+            // Verifica se o campo de votos existe e é numérico
+            return (isset($b['votos']) && isset($a['votos'])) ? $b['votos'] <=> $a['votos'] : 0;
+        });
+
+        return $resultadosFiltrados; // Retorna os dados filtrados e ordenados
     }
 
-    public function buscarPorMunicipio($ano) {
 
-        $result = $this->eleicoesModel->buscarPorMunicipio($ano);
 
-        if ($result['status'] == 'success') {
-            return $result;
-        }
-
-        if ($result['status'] == 'empty') {
-            return ['status' => 'empty', 'message' => 'Nada encontrado.'];
-        }
-
-        if ($result['status'] == 'error') {
-            return ['status' => 'error', 'message' => 'Erro ao listar resultados.'];
-        }
-    }
 
 
 

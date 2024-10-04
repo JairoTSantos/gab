@@ -1,0 +1,211 @@
+[{
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600238",
+  "id_candidato_bd": "615577",
+  "votos": "388"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600709",
+  "id_candidato_bd": "615577",
+  "votos": "133"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600279",
+  "id_candidato_bd": "615577",
+  "votos": "355"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600808",
+  "id_candidato_bd": "615577",
+  "votos": "628"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600402",
+  "id_candidato_bd": "615577",
+  "votos": "462"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600212",
+  "id_candidato_bd": "615577",
+  "votos": "443"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600303",
+  "id_candidato_bd": "615577",
+  "votos": "10550"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600105",
+  "id_candidato_bd": "615577",
+  "votos": "126"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600055",
+  "id_candidato_bd": "615577",
+  "votos": "214"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600501",
+  "id_candidato_bd": "615577",
+  "votos": "590"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600154",
+  "id_candidato_bd": "615577",
+  "votos": "152"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600204",
+  "id_candidato_bd": "615577",
+  "votos": "239"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600550",
+  "id_candidato_bd": "615577",
+  "votos": "31"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600600",
+  "id_candidato_bd": "615577",
+  "votos": "3668"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600253",
+  "id_candidato_bd": "615577",
+  "votos": "205"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "id_municipio": "1600535",
+  "id_candidato_bd": "615577",
+  "votos": "927"
+}, {
+  "ano": "2016",
+  "id_eleicao": "220",
+  "id_municipio": "1600303",
+  "id_candidato_bd": "615577",
+  "votos": "5700"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600550",
+  "id_candidato_bd": "615577",
+  "votos": "377"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600808",
+  "id_candidato_bd": "615577",
+  "votos": "477"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600055",
+  "id_candidato_bd": "615577",
+  "votos": "317"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600402",
+  "id_candidato_bd": "615577",
+  "votos": "1538"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600303",
+  "id_candidato_bd": "615577",
+  "votos": "10962"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600154",
+  "id_candidato_bd": "615577",
+  "votos": "312"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600238",
+  "id_candidato_bd": "615577",
+  "votos": "562"
+}, {
+  "ano": "2008",
+  "id_eleicao": "30",
+  "id_municipio": "1600303",
+  "id_candidato_bd": "615577",
+  "votos": "5133"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600105",
+  "id_candidato_bd": "615577",
+  "votos": "275"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600600",
+  "id_candidato_bd": "615577",
+  "votos": "3057"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600709",
+  "id_candidato_bd": "615577",
+  "votos": "571"
+}, {
+  "ano": "2012",
+  "id_eleicao": "47",
+  "id_municipio": "1600303",
+  "id_candidato_bd": "615577",
+  "votos": "4606"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600204",
+  "id_candidato_bd": "615577",
+  "votos": "373"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600279",
+  "id_candidato_bd": "615577",
+  "votos": "2727"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600212",
+  "id_candidato_bd": "615577",
+  "votos": "762"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600535",
+  "id_candidato_bd": "615577",
+  "votos": "417"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600501",
+  "id_candidato_bd": "615577",
+  "votos": "1014"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "id_municipio": "1600253",
+  "id_candidato_bd": "615577",
+  "votos": "323"
+}]

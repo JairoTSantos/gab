@@ -1,0 +1,41 @@
+[{
+  "ano": "2012",
+  "id_eleicao": "47",
+  "cargo": "vereador",
+  "sigla_partido": "PMDB",
+  "numero_candidato": "15699",
+  "id_candidato_bd": "615577",
+  "votos": "4606"
+}, {
+  "ano": "2018",
+  "id_eleicao": "297",
+  "cargo": "deputado federal",
+  "sigla_partido": "PROS",
+  "numero_candidato": "9000",
+  "id_candidato_bd": "615577",
+  "votos": "19111"
+}, {
+  "ano": "2022",
+  "id_eleicao": "546",
+  "cargo": "deputado federal",
+  "sigla_partido": "MDB",
+  "numero_candidato": "1515",
+  "id_candidato_bd": "615577",
+  "votos": "24064"
+}, {
+  "ano": "2016",
+  "id_eleicao": "220",
+  "cargo": "vereador",
+  "sigla_partido": "PROS",
+  "numero_candidato": "90000",
+  "id_candidato_bd": "615577",
+  "votos": "5700"
+}, {
+  "ano": "2008",
+  "id_eleicao": "30",
+  "cargo": "vereador",
+  "sigla_partido": "PMDB",
+  "numero_candidato": "15699",
+  "id_candidato_bd": "615577",
+  "votos": "5133"
+}]

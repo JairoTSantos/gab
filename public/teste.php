@@ -4,6 +4,6 @@ require_once dirname(__DIR__) . '/app/controllers/EleicoesController.php';
 $eleicoesController = new EleicoesController();
 
 
-$eleicoesController->inserirMunicipiosGeral();
+echo json_encode($eleicoesController->getEleicoesMunicipios(2022));
 
 
