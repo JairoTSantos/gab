@@ -130,7 +130,7 @@ $layoutClass = new Layout();
             session_start();
             $_SESSION['usuario_nivel'] = 1;
 
-            require_once dirname(__DIR__) . '/app/controllers/usuarioController.php';
+            require_once dirname(__DIR__) . '/app/controllers/UsuarioController.php';
 
             $usuarioController = new UsuarioController();
 

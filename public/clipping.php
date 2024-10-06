@@ -54,7 +54,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                                             <i class="fa-solid fa-circle-plus"></i> Novo tipo
                                                         </button>
                                                         <button class="btn btn-secondary btn-sm" style="font-size: 0.850em;" id="btn_novo_orgao" type="button">
-                                                            <i class="fa-solid fa-circle-plus"></i> Novo órgão
+                                                            <i class="fa-solid fa-circle-plus"></i> Novo veículo
                                                         </button>
                                                     </a>
                                                 </li>
@@ -103,7 +103,7 @@ $termo = isset($_GET['termo']) ? htmlspecialchars($_GET['termo']) : null;
                                     </div>
                                     <div class="col-md-2 col-12">
                                         <select class="form-select form-select-sm" name="clipping_orgao" id="clipping_orgao" required>
-                                            <option value="1000">Órgão não informado</option>
+                                            <option value="1000">Veículo não informado</option>
                                             <?php
                                             $buscaOrgaos = $orgaoController->ListarOrgaos(1000);
                                             if ($buscaOrgaos['status'] == 'success') {

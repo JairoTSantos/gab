@@ -68,8 +68,7 @@ class Layout {
                     <a class="list-group-item list-group-item-action list-group-item-light px-4" href="pessoas.php"><i class="fa-solid fa-person"></i> Pessoas</a>
                     <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão do gabinete</p> 
                     <a class="list-group-item list-group-item-action list-group-item-light px-4" href="oficios.php"><i class="fa-regular fa-file-lines"></i>  Ofícios</a>
-                    <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fa-solid fa-check-to-slot"></i> Eleitoral</p> 
-                    <a class="list-group-item list-group-item-action list-group-item-light px-4" href="eleicoes.php"><i class="fa-regular fa-file-lines"></i>  Resultado Eleições</a>
+                    
                     <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Comunicação</p> 
                     <a class="list-group-item list-group-item-action list-group-item-light px-4" href="postagens.php"><i class="fa-regular fa-newspaper"></i>  Postagens</a>
                     <a class="list-group-item list-group-item-action list-group-item-light px-4" href="clipping.php"><i class="fa-solid fa-clipboard"></i>  Clipping</a>

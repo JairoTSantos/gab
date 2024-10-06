@@ -236,6 +236,8 @@ CREATE TABLE clipping_tipos (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO clipping_tipos (clipping_tipo_id, clipping_tipo_nome, clipping_tipo_descricao, clipping_tipo_criado_por) VALUES (1000, 'Sem tipo definido', 'Sem tipo definido', 1000);
+INSERT INTO clipping_tipos (clipping_tipo_id, clipping_tipo_nome, clipping_tipo_descricao, clipping_tipo_criado_por) VALUES (1001, 'Notícia Jornalística', 'Matéria Jornalistica de site, revista, blog...', 1000);
+INSERT INTO clipping_tipos (clipping_tipo_id, clipping_tipo_nome, clipping_tipo_descricao, clipping_tipo_criado_por) VALUES (1002, 'Post de rede social', 'Post de instagram, facebook....', 1000);
 
 CREATE TABLE clipping (
     clipping_id INT NOT NULL AUTO_INCREMENT,
