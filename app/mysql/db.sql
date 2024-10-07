@@ -103,13 +103,17 @@ CREATE TABLE pessoas_tipos (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1000, 'Sem tipo definido', 'Sem tipo definido', 1000);
-INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1001, 'Autoridades políticas', 'Prefeitos, vereadores, deputados...', 1000);
+INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1001, 'Autoridades', 'Prefeitos, vereadores, Ministros...', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1002, 'Familiares', 'Familiares do deputado', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1003, 'Empresários', 'Donos de empresa', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1004, 'Eleitores', 'Eleitores em geral', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1005, 'Imprensa', 'Jornalistas, diretores de jornais, assessoria', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1006, 'Site', 'Pessoas registradas no site', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1007, 'Amigos', 'Amigos pessoais do deputado', 1000);
+INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1008, 'Deputado(a) Federal', 'Deputado(a) Federal', 1000);
+INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1009, 'Senador(a)', 'Senador(a)', 1000);
+
+
 
 CREATE TABLE pessoas_profissoes (
     pessoas_profissoes_id int NOT NULL AUTO_INCREMENT,

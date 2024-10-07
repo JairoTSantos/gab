@@ -26,8 +26,6 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
 $config = require dirname(__DIR__) . '/app/config/config.php';
 $depConfig = $config['deputado'];
 
-//print_r($pessoaController->InserirDeputados());
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -275,7 +273,7 @@ $depConfig = $config['deputado'];
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <input type="text" class="form-control form-control-sm" name="termo" placeholder="Buscar...">
+                                        <input type="text" class="form-control form-control-sm" name="termo" placeholder="Buscar por nome..." value="<?php echo $termo ?>">
                                     </div>
                                     <div class="col-md-1 col-6">
                                         <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -295,7 +293,6 @@ $depConfig = $config['deputado'];
                             'Nome' => '<a href="editar-pessoa.php?id=' . $pessoa['pessoa_id'] . '">' . $pessoa['pessoa_nome'] . '</a>',
                             'Email' =>  $pessoa['pessoa_email'],
                             'Telefone' =>  $pessoa['pessoa_telefone'],
-                            'Endereço' =>  $pessoa['pessoa_telefone'] . ' - ' . $pessoa['pessoa_bairro'],
                             'Município/UF' =>  $pessoa['pessoa_municipio'] . ' - ' . $pessoa['pessoa_estado'],
                             'Tipo' =>  '<b>'.$pessoa['pessoa_tipo_nome'].'</b>',
                             'Órgão' =>  $pessoa['orgao_nome'],

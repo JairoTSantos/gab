@@ -53,7 +53,11 @@ if ($buscaPessoa['status'] == 'empty' || $buscaPessoa['status'] == 'error') {
                                     <div class="col-12 col-md-1">
                                         <?php
                                         if (isset($buscaPessoa['dados']['pessoa_foto'])) {
-                                            echo '<img src="..' . $buscaPessoa['dados']['pessoa_foto'] . '" class="img-thumbnail img-crop" alt="...">';
+                                            if ($buscaPessoa['dados']['pessoa_tipo'] == 1008 || $buscaPessoa['dados']['pessoa_tipo'] == 1009) {
+                                                echo '<img src="' . $buscaPessoa['dados']['pessoa_foto'] . '" class="img-thumbnail img-crop" alt="...">';
+                                            } else {
+                                                echo '<img src="..' . $buscaPessoa['dados']['pessoa_foto'] . '" class="img-thumbnail img-crop" alt="...">';
+                                            }
                                         } else {
                                             echo '<img src="img/not_found.jpg" class="img-thumbnail img-crop" alt="...">';
                                         }
@@ -241,12 +245,19 @@ if ($buscaPessoa['status'] == 'empty' || $buscaPessoa['status'] == 'error') {
                                     <div class="col-md-3 col-12">
                                         <input type="text" class="form-control form-control-sm" name="cargo" placeholder="Cargo (Diretor, assessor, coordenador....)" value="<?php echo $buscaPessoa['dados']['pessoa_cargo']; ?>">
                                     </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="file-upload">
-                                            <input type="file" id="file-input" name="foto" style="display: none;" />
-                                            <button id="file-button" type="button" class="btn btn-primary btn-sm"><i class="fa-regular fa-image"></i> Escolher Foto</button>
-                                        </div>
-                                    </div>
+                                    <?php
+
+                                    if ($buscaPessoa['dados']['pessoa_tipo'] != 1008 && $buscaPessoa['dados']['pessoa_tipo'] != 1009) {
+                                            echo ' <div class="col-md-3 col-12">
+                                            <div class="file-upload">
+                                                <input type="file" id="file-input" name="foto" style="display: none;" />
+                                                <button id="file-button" type="button" class="btn btn-primary btn-sm"><i class="fa-regular fa-image"></i> Escolher Foto</button>
+                                            </div>
+                                        </div>';
+                                    }
+
+                                    ?>
+                                   
                                     <div class="col-md-12 col-12">
                                         <textarea class="form-control form-control-sm" name="informacoes" rows="5" placeholder="Informações importantes dessa pessoa"><?php echo $buscaPessoa['dados']['pessoa_informacoes']; ?></textarea>
                                     </div>
