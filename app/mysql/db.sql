@@ -246,7 +246,7 @@ CREATE TABLE clipping (
     clipping_link VARCHAR(255) NOT NULL UNIQUE,
     clipping_orgao INT NOT NULL,
     clipping_arquivo VARCHAR(255),
-    clipping_tipo INT NOT NULL,
+    clipping_tipo INT NOT NULL, 
     clipping_criado_por INT NOT NULL,
     clipping_criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     clipping_atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
