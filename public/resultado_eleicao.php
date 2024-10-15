@@ -32,7 +32,7 @@ $cargo = $_GET['cargo'];
             <div class="container-fluid p-2">
                 <?php $layoutClass->navBar(true, 'eleicoes.php') ?>
                 <?php $layoutClass->cardDescription('Detalhes da Eleição', '<p class="card-text mb-2">Visualize os resultados do deputado na eleição selecionada.</p><p class="card-text mb-0">Aqui você encontrará a contagem dos votos nominais (aqueles direcionados a candidatos específicos) e dos votos de legenda.</p>');
-               
+
                 $detalhes = $eleicoesController->getDetalhesEleicao($ano, $eleicao, $cargo);
 
                 ?>
@@ -63,6 +63,16 @@ $cargo = $_GET['cargo'];
                         </div>
                     </div>
                 </div>
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <p class="card-text mb-0"><b>Votos do deputado</b></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <?php
 
@@ -79,7 +89,7 @@ $cargo = $_GET['cargo'];
                         ];
                     }
                     echo $layoutClass->criarTabela($tabela);
-                }else if ($resultados['status'] == 'error') {
+                } else if ($resultados['status'] == 'error') {
                     echo $layoutClass->criarTabela([['Mensagem' => 'Erro interno do servidor.']]);
                 } else {
                     echo $layoutClass->criarTabela([]);
@@ -100,7 +110,7 @@ $cargo = $_GET['cargo'];
             </div>
         </div>
     </div>
-    </div>
+
 </body>
 
 </html>

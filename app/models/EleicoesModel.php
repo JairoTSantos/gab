@@ -95,7 +95,13 @@ class EleicoesModel { // Renomeie para EleicoesModel
 
         try {
 
-            $query = "SELECT SUM(QT_VOTOS_NOMINAIS) AS total_votos, NM_MUNICIPIO FROM votacao_candidato_munzona_" . $ano . "_" . $this->estado_dep . " WHERE NM_URNA_CANDIDATO = '" . $this->nome_dep . "' AND CD_ELEICAO = ".$id_eleicao." GROUP BY NM_MUNICIPIO ORDER BY total_votos DESC;";
+            if($ano < 2016){
+                $query = "SELECT SUM(QT_VOTOS_NOMINAIS) AS total_votos, NM_MUNICIPIO FROM votacao_candidato_munzona_" . $ano . "_" . $this->estado_dep . " WHERE NM_URNA_CANDIDATO = '" . $this->nome_dep . "' AND CD_ELEICAO = ".$id_eleicao." GROUP BY NM_MUNICIPIO ORDER BY total_votos DESC;";
+            }else{
+                $query = "SELECT SUM(QT_VOTOS_NOMINAIS) AS total_votos, NM_MUNICIPIO FROM votacao_candidato_munzona_" . $ano . "_" . $this->estado_dep . " WHERE NM_URNA_CANDIDATO = '" . $this->nome_dep . "' AND CD_ELEICAO = ".$id_eleicao." GROUP BY NM_MUNICIPIO ORDER BY total_votos DESC;";
+            }
+
+            
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

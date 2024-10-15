@@ -1,0 +1,2 @@
+2024-10-15 12:51:12 - Usuário logado: Jairo Santos - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'QT_TOTAL_VOTOS_LEG_VALIDOS' in 'field list'
+2024-10-15 12:51:25 - Usuário logado: Jairo Santos - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'QT_VOTOS_LEGENDA' in 'field list'
