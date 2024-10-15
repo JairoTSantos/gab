@@ -34,7 +34,9 @@ return [
     'deputado' => [
         'id_deputado' => 00000000, //ID DO DEPUTADO DO GABINETE 
         'nome_deputado' => 'Nome parlamentar', //NOME DO DEPUTADO DO GABINETE
-        'estado_deputado' => 'XX' //ESTADO DO DEPUTADO
+        'estado_deputado' => 'XX' //ESTADO DO DEPUTADO,
+        'primeira_eleicao' => 2008,//PRIMEIRA ELEIÇÃO QUE O DEPUTADO DISPUTOU
+        'ultima_eleicao' => 2024//ULTIMA ELEICAO QUE O DEPUTADO DISPUTOU
     ]
 ];
 ```
@@ -44,8 +46,8 @@ Importe o sript sql no seu banco de dados. /app/mysql/db.sql
 
 ## Primero acesso
 
-Acesse `/pasta_da_hospedagem` e faça login com o usuário administrativo e crie sua nova conta.
+Acesse `meu_dominio.com.br/pasta_do_aplicativo` e faça login com o usuário administrativo e crie sua nova conta.
 
 ## Novos usuários
 
-Para permitir que outros usuário criem suas contas, acesse `/pasta_da_hospedagem/public/cadastro.php` e peça para que eles preencham os campos. Cada novo usuário estará desativado necessitando que um usuário administrativo ative sua conta.
+Para permitir que outros usuário criem suas contas, acesse `meu_dominio.com.br/pasta_do_aplicativo/public/cadastro.php` e peça para que eles preencham os campos. Cada novo usuário estará desativado necessitando que um usuário administrativo ative sua conta.
