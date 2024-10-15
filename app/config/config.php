@@ -25,8 +25,10 @@ return [
     ],
     'deputado' => [
         'id_deputado' => 204379,
-        'nome_deputado' => 'Acácio Favacho',
+        'nome_deputado' => 'ACÁCIO FAVACHO',
         'estado_deputado' => 'AP',
-        'legislatura_atual' => $legislaturaAtual
+        'legislatura_atual' => $legislaturaAtual,
+        'primeira_eleicao' => 2008,
+        'ultima_eleicao' => 2024//ULTIMA ELEICAO QUE O DEPUTADO DISPUTOU
     ]
 ];

@@ -4,6 +4,8 @@ require_once dirname(__DIR__) . '/public/includes/verificaLogado.php';
 require_once dirname(__DIR__) . '/public/includes/Layout.php';
 $layoutClass = new Layout();
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -22,7 +24,10 @@ $layoutClass = new Layout();
         <div id="page-content-wrapper">
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
-                
+
+
+
+
             </div>
         </div>
     </div>
