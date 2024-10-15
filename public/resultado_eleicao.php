@@ -32,7 +32,6 @@ $cargo = $_GET['cargo'];
             <div class="container-fluid p-2">
                 <?php $layoutClass->navBar(true, 'eleicoes.php') ?>
                 <?php $layoutClass->cardDescription('Detalhes da Eleição', '<p class="card-text mb-2">Visualize os resultados do deputado na eleição selecionada.</p><p class="card-text mb-0">Aqui você encontrará a contagem dos votos nominais (aqueles direcionados a candidatos específicos) e dos votos de legenda.</p>');
-                    
                
                 $detalhes = $eleicoesController->getDetalhesEleicao($ano, $eleicao, $cargo);
 
