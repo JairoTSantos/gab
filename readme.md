@@ -32,8 +32,8 @@ return [
         'permitted_files' => ['png', 'jpg', 'jpeg', 'docx', 'pdf', 'doc']  //tipos de arquivos permitidos para upload
     ],
     'deputado' => [
-        'id_deputado' => 00000000, //ID DO DEPUTADO DO GABINETE 
-        'nome_deputado' => 'Nome parlamentar', //NOME DO DEPUTADO DO GABINETE
+        'id_deputado' => 00000000, //ID DO DEPUTADO DO GABINETE | BUSCAR EM https://dadosabertos.camara.leg.br/api/v2/deputados?ordem=ASC&ordenarPor=nome
+        'nome_deputado' => 'NOME_PARLAMENTAR', //NOME DO DEPUTADO DO GABINETE | BUSCAR EM https://dadosabertos.camara.leg.br/api/v2/deputados?ordem=ASC&ordenarPor=nome
         'estado_deputado' => 'XX' //ESTADO DO DEPUTADO,
         'primeira_eleicao' => 2008,//PRIMEIRA ELEIÇÃO QUE O DEPUTADO DISPUTOU
         'ultima_eleicao' => 2024//ULTIMA ELEICAO QUE O DEPUTADO DISPUTOU
