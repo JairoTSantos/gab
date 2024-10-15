@@ -1,2 +1,7 @@
 2024-10-15 12:51:12 - Usuário logado: Jairo Santos - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'QT_TOTAL_VOTOS_LEG_VALIDOS' in 'field list'
 2024-10-15 12:51:25 - Usuário logado: Jairo Santos - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'QT_VOTOS_LEGENDA' in 'field list'
+2024-10-15 13:08:12 - Usuário logado: Jairo Santos - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE NM_MUNICIPIO = 'MACAPÁ' GROUP BY DS_CARGO' at line 1
+2024-10-15 13:09:14 - Usuário logado: Jairo Santos - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CD_MUNICNIPIO' in 'field list'
+2024-10-15 13:09:21 - Usuário logado: Jairo Santos - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CD_MUNICNIPIO' in 'field list'
+2024-10-15 13:09:35 - Usuário logado: Jairo Santos - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'NR_MUNICIPIO' in 'field list'
+2024-10-15 13:09:42 - Usuário logado: Jairo Santos - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'NR_MUNICIPIO' in 'field list'
