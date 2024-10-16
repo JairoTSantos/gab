@@ -95,7 +95,7 @@ $tipo = $_GET['tipo'] ?? 101;
                 <div class="row mb-2">
                     <div class="col-12">
                         <div class="card card_description">
-                            <div class="card-header px-2 py-1 bg-success text-white" style="font-size:1em">
+                            <div class="card-header px-2 py-1 bg-secondary text-white" style="font-size:1em">
                                 Membros dessa comissão
                             </div>
                             <div class="card-body p-2">
@@ -158,13 +158,13 @@ $tipo = $_GET['tipo'] ?? 101;
                             <div class="card-body p-2">
                                 <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
                                     <input type="hidden" value="<?php echo $comissao ?>" name="comissao" />
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-10">
                                         <select class="form-select form-select-sm" name="tipo" required>
                                             <option value="101" <?php echo $tipo == 101 ? 'selected' : ''; ?>>Titulares</option>
                                             <option value="102" <?php echo $tipo == 102 ? 'selected' : ''; ?>>Suplentes</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 col-6">
+                                    <div class="col-md-1 col-2">
                                         <button type="submit" class="btn btn-success btn-sm"><i
                                                 class="fa-solid fa-magnifying-glass"></i></button>
                                     </div>

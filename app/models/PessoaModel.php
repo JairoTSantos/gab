@@ -53,7 +53,6 @@ class PessoaModel {
         }
     }
 
-
     public function AtualizarPessoa($pessoa_id, $dados) {
         try {
 
@@ -150,8 +149,6 @@ class PessoaModel {
             ];
         }
     }
-    
-
 
     public function BuscarPessoa($coluna, $valor) {
 

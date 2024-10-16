@@ -71,6 +71,8 @@ CREATE TABLE orgaos (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO orgaos (orgao_id, orgao_nome, orgao_email, orgao_municipio, orgao_estado, orgao_tipo, orgao_criado_por) VALUES (1000, 'Órgão não informado', 'email@email', 'municipio', 'estado', 1000, 1000);
+INSERT INTO orgaos (orgao_id, orgao_nome, orgao_email, orgao_municipio, orgao_estado, orgao_tipo, orgao_criado_por) VALUES (1001, 'Câmara dos Deputados', 'email@email', 'Brasília', 'DF', 1035, 1000);
+
 
 /*-----------------------TABELAS DE PESSOAS-----------------------*/
 CREATE TABLE pessoas_tipos (
@@ -84,13 +86,15 @@ CREATE TABLE pessoas_tipos (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1000, 'Sem tipo definido', 'Sem tipo definido', 1000);
-INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1001, 'Autoridades políticas', 'Prefeitos, vereadores, Ministros...', 1000);
+/*INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1001, 'Autoridades políticas', 'Prefeitos, vereadores, Ministros...', 1000);*/
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1002, 'Familiares', 'Familiares do deputado', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1003, 'Empresários', 'Donos de empresa', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1004, 'Eleitores', 'Eleitores em geral', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1005, 'Imprensa', 'Jornalistas, diretores de jornais, assessoria', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1006, 'Site', 'Pessoas registradas no site', 1000);
 INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1007, 'Amigos', 'Amigos pessoais do deputado', 1000);
+INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1008, 'Deputado Federal', 'Deputado Federal', 1000);
+INSERT INTO pessoas_tipos (pessoa_tipo_id, pessoa_tipo_nome, pessoa_tipo_descricao, pessoa_tipo_criado_por) VALUES (1009, 'Senador', 'Senador', 1000);
 
 
 
@@ -153,8 +157,8 @@ VALUES
 (1038, 'Logístico', 'Profissional que coordena e gerencia operações de logística e cadeia de suprimentos', 1000),
 (1039, 'Fonoaudiólogo', 'Profissional que avalia e trata problemas de comunicação e linguagem', 1000),
 (1040, 'Corretor de Imóveis', 'Profissional que facilita a compra, venda e aluguel de propriedades', 1000),
-(1041, 'Deputado Federal', 'Deputado Federal', 1000),
-(1042, 'Senador', 'Federal', 1000);
+/*(1041, 'Deputado Federal', 'Deputado Federal', 1000),
+(1042, 'Senador', 'Federal', 1000);*/
 
 
 

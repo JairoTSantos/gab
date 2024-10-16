@@ -1,0 +1,1 @@
+2024-10-16 20:03:17SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`gabinete_digital`.`pessoas`, CONSTRAINT `fk_pessoa_orgao` FOREIGN KEY (`pessoa_orgao`) REFERENCES `orgaos` (`orgao_id`))

@@ -26,6 +26,7 @@ $filtro = isset($_GET['filtro']) ? ($_GET['filtro'] == '1' ? true : false) : fal
 $config = require dirname(__DIR__) . '/app/config/config.php';
 $depConfig = $config['deputado'];
 
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

@@ -20,6 +20,10 @@ class PessoaController {
         $this->usuario_id = $_SESSION['usuario_id'];
     }
 
+
+
+
+
     public function NovaPessoa($dados) {
 
         if (empty($dados['pessoa_nome']) || empty($dados['pessoa_email']) || empty($dados['pessoa_municipio']) || empty($dados['pessoa_estado']) || empty($dados['pessoa_tipo'])) {
@@ -176,6 +180,4 @@ class PessoaController {
             return ['status' => 'error', 'message' => 'Erro ao buscar pessoa.'];
         }
     }
-
-  
 }
