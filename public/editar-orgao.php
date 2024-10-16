@@ -11,6 +11,9 @@ $orgaoController = new OrgaoController();
 require_once dirname(__DIR__) . '/app/controllers/OrgaoTipoController.php';
 $orgaoTipoController = new OrgaoTipoController();
 
+require_once dirname(__DIR__) . '/app/controllers/PessoaController.php';
+$pessoaController = new PessoaController();
+
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 $buscarOrgao = $orgaoController->BuscarOrgaos('orgao_id', $id);
@@ -52,7 +55,7 @@ if ($buscarOrgao['status'] == 'empty' || $buscarOrgao['status'] == 'error') {
                                         <p class="card-text mb-2"><i class="fa-solid fa-mobile-screen"></i> <?php echo $buscarOrgao['dados']['orgao_telefone'] ? $buscarOrgao['dados']['orgao_telefone'] : 'Sem telefone'; ?></p>
                                         <p class="card-text mb-2"><i class="fa-solid fa-map-location-dot"></i> <?php echo $buscarOrgao['dados']['orgao_endereco'] ? $buscarOrgao['dados']['orgao_endereco'] . ' ' . $buscarOrgao['dados']['orgao_bairro'] . ' | ' . $buscarOrgao['dados']['orgao_municipio'] . '/' . $buscarOrgao['dados']['orgao_estado'] : 'Sem endereço'; ?></p>
                                         <p class="card-text mb-2"><i class="fa-solid fa-globe"></i> <?php echo $buscarOrgao['dados']['orgao_site'] ? $buscarOrgao['dados']['orgao_site'] : 'Sem site ou redes sociais'; ?></p>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -201,6 +204,33 @@ if ($buscarOrgao['status'] == 'empty' || $buscarOrgao['status'] == 'error') {
                         </div>
                     </div>
                 </div>
+                
+                <?php
+                $pessoas = $pessoaController->BuscarPessoa('pessoa_orgao', $id);
+                $tabela = [];
+
+                if ($pessoas['status'] == 'success') {
+                    echo '<div class="row">
+                                <div class="col-12">
+                                    <div class="card shadow-sm mb-2">
+                                        <div class="card-body p-2">
+                                            <p class="card-text">Pessoas que fazem parte desse órgão</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+                    foreach ($pessoas['dados'] as $pessoa) {
+                        $tabela[] = [
+                            'Nome' => '<a href="editar-pessoa.php?id=' . $pessoa['pessoa_id'] . '">' . $pessoa['pessoa_nome'] . '</a>',
+                            'Email' => $pessoa['pessoa_email'],
+                            'Aniversário' => date('d/m/Y', strtotime($pessoa['pessoa_aniversario'])),
+                            'Telefone' => $pessoa['pessoa_telefone']
+                        ];
+                    }
+                    echo $layoutClass->criarTabela($tabela);
+                }
+
+                ?>
             </div>
         </div>
     </div>
@@ -283,7 +313,7 @@ if ($buscarOrgao['status'] == 'empty' || $buscarOrgao['status'] == 'error') {
         $('#btn_novo_tipo').click(function() {
             if (window.confirm("Você realmente deseja inserir um novo tipo?")) {
                 window.location.href = "orgaos-tipos.php";
-            }else{
+            } else {
                 return false;
             }
         });

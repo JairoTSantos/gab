@@ -118,7 +118,7 @@ class PessoaController {
 
     public function BuscarPessoa($coluna, $valor) {
 
-        if (!in_array($coluna, ['pessoa_id', 'pessoa_email'])) {
+        if (!in_array($coluna, ['pessoa_id', 'pessoa_email', 'pessoa_orgao'])) {
             return ['status' => 'invalid_column', 'message' => 'A coluna selecionada é inválida'];
         }
 

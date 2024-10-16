@@ -162,7 +162,7 @@ class PessoaModel {
             $stmt->bindParam(':valor', $valor);
             $stmt->execute();
 
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($result)) {
                 return ['status' => 'empty'];
