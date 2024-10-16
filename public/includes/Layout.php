@@ -118,7 +118,7 @@ class Layout {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Nenhum registro encontrado.</td>
+                                                <td >Nenhum registro encontrado.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -156,7 +156,7 @@ class Layout {
         foreach ($dados as $linha) {
             $html .= '<tr>';
             foreach ($chaves as $chave) {
-                $html .= "<td style='white-space: nowrap;'>{$linha[$chave]}</td>";
+                $html .= "<td>{$linha[$chave]}</td>";
             }
             $html .= '</tr>';
         }

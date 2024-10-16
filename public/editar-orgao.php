@@ -294,8 +294,6 @@ if ($buscarOrgao['status'] == 'empty' || $buscarOrgao['status'] == 'error') {
             }
         });
 
-
-
         $('button[name="btn_apagar"]').on('click', function(event) {
             const confirmacao = confirm("Tem certeza que deseja apagar este órgao?");
             if (!confirmacao) {
