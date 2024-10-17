@@ -33,7 +33,7 @@ $tipo_comissao = $_GET['tipo'] ?? 2;
                 <?php $layoutClass->navBar() ?>
                 <?php $layoutClass->cardDescription(
                     '<i class="fa-solid fa-building"></i> Comissões do Deputado',
-                    '<p class="card-text mb-2">Aqui, você pode visualizar as comissões em que o deputado é membro e aquelas das quais já foi membro.</p>
+                    '<p class="card-text mb-2">Aqui, você pode visualizar as comissões em que o deputado é membro e aquelas das quais já foi membro ou todas as comissões da casa.</p>
                      <p class="card-text mb-0"><i class="fa-solid fa-triangle-exclamation"></i> <b>As informações são de responsabilidade da Câmara dos Deputados.</b></p>'
                 ) ?>
 
@@ -45,6 +45,7 @@ $tipo_comissao = $_GET['tipo'] ?? 2;
                             </div>
                             <div class="card-body p-2">
                                 <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
+                                    <input type="hidden" name="tipo" value="<?php echo $tipo_comissao ?>" />
                                     <div class="col-md-2 col-6">
                                         <select class="form-select form-select-sm" name="flag" required>
                                             <option value="false" <?php echo !$flag ? 'selected' : ''; ?>>Somente atuais</option>
@@ -89,16 +90,19 @@ $tipo_comissao = $_GET['tipo'] ?? 2;
                             </div>
                             <div class="card-body p-2">
                                 <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
+                                    <input type="hidden" name="flag" value="<?php echo $flag ?>" />
                                     <div class="col-md-2 col-10">
                                         <select class="form-select form-select-sm" name="tipo" required>
                                             <?php
                                             $tipos = $comissoesController->ListarTiposComissoes();
                                             if ($tipos['status'] == 'success') {
                                                 foreach ($tipos['dados'] as $tipo) {
-                                                    if ($tipo['comissao_tipo'] == $tipo_comissao) {
-                                                        echo '<option value="' . $tipo['comissao_tipo'] . '" selected>' . $tipo['comissao_descricao'] . '</option>';
-                                                    } else {
-                                                        echo '<option value="' . $tipo['comissao_tipo'] . '">' . $tipo['comissao_descricao'] . '</option>';
+                                                    if ($tipo['comissao_tipo'] != 9) {
+                                                        if ($tipo['comissao_tipo'] == $tipo_comissao) {
+                                                            echo '<option value="' . $tipo['comissao_tipo'] . '" selected>' . $tipo['comissao_descricao'] . '</option>';
+                                                        } else {
+                                                            echo '<option value="' . $tipo['comissao_tipo'] . '">' . $tipo['comissao_descricao'] . '</option>';
+                                                        }
                                                     }
                                                 }
                                             } else if ($tipos['status'] == 'empty') {
