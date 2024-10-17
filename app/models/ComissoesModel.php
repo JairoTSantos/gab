@@ -43,7 +43,6 @@ class ComissaoModel {
         }
     }
 
-
     public function AtualizarComissoesDeputado($dados) {
         try {
 
@@ -70,7 +69,6 @@ class ComissaoModel {
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
-
 
     public function ListarComissoesDep($flag) {
 
@@ -101,7 +99,6 @@ class ComissaoModel {
             ];
         }
     }
-
 
     public function ListarCargos($comissao) {
 
@@ -154,4 +151,60 @@ class ComissaoModel {
             ];
         }
     }
+
+    public function ListarTiposComissoes() {
+
+        $query = "SELECT comissao_tipo, comissao_descricao FROM comissoes GROUP BY comissao_tipo, comissao_descricao ORDER BY comissao_tipo ASC;";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return ['status' => 'empty'];
+            }
+
+            return [
+                'status' => 'success',
+                'dados' => $result
+            ];
+        } catch (PDOException $e) {
+            $this->logger->novoLog('comissao_error', $e->getMessage());
+            return [
+                'status' => 'error',
+            ];
+        }
+    }
+
+
+    public function ListarComissoes($tipo) {
+
+        $query = "SELECT * FROM comissoes WHERE comissao_tipo = ".$tipo." ORDER BY comissao_sigla ASC;";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return ['status' => 'empty'];
+            }
+
+            return [
+                'status' => 'success',
+                'dados' => $result
+            ];
+        } catch (PDOException $e) {
+            $this->logger->novoLog('comissao_error', $e->getMessage());
+            return [
+                'status' => 'error',
+            ];
+        }
+    }
+
+
+
 }

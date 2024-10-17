@@ -8,7 +8,7 @@ require_once dirname(__DIR__) . '/app/controllers/ComissoesController.php';
 $comissoesController = new ComissoesController();
 
 $flag = isset($_GET['flag']) ? filter_var($_GET['flag'], FILTER_VALIDATE_BOOLEAN) : false;
-
+$tipo_comissao = $_GET['tipo'] ?? 2;
 
 
 ?>
@@ -39,6 +39,9 @@ $flag = isset($_GET['flag']) ? filter_var($_GET['flag'], FILTER_VALIDATE_BOOLEAN
                 <div class="row ">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2">
+                            <div class="card-header px-2 py-1 bg-primary text-white" style="font-size:1em">
+                                Comissões do deputado
+                            </div>
                             <div class="card-body p-2">
                                 <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
                                     <div class="col-md-2 col-6">
@@ -57,20 +60,70 @@ $flag = isset($_GET['flag']) ? filter_var($_GET['flag'], FILTER_VALIDATE_BOOLEAN
                 </div>
 
                 <?php
-                $comissoes = $comissoesController->ListarComissoesDep($flag);
-                $tabela = [];
-                if ($comissoes['status'] == 'success') {
-                    foreach ($comissoes['dados'] as $comissao) {
-                        if ($comissao['comissao_sigla'] !== 'PLEN' && $comissao['comissao_sigla'] !== 'PLENARIO') {
-                            $tabela[] = [
-                                "Sigla" => '<a href="detalhe_comissao.php?comissao=' . $comissao['comissao_id'] . '">' . $comissao['comissao_sigla'] . '</a>',
-                                "Comissao" => $comissao['comissao_nome_publicacao'],
-                                "Tipo" => $comissao['comissao_descricao']
+                $comissoes_dep = $comissoesController->ListarComissoesDep($flag);
+                $tabela_dep = [];
+                if ($comissoes_dep['status'] == 'success') {
+                    foreach ($comissoes_dep['dados'] as $comissao_dep) {
+                        if ($comissao_dep['comissao_sigla'] !== 'PLEN' && $comissao_dep['comissao_sigla'] !== 'PLENARIO') {
+                            $tabela_dep[] = [
+                                "Sigla" => '<a href="detalhe_comissao.php?comissao=' . $comissao_dep['comissao_id'] . '">' . $comissao_dep['comissao_sigla'] . '</a>',
+                                "Comissao" => $comissao_dep['comissao_nome_publicacao'],
+                                "Tipo" => $comissao_dep['comissao_descricao']
                             ];
                         }
                     }
-                    echo $layoutClass->criarTabela($tabela);
+                    echo $layoutClass->criarTabela($tabela_dep);
                 }
+                ?>
+
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="card shadow-sm mb-2">
+                            <div class="card-header px-2 py-1 bg-secondary text-white" style="font-size:1em">
+                                Comissões
+                            </div>
+                            <div class="card-body p-2">
+                                <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
+                                    <div class="col-md-2 col-10">
+                                        <select class="form-select form-select-sm" name="tipo" required>
+                                            <?php
+                                            $tipos = $comissoesController->ListarTiposComissoes();
+                                            if ($tipos['status'] == 'success') {
+                                                foreach ($tipos['dados'] as $tipo) {
+                                                    if ($tipo['comissao_tipo'] == $tipo_comissao) {
+                                                        echo '<option value="' . $tipo['comissao_tipo'] . '" selected>' . $tipo['comissao_descricao'] . '</option>';
+                                                    } else {
+                                                        echo '<option value="' . $tipo['comissao_tipo'] . '">' . $tipo['comissao_descricao'] . '</option>';
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 col-2">
+                                        <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                $comissoes = $comissoesController->ListarComissoes($tipo_comissao);
+                $tabela_comissoes = [];
+                if ($comissoes['status'] == 'success') {
+                    foreach ($comissoes['dados'] as $comissao) {
+                        $tabela_comissoes[] = [
+                            "Sigla" => '<a href="detalhe_comissao.php?comissao=' . $comissao['comissao_id'] . '">' . $comissao['comissao_sigla'] . '</a>',
+                            "Comissao" => $comissao['comissao_apelido'],
+                            "Descricao" => $comissao['comissao_nome']
+                        ];
+                    }
+                    echo $layoutClass->criarTabela($tabela_comissoes);
+                }
+
                 ?>
 
             </div>

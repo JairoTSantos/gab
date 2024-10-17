@@ -145,4 +145,38 @@ class ComissoesController {
             return ['status' => 'error', 'message' => 'Erro ao listar comissões.'];
         }
     }
+
+    public function ListarTiposComissoes() {
+
+        $result = $this->comissaoModel->ListarTiposComissoes();
+
+        if ($result['status'] == 'success') {
+            return $result;
+        }
+
+        if ($result['status'] == 'empty') {
+            return ['status' => 'empty', 'message' => 'Comissão não encontrada'];
+        }
+
+        if ($result['status'] == 'error') {
+            return ['status' => 'error', 'message' => 'Erro ao listar comissões.'];
+        }
+    }
+
+    public function ListarComissoes($tipo) {
+
+        $result = $this->comissaoModel->ListarComissoes($tipo);
+
+        if ($result['status'] == 'success') {
+            return $result;
+        }
+
+        if ($result['status'] == 'empty') {
+            return ['status' => 'empty', 'message' => 'Comissão não encontrada'];
+        }
+
+        if ($result['status'] == 'error') {
+            return ['status' => 'error', 'message' => 'Erro ao listar comissões.'];
+        }
+    }
 }

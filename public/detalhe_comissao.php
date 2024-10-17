@@ -38,7 +38,7 @@ if ($comissaoDet['status'] != 'success') {
         <div id="page-content-wrapper">
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
-                <?php $layoutClass->navBar(false) ?>
+                <?php $layoutClass->navBar(true, 'comissoes.php') ?>
                 <div class="row mb-2">
                     <div class="col-12">
                         <div class="card card_description">
@@ -100,7 +100,7 @@ if ($comissaoDet['status'] != 'success') {
                 } else if ($cargos['status'] == 'error') {
                     echo $layoutClass->criarTabela([['Mensagem' => 'Erro interno do servidor.']]);
                 } else {
-                    echo $layoutClass->criarTabela([]);
+                    echo $layoutClass->criarTabela([['Mensagem' => 'O deputado nunca foi membro dessa comissão.']]);
                 }
 
 
