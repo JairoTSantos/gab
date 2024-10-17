@@ -28,8 +28,9 @@ $tipo = $_GET['tipo'] ?? 0;
     <div class="d-flex" id="wrapper">
         <?php $layoutClass->MontarSideMenu() ?>
         <div id="page-content-wrapper">
-            <?php $layoutClass->MontarTopMenu() ?>
+            <?php $layoutClass->MontarTopMenu(false) ?>
             <div class="container-fluid p-2">
+                <?php $layoutClass->navBar(true, 'detalhe_comissao.php?comissao=' . $comissao) ?>
                 <?php $layoutClass->cardDescription(
                     '<i class="fa-solid fa-building"></i> Agenda da comissão',
                     '<p class="card-text mb-0">Agenda de reuniões de uma comissão selecionada.</p>'
@@ -76,22 +77,19 @@ $tipo = $_GET['tipo'] ?? 0;
                                     }
 
 
-
-                                    //print_r($dadosJson);
-
                                     if (!isset($dadosJson['error'])) {
                                         if (count($dadosJson['dados']) > 0) {
                                             foreach ($dadosJson['dados'] as $reuniao) {
-                                                echo ' <a href="#" class="list-group-item list-group-item-action" >
+                                                echo ' <a href="pauta_reuniao.php?reuniao=' . $reuniao['id'] . '" class="list-group-item list-group-item-action" >
                                                         <p class="mb-1"><i class="fa-regular fa-clock" style="font-size:0.850em"></i> ' . date('H:i', strtotime($reuniao['dataHoraInicio'])) . '</p>
                                                         <p class="mb-1" ><i class="fa-regular fa-building" style="font-size:0.850em"></i> ' . $reuniao['localCamara']['nome'] . '</p>
-                                                        <p class="mb-2">' . $reuniao['descricaoTipo'] . ' | ' . $reuniao['situacao'] . '</p>
+                                                        <p class="mb-2">' . $reuniao['descricaoTipo'] . ' | <b>' . $reuniao['situacao'] . '</b></p>
                                                          <small class="text-body-secondary" style="font-size:0.8em">' . $reuniao['descricao'] . '</small>
                                                     </a>';
                                             }
                                         } else {
                                             echo ' <a href="#" class="list-group-item list-group-item-action" >
-                                                        <p class="mb-0">Nenhuma reunião para a data ou tipo selecionado</p>
+                                                        <p class="mb-0">Nenhuma reunião para a data ou tipo selecionado </p>
                                                     </a>';
                                         }
                                     } else {
@@ -101,11 +99,6 @@ $tipo = $_GET['tipo'] ?? 0;
                                     }
 
                                     ?>
-
-
-
-
-
                                 </div>
                             </div>
                         </div>

@@ -63,7 +63,7 @@ if ($comissaoDet['status'] != 'success') {
                                                 <li class="nav-item">
                                                     <a class="nav-link active p-1" aria-current="page" href="agenda_comissao.php?comissao=<?php echo $comissaoDet['dados'][0]['comissao_id'];  ?>">
                                                         <button class="btn btn-outline-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
-                                                            <i class="fa-solid fa-calendar-days"></i> Agenda Completa
+                                                            <i class="fa-solid fa-calendar-days"></i> Agenda da comissão
                                                         </button>
                                                     </a>
                                                 </li>
