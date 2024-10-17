@@ -105,7 +105,7 @@ class ComissaoModel {
 
     public function ListarCargos($comissao) {
 
-        $query = "SELECT * FROM comissoes_dep WHERE comissao_id = ".$comissao." ORDER BY comissao_saida ASC;";
+        $query = "SELECT * FROM comissoes_dep WHERE comissao_id = ".$comissao." ORDER BY comissao_entrada DESC;";
 
         try {
             $stmt = $this->db->prepare($query);

@@ -119,13 +119,13 @@ if ($comissaoDet['status'] != 'success') {
                                 if (!isset($dadosJson['error'])) {
                                     foreach ($dadosJson['dados'] as $dep) {
                                         if ($dep['codTitulo'] == 1) {
-                                            echo '<p class="card-text mb-0">Presidente: ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                            echo '<p class="card-text mb-0">Presidente: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         } else if ($dep['codTitulo'] == 2) {
-                                            echo '<p class="card-text mb-0">1º Vice-presidente: ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                            echo '<p class="card-text mb-0">1º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         } else if ($dep['codTitulo'] == 3) {
-                                            echo '<p class="card-text mb-0">2º Vice-presidente: ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                            echo '<p class="card-text mb-0">2º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         } else if ($dep['codTitulo'] == 4) {
-                                            echo '<p class="card-text mb-0">3º Vice-presidente: ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                            echo '<p class="card-text mb-0">3º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         }
                                     }
                                 } else {
@@ -159,6 +159,10 @@ if ($comissaoDet['status'] != 'success') {
                 </div>
                 <?php
 
+
+                $registrosPorPagina = 10;
+                $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
                 $tabela_membros = [];
                 if (!isset($dadosJson['error'])) {
 
@@ -175,13 +179,51 @@ if ($comissaoDet['status'] != 'success') {
                         return strcmp($a['Deputado'], $b['Deputado']);
                     });
 
-                    echo $layoutClass->criarTabela($tabela_membros);
+                    $totalRegistros = count($tabela_membros);
+
+                    $inicio = ($paginaAtual - 1) * $registrosPorPagina;
+                    $dadosPaginados = array_slice($tabela_membros, $inicio, $registrosPorPagina);
+
+                    echo $layoutClass->criarTabela($dadosPaginados);
+
+                    $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+
+                    if ($totalPaginas > 1) {
+                        echo '<nav>';
+                        echo '<ul class="pagination custom-pagination ">';
+
+                        // Botão "Anterior"
+                        if ($paginaAtual > 1) {
+                            echo '<li class="page-item"><a class="page-link" href="?pagina=' . ($paginaAtual - 1) . '&comissao=' . $comissao . '&tipo=' . $tipo . '">Anterior</a></li>';
+                        } else {
+                            echo '<li class="page-item disabled"><a class="page-link">Anterior</a></li>';
+                        }
+
+                        // Botões das páginas
+                        for ($i = 1; $i <= $totalPaginas; $i++) {
+                            if ($i == $paginaAtual) {
+                                echo '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
+                            } else {
+                                echo '<li class="page-item"><a class="page-link" href="?pagina=' . $i . '&comissao=' . $comissao . '&tipo=' . $tipo . '">' . $i . '</a></li>';
+                            }
+                        }
+
+                        // Botão "Próximo"
+                        if ($paginaAtual < $totalPaginas) {
+                            echo '<li class="page-item"><a class="page-link" href="?pagina=' . ($paginaAtual + 1) . '&comissao=' . $comissao . '&tipo=' . $tipo . '">Próximo</a></li>';
+                        } else {
+                            echo '<li class="page-item disabled"><a class="page-link">Próximo</a></li>';
+                        }
+
+                        echo '</ul>';
+                        echo '</nav>';
+                    }
                 } else {
                     echo $layoutClass->criarTabela([['Mensagem' => 'Erro interno do servidor.']]);
                 }
 
-
                 ?>
+
 
             </div>
         </div>
