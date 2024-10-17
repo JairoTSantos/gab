@@ -304,10 +304,22 @@ CREATE TABLE comissoes(
     comissao_sigla TEXT,
     comissao_apelido TEXT,
     comissao_nome TEXT,
+    comissao_nome_publicacao TEXT,
+    comissao_tipo INT,
+    comissao_descricao TEXT,
+    comissao_site TEXT
+    PRIMARY KEY (comissao_id) -- Define comissao_id como um índice
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+CREATE TABLE comissoes_dep(
+    comissao_id INT,
+    deputado_id INT,
+    comissao_entrada DATE,
+    comissao_saida DATE,
     comissao_cargo TEXT,
-    comissao_inicio DATE,
-    comissao_fim DATE,
-    INDEX (comissao_id) -- Define comissao_id como um índice
+    comissao_cargo_id INT,
+    INDEX (comissao_id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 

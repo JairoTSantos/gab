@@ -14,6 +14,12 @@ $comissao = $_GET['comissao'];
 $tipo = $_GET['tipo'] ?? 101;
 
 
+$comissaoDet = $comissoesController->DetalhesComissao($comissao);
+
+if ($comissaoDet['status'] != 'success') {
+    header('Location: comissoes.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,7 +29,7 @@ $tipo = $_GET['tipo'] ?? 101;
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <?php $layoutClass->MontarHead('Home'); ?>
+    <?php $layoutClass->MontarHead('Detalhe Comissão'); ?>
 </head>
 
 <body>
@@ -32,12 +38,20 @@ $tipo = $_GET['tipo'] ?? 101;
         <div id="page-content-wrapper">
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
-                <?php $layoutClass->navBar(true, 'comissoes.php') ?>
-                <?php $layoutClass->cardDescription(
-                    '<i class="fa-solid fa-building"></i> Detalhes da Comissão',
-                    '<p class="card-text mb-2">Nesta seção, você encontrará informações detalhadas sobre a comissão.</p>
-                     <p class="card-text mb-0">Serão exibidos todos os cargos que o deputado já ocupou nesta comissão, bem como os cargos da mesa e a lista de membros titulares e suplentes.</p>'
-                ) ?>
+                <?php $layoutClass->navBar(false) ?>
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <div class="card card_description">
+                            <div class="card-header px-2 py-1 bg-primary text-white card-background" style="font-size:1em">
+                                Detalhes da comissão
+                            </div>
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1" style="font-size:1.4em"><?php echo $comissaoDet['dados'][0]['comissao_sigla'] ?></h6>
+                                <p class="card-text"><?php echo $comissaoDet['dados'][0]['comissao_nome_publicacao'];  ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row ">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2 ">
@@ -47,9 +61,16 @@ $tipo = $_GET['tipo'] ?? 101;
                                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                             <ul class="navbar-nav me-auto mb-0 mb-lg-0">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active p-1" aria-current="page" href="agenda_comissao.php?comissao=<?php echo $comissao ?>">
-                                                        <button class="btn btn-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
-                                                            <i class="fa-solid fa-calendar-days"></i> Ver agenda da comissão
+                                                    <a class="nav-link active p-1" aria-current="page" href="agenda_comissao.php?comissao=<?php echo $comissaoDet['dados'][0]['comissao_id'];  ?>">
+                                                        <button class="btn btn-outline-success btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
+                                                            <i class="fa-solid fa-calendar-days"></i> Agenda Completa
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link active p-1" aria-current="page" href="<?php echo $comissaoDet['dados'][0]['comissao_site'];  ?>" target="_blank">
+                                                        <button class="btn btn-outline-secondary btn-sm" style="font-size: 0.850em;" id="btn_novo_tipo" type="button">
+                                                            <i class="fa-solid fa-calendar-days"></i> Página
                                                         </button>
                                                     </a>
                                                 </li>
@@ -61,97 +82,61 @@ $tipo = $_GET['tipo'] ?? 101;
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2">
+                <?php
+
+                $cargos = $comissoesController->ListarCargos($comissao);
+
+                $tabela_cargos = [];
+                if ($cargos['status'] == 'success') {
+                    foreach ($cargos['dados'] as $cargo) {
+                        $tabela_cargos[] = [
+                            'Cargo' => $cargo['comissao_cargo'],
+                            'Início' => date('d/m/Y', strtotime($cargo['comissao_entrada'])),
+                            'Saída' => (!empty($cargo['comissao_saida']) ? date('d/m/Y', strtotime($cargo['comissao_saida'])) : 'Membro')
+                        ];
+                    }
+
+                    echo $layoutClass->criarTabela($tabela_cargos);
+                } else if ($cargos['status'] == 'error') {
+                    echo $layoutClass->criarTabela([['Mensagem' => 'Erro interno do servidor.']]);
+                } else {
+                    echo $layoutClass->criarTabela([]);
+                }
+
+
+                ?>
+                <div class="row ">
                     <div class="col-12">
-                        <div class="card card_description">
-                            <div class="card-header px-2 py-1 bg-primary text-white" style="font-size:1em">
-                                Cargos ocupados pelo deputado
-                            </div>
-                            <div class="card-body p-2">
-                                <?php
-
-                                $cargos = $comissoesController->ListarCargos($comissao);
-
-                                if ($cargos['status'] == 'success') {
-                                    echo '<div class="list-group"  style="font-size:1em">';
-                                    foreach ($cargos['dados'] as $cargo) {
-                                        echo '<a href="#" class="list-group-item list-group-item-action">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h6 class="mb-2"  style="font-size:1.2em">' . $cargo['comissao_cargo'] . '</h6>
-                                                </div>
-                                                <p class="mb-0"><small>Início: ' . date('d/m/Y', strtotime($cargo['comissao_inicio'])) . '</small></p>
-                                                <p class="mb-0">' . (isset($cargo['comissao_fim']) ? '<small>Saída: ' . date('d/m/Y', strtotime($cargo['comissao_fim'])) . '</small>' : '<small>Saída: Membro atualmente') . '</small></p>
-                                              </a>';
-                                    }
-                                    echo '</div>';
-                                }
-
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mb-2">
-                    <div class="col-12">
-                        <div class="card card_description">
+                        <div class="card shadow-sm mb-2">
                             <div class="card-header px-2 py-1 bg-secondary text-white" style="font-size:1em">
                                 Membros dessa comissão
                             </div>
-                            <div class="card-body p-2">
+                            <div class="card-body p-2" style="font-size: 0.950em;">
                                 <?php
-                                $membros = getJson('https://dadosabertos.camara.leg.br/api/v2/orgaos/' . $comissao . '/membros?dataInicio=' . date('Y-m-d') . '&dataFim=' . date('Y-m-d') . '&itens=100');
+                                $jsonData = [];
+                                $dadosJson = getJson('https://dadosabertos.camara.leg.br/api/v2/orgaos/' . $comissao . '/membros?dataInicio=' . date('Y-m-d') . '&itens=100');
 
-                                if (isset($membros['dados'])) {
-                                    $presidente = 'Não há';
-                                    $id_presidente = 0;
-                                    $vice1 = 'Não há';
-                                    $vice2 = 'Não há';
-                                    $vice3 = 'Não há';
-
-                                    foreach ($membros['dados'] as $mesa) {
-                                        if ($mesa['codTitulo'] == 1) {
-                                            $presidente = $mesa['nome'] . ' ' . $mesa['siglaPartido'] . '/' . $mesa['siglaUf'];
-                                            $id_presidente = $mesa['id'];
-                                        }
-                                        if ($mesa['codTitulo'] == 2) {
-                                            $vice1 = $mesa['nome'] . ' ' . $mesa['siglaPartido'] . '/' . $mesa['siglaUf'];
-                                            $id_vice1 = $mesa['id'];
-                                        }
-                                        if ($mesa['codTitulo'] == 3) {
-                                            $vice2 = $mesa['nome'] . ' ' . $mesa['siglaPartido'] . '/' . $mesa['siglaUf'];
-                                            $id_vice2 = $mesa['id'];
-                                        }
-                                        if ($mesa['codTitulo'] == 4) {
-                                            $vice3 = $mesa['nome'] . ' ' . $mesa['siglaPartido'] . '/' . $mesa['siglaUf'];
-                                            $id_vice3 = $mesa['id'];
+                                if (!isset($dadosJson['error'])) {
+                                    foreach ($dadosJson['dados'] as $dep) {
+                                        if ($dep['codTitulo'] == 1) {
+                                            echo '<p class="card-text mb-0">Presidente: ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                        } else if ($dep['codTitulo'] == 2) {
+                                            echo '<p class="card-text mb-0">1º Vice-presidente: ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                        } else if ($dep['codTitulo'] == 3) {
+                                            echo '<p class="card-text mb-0">2º Vice-presidente: ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                        } else if ($dep['codTitulo'] == 4) {
+                                            echo '<p class="card-text mb-0">3º Vice-presidente: ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         }
                                     }
-                                ?>
-                                    <p class="card-text mb-2"><i class="fa-solid fa-caret-right"></i> Presidente: | <a href="https://www.camara.leg.br/deputados/<?php echo $id_presidente; ?>" target="_blank"><?php echo $presidente; ?></a></p>
-
-                                    <?php if ($vice1 != 'Não há'): ?>
-                                        <p class="card-text mb-0"><i class="fa-solid fa-caret-right"></i> 1º Vice-presidente: | <a href="https://www.camara.leg.br/deputados/<?php echo $id_vice1; ?>" target="_blank"><?php echo $vice1; ?></a></p>
-                                    <?php endif; ?>
-
-                                    <?php if ($vice2 != 'Não há'): ?>
-                                        <p class="card-text mb-0"><i class="fa-solid fa-caret-right"></i> 2º Vice-presidente: | <a href="https://www.camara.leg.br/deputados/<?php echo $id_vice2; ?>" target="_blank"><?php echo $vice2; ?></a></p>
-                                    <?php endif; ?>
-
-                                    <?php if ($vice3 != 'Não há'): ?>
-                                        <p class="card-text mb-0"><i class="fa-solid fa-caret-right"></i> 3º Vice-presidente: |<a href="https://www.camara.leg.br/deputados/<?php echo $id_vice3; ?>" target="_blank"> <?php echo $vice3; ?></a></p>
-                                    <?php endif; ?>
-
-                                <?php
                                 } else {
-                                    echo '<p class="card-text mb-1">Erro ao buscar informações. <a href="detalhe_comissao.php?comissao=' . $comissao . '">Tentar novamente</a></p>';
+                                    echo '<p class="card-text mb-0">Erro interno do servidor</p>';
                                 }
+
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row ">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2">
@@ -165,35 +150,39 @@ $tipo = $_GET['tipo'] ?? 101;
                                         </select>
                                     </div>
                                     <div class="col-md-1 col-2">
-                                        <button type="submit" class="btn btn-success btn-sm"><i
-                                                class="fa-solid fa-magnifying-glass"></i></button>
+                                        <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <?php
+
                 $tabela_membros = [];
-                if (isset($membros['dados'])) {
-                    foreach ($membros['dados'] as $membro) {
-                        if ($membro['codTitulo'] == $tipo) {
+                if (!isset($dadosJson['error'])) {
+
+                    foreach ($dadosJson['dados'] as $dep) {
+                        if ($dep['codTitulo'] == $tipo) {
                             $tabela_membros[] = [
-                                'Deputado(a)' => '<a href="https://www.camara.leg.br/deputados/' . $membro['id'] . '" target="_blank">' . $membro['nome'] . '</a>',
-                                'Partido' => $membro['siglaPartido'] . '/' . $membro['siglaUf']
+                                'Deputado' => $dep['nome'],
+                                'Partido' => $dep['siglaPartido'] . '/' . $dep['siglaUf']
                             ];
                         }
                     }
+
                     usort($tabela_membros, function ($a, $b) {
-                        return strcmp(strip_tags($a['Deputado(a)']), strip_tags($b['Deputado(a)']));
+                        return strcmp($a['Deputado'], $b['Deputado']);
                     });
 
                     echo $layoutClass->criarTabela($tabela_membros);
                 } else {
-                    echo $layoutClass->criarTabela([['Informação' => 'Erro interno do servidor']]);
+                    echo $layoutClass->criarTabela([['Mensagem' => 'Erro interno do servidor.']]);
                 }
+
+
                 ?>
+
             </div>
         </div>
     </div>
