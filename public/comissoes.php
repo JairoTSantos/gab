@@ -11,6 +11,7 @@ $flag = isset($_GET['flag']) ? filter_var($_GET['flag'], FILTER_VALIDATE_BOOLEAN
 $tipo_comissao = $_GET['tipo'] ?? 2;
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -73,6 +74,10 @@ $tipo_comissao = $_GET['tipo'] ?? 2;
                         }
                     }
                     echo $layoutClass->criarTabela($tabela_dep);
+                } else if ($comissoes_dep['status'] == 'empty') {
+                    echo $layoutClass->criarTabela([['Mensagem' => 'Nenhuma comissão encontrada.']]);
+                } else if ($comissoes_dep['status'] == 'error') {
+                    echo $layoutClass->criarTabela([['Mensagem' => 'Erro interno do servidor.']]);
                 }
                 ?>
 
@@ -96,6 +101,10 @@ $tipo_comissao = $_GET['tipo'] ?? 2;
                                                         echo '<option value="' . $tipo['comissao_tipo'] . '">' . $tipo['comissao_descricao'] . '</option>';
                                                     }
                                                 }
+                                            } else if ($tipos['status'] == 'empty') {
+                                                echo '<option>Nenhum tipo encontrado</option>';
+                                            } else if ($tipos['status'] == 'error') {
+                                                echo '<option>Erro interno do servidor</option>';
                                             }
                                             ?>
                                         </select>
@@ -122,6 +131,10 @@ $tipo_comissao = $_GET['tipo'] ?? 2;
                         ];
                     }
                     echo $layoutClass->criarTabela($tabela_comissoes);
+                } else if ($comissoes_dep['status'] == 'empty') {
+                    echo $layoutClass->criarTabela([['Mensagem' => 'Nenhuma comissão encontrada.']]);
+                } else if ($comissoes_dep['status'] == 'error') {
+                    echo $layoutClass->criarTabela([['Mensagem' => 'Erro interno do servidor.']]);
                 }
 
                 ?>

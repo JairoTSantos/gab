@@ -121,7 +121,7 @@ class ComissoesController {
         }
 
         if ($result['status'] == 'empty') {
-            return ['status' => 'empty', 'message' => 'Comissão não encontrada'];
+            return ['status' => 'empty', 'message' => 'Nenhuma comissão encontrada'];
         }
 
         if ($result['status'] == 'error') {
@@ -138,11 +138,11 @@ class ComissoesController {
         }
 
         if ($result['status'] == 'empty') {
-            return ['status' => 'empty', 'message' => 'Comissão não encontrada'];
+            return ['status' => 'empty', 'message' => 'Nenhum cargo encontrado'];
         }
 
         if ($result['status'] == 'error') {
-            return ['status' => 'error', 'message' => 'Erro ao listar comissões.'];
+            return ['status' => 'error', 'message' => 'Erro ao listar cargos.'];
         }
     }
 
@@ -155,11 +155,11 @@ class ComissoesController {
         }
 
         if ($result['status'] == 'empty') {
-            return ['status' => 'empty', 'message' => 'Comissão não encontrada'];
+            return ['status' => 'empty', 'message' => 'Nenhum tipo encontrado'];
         }
 
         if ($result['status'] == 'error') {
-            return ['status' => 'error', 'message' => 'Erro ao listar comissões.'];
+            return ['status' => 'error', 'message' => 'Erro ao listar tipos.'];
         }
     }
 
@@ -172,7 +172,7 @@ class ComissoesController {
         }
 
         if ($result['status'] == 'empty') {
-            return ['status' => 'empty', 'message' => 'Comissão não encontrada'];
+            return ['status' => 'empty', 'message' => 'Nenhuma comissão encontrada'];
         }
 
         if ($result['status'] == 'error') {
