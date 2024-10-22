@@ -40,6 +40,8 @@ class Layout {
                                          <hr class="dropdown-divider">
                                          <a class="dropdown-item" href="clipping-tipo.php" style="font-size:0.8em"><i class="fa-solid fa-clipboard"></i> Tipo de clipping</a>
                                          <hr class="dropdown-divider">
+                                         <a class="dropdown-item" href="atualizar_comissoes.php" style="font-size:0.8em"><i class="fa-solid fa-users-between-lines"></i>  Atualizar Comissoes</a>
+                                         <hr class="dropdown-divider">
                                          <a class="dropdown-item" href="usuarios.php" style="font-size:0.8em"><i class="fa-solid fa-users"></i> Usuários</a>
                                     </div>
                                    

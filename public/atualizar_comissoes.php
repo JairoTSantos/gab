@@ -16,7 +16,7 @@ $comissoesController = new ComissoesController();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <?php $layoutClass->MontarHead('Home'); ?>
+    <?php $layoutClass->MontarHead('Atualizar comissões'); ?>
 </head>
 
 <body>
@@ -25,11 +25,12 @@ $comissoesController = new ComissoesController();
         <div id="page-content-wrapper">
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
-                <?php $layoutClass->cardDescription(
+                <?php
+                $layoutClass->cardDescription(
                     '<i class="fa-solid fa-building"></i> Atualização de Comissões',
-                    '<p class="card-text mb-2">Nesta seção, é possível atualizar as comissões da Câmara e as comissões nas quais o deputado é membro. Selecione a opção desejada no menu e clique em "Atualizar".</p>
-                    <p class="card-text mb-0"><i class="fa-solid fa-triangle-exclamation"></i> <b>Importante:</b> As informações exibidas são fornecidas pela Câmara dos Deputados e são de sua responsabilidade.</p>'
-                )  ?>
+                    '<p class="card-text mb-0">Nesta seção, é possível atualizar as comissões da Câmara e as comissões nas quais o deputado é membro. Selecione a opção desejada no menu e clique em "Atualizar".</p>'
+                )
+                ?>
                 <div class="row ">
                     <div class="col-12">
                         <div class="card shadow-sm mb-2">
@@ -56,13 +57,13 @@ $comissoesController = new ComissoesController();
                                 ?>
                                 <form class="row g-2 form_custom mb-0" method="POST" enctype="application/x-www-form-urlencoded">
                                     <input type="hidden" name="tipo" value="<?php echo $tipo_comissao ?>" />
-                                    <div class="col-md-2 col-10">
+                                    <div class="col-md-2 col-8">
                                         <select class="form-select form-select-sm" name="tipo" required>
                                             <option value="1">Todas as comissões</option>
                                             <option value="2">Comissões do deputado</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 col-2">
+                                    <div class="col-md-1 col-4">
                                         <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-arrows-rotate"></i> Atualizar</button>
                                     </div>
                                 </form>
