@@ -35,7 +35,7 @@ class ComissoesController {
         $result = $this->comissaoModel->AtualizarComissoesDeputado($dados);
 
         if ($result['status'] == 'success') {
-            return ['status' => 'success', 'message' => 'Comissões inseridas com sucesso.'];
+            return ['status' => 'success', 'message' => 'Comissões do deputado atualizadas com sucesso.'];
         } elseif ($result['status'] == 'error') {
             return ['status' => 'error', 'message' => 'Erro ao inserir as comissões.'];
         }
@@ -85,7 +85,7 @@ class ComissoesController {
         $result = $this->comissaoModel->AtualizarComissoes($dados);
 
         if ($result['status'] == 'success') {
-            return ['status' => 'success', 'message' => 'Comissões inseridas com sucesso.'];
+            return ['status' => 'success', 'message' => 'Comissões atualizadas com sucesso.'];
         } elseif ($result['status'] == 'error') {
             return ['status' => 'error', 'message' => 'Erro ao inserir as comissões.'];
         }

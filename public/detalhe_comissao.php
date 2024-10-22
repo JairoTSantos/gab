@@ -91,8 +91,8 @@ if ($comissaoDet['status'] != 'success') {
                     foreach ($cargos['dados'] as $cargo) {
                         $tabela_cargos[] = [
                             'Cargo' => $cargo['comissao_cargo'],
-                            'Início' => date('d/m/Y', strtotime($cargo['comissao_entrada'])),
-                            'Saída' => (!empty($cargo['comissao_saida']) ? date('d/m/Y', strtotime($cargo['comissao_saida'])) : 'Membro')
+                            'Início' => '  <i class="fa-solid fa-right-long"></i> ' . date('d/m/Y', strtotime($cargo['comissao_entrada'])),
+                            'Saída' => (!empty($cargo['comissao_saida']) ? date('d/m/Y', strtotime($cargo['comissao_saida'])) . '  <i class="fa-solid fa-right-long"></i>' : 'Membro')
                         ];
                     }
 
@@ -119,13 +119,13 @@ if ($comissaoDet['status'] != 'success') {
                                 if (!isset($dadosJson['error'])) {
                                     foreach ($dadosJson['dados'] as $dep) {
                                         if ($dep['codTitulo'] == 1) {
-                                            echo '<p class="card-text mb-0">Presidente: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                            echo '<p class="card-text mb-0"><i class="fa-solid fa-user-tie"></i> | Presidente: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         } else if ($dep['codTitulo'] == 2) {
-                                            echo '<p class="card-text mb-0">1º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                            echo '<p class="card-text mb-0"><i class="fa-solid fa-user-tie"></i> | 1º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         } else if ($dep['codTitulo'] == 3) {
-                                            echo '<p class="card-text mb-0">2º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                            echo '<p class="card-text mb-0"><i class="fa-solid fa-user-tie"></i> | 2º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         } else if ($dep['codTitulo'] == 4) {
-                                            echo '<p class="card-text mb-0">3º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
+                                            echo '<p class="card-text mb-0"><i class="fa-solid fa-user-tie"></i> | 3º Vice: ' . $dep['nome'] . ' ' . $dep['siglaPartido'] . '/' . $dep['siglaUf'] . '</p>';
                                         }
                                     }
                                 } else {

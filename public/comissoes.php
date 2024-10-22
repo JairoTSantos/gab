@@ -11,7 +11,6 @@ $flag = isset($_GET['flag']) ? filter_var($_GET['flag'], FILTER_VALIDATE_BOOLEAN
 $tipo_comissao = $_GET['tipo'] ?? 2;
 
 
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -46,13 +45,13 @@ $tipo_comissao = $_GET['tipo'] ?? 2;
                             <div class="card-body p-2">
                                 <form class="row g-2 form_custom mb-0" method="GET" enctype="application/x-www-form-urlencoded">
                                     <input type="hidden" name="tipo" value="<?php echo $tipo_comissao ?>" />
-                                    <div class="col-md-2 col-6">
+                                    <div class="col-md-2 col-10">
                                         <select class="form-select form-select-sm" name="flag" required>
                                             <option value="false" <?php echo !$flag ? 'selected' : ''; ?>>Somente atuais</option>
                                             <option value="true" <?php echo $flag ? 'selected' : ''; ?>>Ver todas</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 col-6">
+                                    <div class="col-md-1 col-2">
                                         <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
                                     </div>
                                 </form>
