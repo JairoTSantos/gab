@@ -61,7 +61,6 @@ if (empty($dadosJson)) {
                                 <p class="card-text mb-2"> <?php echo $dadosJson['statusProposicao']['apreciacao'] ?></p>
                                 <p class="card-text mb-3" style="font-size: 0.9em;"><em> <?php echo $dadosJson['ementa'] ?></em></p>
                                 <p class="card-text mb-0" style="font-size: 0.9em;"><a href="<?php echo $dadosJson['urlInteiroTeor'] ?>" target="_blank"><i class="fa-regular fa-file-lines"></i> Ver inteiro teor </a> | <a href="imprimir_nota.php?proposicao=<?php echo $proposicaoIdGet ?>&imprimir=1" target="_blank"><i class="fa-solid fa-print"></i> Imprimir nota</a></p>
-
                             </div>
                         </div>
                     </div>
@@ -122,7 +121,7 @@ if (empty($dadosJson)) {
                                     } else if ($resultado['status'] === 'error' || $resultado['status'] === 'bad_request') {
                                         $layoutClass->alert('danger', 'Erro ao apagar a nota.', 3);
                                     }
-                                    
+
                                 }
 
                                 ?>
