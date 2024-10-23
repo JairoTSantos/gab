@@ -87,8 +87,8 @@ class ProposicaoController {
     }
 
 
-    public function ListarProposicoesDeputado($ano, $tipo = 'PL', $arquivada = 0) {
-
+    public function ListarProposicoesDeputado($ano, $tipo, $arquivada) {
+        
         $result = $this->proposicaoModel->ListarProposicoesDeputado($ano, $tipo, $arquivada);
 
         if ($result['status'] == 'success') {

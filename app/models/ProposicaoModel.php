@@ -7,10 +7,12 @@ class ProposicaoModel {
 
     private $db;
     private $logger;
+    private $config;
 
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
         $this->logger = new Logger();
+        $this->config = require dirname(__DIR__) . '/config/config.php';
     }
 
     public function limparBanco($tabela, $ano) {
@@ -80,8 +82,8 @@ class ProposicaoModel {
     }
 
     public function ListarProposicoesDeputado($ano, $tipo, $arquivada) {
-        $config = require dirname(__DIR__) . '/config/config.php';
-        $depConfig = $config['deputado'];
+
+        $depConfig = $this->config['deputado'];
 
         if ($arquivada == 1) {
             $query = "

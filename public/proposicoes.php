@@ -74,12 +74,16 @@ $autoria = isset($_GET['autoria']) ? $_GET['autoria'] : 1;
 
                 if ($result['status'] == 'success') {
                     foreach ($result['dados'] as $proposicao) {
-                        $proposicoes[] = [
+                        // Cria um array com informações necessárias para o filtro
+                        $tempProposicao = [
                             'Título' => $proposicao['proposicao_titulo'],
                             'Ementa' => $proposicao['proposicao_ementa'],
                             'Arquivada' => $proposicao['proposicao_arquivada'] ? '<i class="fa-regular fa-circle-check"></i> SIM' : '<i class="fa-regular fa-circle-xmark"></i> NÃO',
                             'Autoria' => $proposicao['proposicao_autoria'] ? '<i class="fa-regular fa-circle-check"></i> SIM' : '<i class="fa-regular fa-circle-xmark"></i> NÃO'
                         ];
+
+                        // Adiciona o array temporário ao array principal
+                        $proposicoes[] = $tempProposicao;
                     }
 
                     // Verifique se $autoria não é nulo ou não está vazio antes de filtrar
@@ -89,13 +93,23 @@ $autoria = isset($_GET['autoria']) ? $_GET['autoria'] : 1;
                         });
                     }
 
-                    echo $layoutClass->criarTabela($proposicoes);
+                    // Prepare um novo array apenas com as colunas que você deseja mostrar
+                    $tabelaProposicoes = array_map(function ($item) {
+                        return [
+                            'Título' => $item['Título'],
+                            'Ementa' => $item['Ementa']
+                            // Você pode adicionar outras colunas que deseja exibir aqui
+                        ];
+                    }, $proposicoes);
+
+                    echo $layoutClass->criarTabela($tabelaProposicoes);
                 } else if ($result['status'] == 'error') {
                     echo $layoutClass->criarTabela([['Mensagem' => 'Erro interno do servidor.']]);
                 } else {
                     echo $layoutClass->criarTabela([]);
                 }
                 ?>
+
 
 
 

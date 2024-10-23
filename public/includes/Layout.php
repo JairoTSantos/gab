@@ -148,9 +148,7 @@ class Layout {
         HTML;
     
         foreach ($chaves as $chave) {
-            // Aplica nowrap somente na primeira coluna
-            $style = ($chave === $chaves[0]) ? "style='white-space: nowrap;'" : "";
-            $html .= "<th $style>{$chave}</th>";
+            $html .= "<th style='white-space: nowrap;'>{$chave}</th>";
         }
     
         $html .= <<<HTML
@@ -161,10 +159,11 @@ class Layout {
     
         foreach ($dados as $linha) {
             $html .= '<tr>';
-            foreach ($chaves as $index => $chave) {
-                // Aplica nowrap somente na primeira coluna
-                $style = ($index === 0) ? "style='white-space: nowrap;'" : "";
-                $html .= "<td $style>{$linha[$chave]}</td>";
+            foreach ($chaves as $chave) {
+                $valor = $linha[$chave];
+                // Verifica se o valor tem mais de 15 caracteres
+                $estilo = (strlen($valor) > 15) ? 'style="word-break: break-word;"' : 'style="white-space: nowrap;"';
+                $html .= "<td {$estilo}>{$valor}</td>";
             }
             $html .= '</tr>';
         }
@@ -182,6 +181,7 @@ class Layout {
         return $html;
     }
     
+
 
 
     function alert($type, $message, $time = 3, $rounded = false) {
