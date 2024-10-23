@@ -78,8 +78,7 @@ $autoria = isset($_GET['autoria']) ? $_GET['autoria'] : 1;
                         $tempProposicao = [
                             'Título' => $proposicao['proposicao_titulo'],
                             'Ementa' => $proposicao['proposicao_ementa'],
-                            'Arquivada' => $proposicao['proposicao_arquivada'] ? '<i class="fa-regular fa-circle-check"></i> SIM' : '<i class="fa-regular fa-circle-xmark"></i> NÃO',
-                            'Autoria' => $proposicao['proposicao_autoria'] ? '<i class="fa-regular fa-circle-check"></i> SIM' : '<i class="fa-regular fa-circle-xmark"></i> NÃO'
+                            'Autoria' => $proposicao['proposicao_autoria'] ? '1' : '0'
                         ];
 
                         // Adiciona o array temporário ao array principal
@@ -89,7 +88,7 @@ $autoria = isset($_GET['autoria']) ? $_GET['autoria'] : 1;
                     // Verifique se $autoria não é nulo ou não está vazio antes de filtrar
                     if (isset($autoria) && $autoria != '') {
                         $proposicoes = array_filter($proposicoes, function ($item) use ($autoria) {
-                            return $item['Autoria'] === ($autoria == 1 ? '<i class="fa-regular fa-circle-check"></i> SIM' : '<i class="fa-regular fa-circle-xmark"></i> NÃO');
+                            return $item['Autoria'] === ($autoria == 1 ? '1' : '0');
                         });
                     }
 
