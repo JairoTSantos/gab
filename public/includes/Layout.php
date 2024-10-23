@@ -39,8 +39,8 @@ class Layout {
                                          <a class="dropdown-item" href="postagens_status.php" style="font-size:0.8em"><i class="fa-regular fa-thumbs-up"></i> Status das postagens</a>
                                          <hr class="dropdown-divider">
                                          <a class="dropdown-item" href="clipping-tipo.php" style="font-size:0.8em"><i class="fa-solid fa-clipboard"></i> Tipo de clipping</a>
-                                         <hr class="dropdown-divider">
-                                         <a class="dropdown-item" href="atualizar_comissoes.php" style="font-size:0.8em"><i class="fa-solid fa-users-between-lines"></i>  Atualizar Comissoes</a>
+                                         <!--<hr class="dropdown-divider">
+                                         <a class="dropdown-item" href="atualizar_comissoes.php" style="font-size:0.8em"><i class="fa-solid fa-users-between-lines"></i>  Atualizar Comissoes</a>-->
                                          <hr class="dropdown-divider">
                                          <a class="dropdown-item" href="usuarios.php" style="font-size:0.8em"><i class="fa-solid fa-users"></i> Usuários</a>
                                     </div>
@@ -65,8 +65,8 @@ class Layout {
                 <div class="sidebar-heading border-bottom bg-light"><img src="img/logo.png" style="width:25px" />&nbsp;&nbsp;Gabinete Digital</div>
                 <div class="list-group list-group-flush">
 
-                    <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Legislativo</p> 
-                    <a class="list-group-item list-group-item-action list-group-item-light px-4" href="comissoes.php"><i class="fa-solid fa-users-between-lines"></i> Comissões</a>
+                    <!--<p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Legislativo</p> 
+                    <a class="list-group-item list-group-item-action list-group-item-light px-4" href="comissoes.php"><i class="fa-solid fa-users-between-lines"></i> Comissões</a>-->
                     <p style="margin-left: 10px; margin-top:20px;font-weight: bolder;" class="text-muted"><i class="fas fa-bars"></i> Gestão de pessoas</p> 
                     <a class="list-group-item list-group-item-action list-group-item-light px-4" href="orgaos.php"><i class="fa-solid fa-building-columns"></i> Órgãos e instituições</a>
                     <a class="list-group-item list-group-item-action list-group-item-light px-4" href="pessoas.php"><i class="fa-solid fa-person"></i> Pessoas</a>

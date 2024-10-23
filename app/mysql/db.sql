@@ -71,7 +71,6 @@ CREATE TABLE orgaos (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO orgaos (orgao_id, orgao_nome, orgao_email, orgao_municipio, orgao_estado, orgao_tipo, orgao_criado_por) VALUES (1000, 'Órgão não informado', 'email@email', 'municipio', 'estado', 1000, 1000);
-INSERT INTO orgaos (orgao_id, orgao_nome, orgao_email, orgao_municipio, orgao_estado, orgao_tipo, orgao_criado_por) VALUES (1001, 'Câmara dos Deputados', 'email@email', 'Brasília', 'DF', 1035, 1000);
 
 
 /*-----------------------TABELAS DE PESSOAS-----------------------*/
@@ -156,9 +155,7 @@ VALUES
 (1037, 'Artista Plástico', 'Profissional que cria obras de arte em diversos meios e materiais', 1000),
 (1038, 'Logístico', 'Profissional que coordena e gerencia operações de logística e cadeia de suprimentos', 1000),
 (1039, 'Fonoaudiólogo', 'Profissional que avalia e trata problemas de comunicação e linguagem', 1000),
-(1040, 'Corretor de Imóveis', 'Profissional que facilita a compra, venda e aluguel de propriedades', 1000),
-/*(1041, 'Deputado Federal', 'Deputado Federal', 1000),
-(1042, 'Senador', 'Federal', 1000);*/
+(1040, 'Corretor de Imóveis', 'Profissional que facilita a compra, venda e aluguel de propriedades', 1000);
 
 
 
@@ -292,34 +289,6 @@ CREATE TABLE postagens(
     PRIMARY KEY(postagem_id),
     CONSTRAINT fk_postagem_criada_por FOREIGN KEY (postagem_criada_por) REFERENCES usuarios(usuario_id),
     CONSTRAINT fk_postagem_status FOREIGN KEY (postagem_status) REFERENCES postagem_status(postagem_status_id)
-)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-
-
-
-
-/*------------------TABELA COMISSOES------------------*/
-
-CREATE TABLE comissoes(
-    comissao_id INT NOT NULL,
-    comissao_sigla TEXT,
-    comissao_apelido TEXT,
-    comissao_nome TEXT,
-    comissao_nome_publicacao TEXT,
-    comissao_tipo INT,
-    comissao_descricao TEXT,
-    comissao_site TEXT
-    PRIMARY KEY (comissao_id) -- Define comissao_id como um índice
-)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-
-
-CREATE TABLE comissoes_dep(
-    comissao_id INT,
-    deputado_id INT,
-    comissao_entrada DATE,
-    comissao_saida DATE,
-    comissao_cargo TEXT,
-    comissao_cargo_id INT,
-    INDEX (comissao_id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
