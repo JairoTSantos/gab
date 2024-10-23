@@ -142,10 +142,11 @@ if (empty($dadosJson)) {
                                         if (!isset($proposicao['dados']['nota_titulo'])) {
                                             echo '<button type="submit" class="btn btn-success btn-sm" name="btn_salvar"><i class="fa-regular fa-floppy-disk"></i> Salvar</button>';
                                         } else {
-                                            echo '<button type="submit" class="btn btn-primary btn-sm" name="btn_atualizar"><i class="fa-regular fa-floppy-disk"></i> Atualizar</button>';
+                                            echo '<button type="submit" class="btn btn-primary btn-sm" name="btn_atualizar"><i class="fa-regular fa-floppy-disk"></i> Atualizar</button>&nbsp;';
+                                            echo '<button type="submit" class="btn btn-danger btn-sm" name="btn_apagar"><i class="fa-solid fa-trash-can"></i> Apagar</button>';
                                         }
                                         ?>
-                                        <button type="submit" class="btn btn-danger btn-sm" name="btn_apagar"><i class="fa-solid fa-trash-can"></i> Apagar</button>
+                                        
                                     </div>
                                 </form>
                             </div>
