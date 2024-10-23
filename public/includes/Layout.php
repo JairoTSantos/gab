@@ -122,7 +122,7 @@ class Layout {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td >Nenhum registro encontrado.</td>
+                                                <td>Nenhum registro encontrado.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -133,9 +133,9 @@ class Layout {
                 </div>
             HTML;
         }
-
+    
         $chaves = array_keys(reset($dados));
-
+    
         $html = <<<HTML
             <div class="row mb-2">
                 <div class="col-12">
@@ -146,25 +146,29 @@ class Layout {
                                     <thead>
                                         <tr>
         HTML;
-
+    
         foreach ($chaves as $chave) {
-            $html .= "<th style='white-space: nowrap;'>{$chave}</th>";
+            // Aplica nowrap somente na primeira coluna
+            $style = ($chave === $chaves[0]) ? "style='white-space: nowrap;'" : "";
+            $html .= "<th $style>{$chave}</th>";
         }
-
+    
         $html .= <<<HTML
                                         </tr>
                                     </thead>
                                     <tbody>
         HTML;
-
+    
         foreach ($dados as $linha) {
             $html .= '<tr>';
-            foreach ($chaves as $chave) {
-                $html .= "<td>{$linha[$chave]}</td>";
+            foreach ($chaves as $index => $chave) {
+                // Aplica nowrap somente na primeira coluna
+                $style = ($index === 0) ? "style='white-space: nowrap;'" : "";
+                $html .= "<td $style>{$linha[$chave]}</td>";
             }
             $html .= '</tr>';
         }
-
+    
         $html .= <<<HTML
                                     </tbody>
                                 </table>
@@ -174,9 +178,10 @@ class Layout {
                 </div>
             </div>
         HTML;
-
+    
         return $html;
     }
+    
 
 
     function alert($type, $message, $time = 3, $rounded = false) {

@@ -293,6 +293,32 @@ CREATE TABLE postagens(
 
 
 
+CREATE TABLE proposicoes (
+  proposicao_id int(11) NOT NULL,
+  proposicao_titulo varchar(255) DEFAULT NULL,
+  proposicao_sigla varchar(255) DEFAULT NULL,
+  proposicao_numero int(11) DEFAULT NULL,
+  proposicao_ano int(11) DEFAULT NULL,
+  proposicao_ementa text,
+  proposicao_apresentacao date DEFAULT NULL,
+  proposicao_arquivada tinyint(1) DEFAULT NULL,
+  proposicao_norma tinyint(1) DEFAULT NULL,
+  PRIMARY KEY(proposicao_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE proposicoes_autores (
+  proposicao_id int(11) NOT NULL,
+  proposicao_id_autor int(11) NOT NULL,
+  proposicao_nome_autor text NOT NULL,
+  proposicao_partido_autor varchar(50) DEFAULT NULL,
+  proposicao_uf_autor char(2) DEFAULT NULL,
+  proposicao_assinatura int(11) DEFAULT NULL,
+  proposicao_proponente int(11) DEFAULT NULL,
+  proposicao_ano int(11) DEFAULT NULL
+  FOREIGN KEY (proposicao_id) REFERENCES proposicoes(proposicao_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 /*-----------------------VIEWS-----------------------*/
 CREATE VIEW view_orgaos AS SELECT orgaos.*, orgaos_tipos.orgao_tipo_nome, usuarios.usuario_nome FROM orgaos INNER JOIN orgaos_tipos ON orgaos.orgao_tipo = orgaos_tipos.orgao_tipo_id INNER JOIN usuarios ON orgaos.orgao_criado_por = usuarios.usuario_id;
 CREATE VIEW view_pessoas AS SELECT pessoas.*, pessoas_profissoes.pessoas_profissoes_nome,  pessoas_tipos.pessoa_tipo_nome, orgaos.orgao_nome, usuarios.usuario_nome FROM pessoas INNER JOIN pessoas_tipos ON pessoas.pessoa_tipo = pessoas_tipos.pessoa_tipo_id INNER JOIN orgaos ON pessoas.pessoa_orgao = orgaos.orgao_id INNER JOIN pessoas_profissoes ON pessoas.pessoa_profissao = pessoas_profissoes.pessoas_profissoes_id INNER JOIN usuarios ON pessoas.pessoa_criada_por = usuarios.usuario_id;

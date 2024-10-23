@@ -4,6 +4,8 @@ require_once dirname(__DIR__) . '/public/includes/verificaLogado.php';
 require_once dirname(__DIR__) . '/public/includes/Layout.php';
 $layoutClass = new Layout();
 
+require_once dirname(__DIR__) . '/app/controllers/ProposicaoController.php';
+$proposicaoController = new ProposicaoController();
 
 
 ?>
@@ -25,7 +27,9 @@ $layoutClass = new Layout();
             <?php $layoutClass->MontarTopMenu() ?>
             <div class="container-fluid p-2">
 
-
+                <?php 
+                    print_r($proposicaoController->ListarProposicoesDeputado(2024));
+                ?>
 
 
             </div>
