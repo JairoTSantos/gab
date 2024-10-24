@@ -103,4 +103,58 @@ class ProposicaoController {
             return ['status' => 'error', 'message' => 'Erro ao listar proposições.'];
         }
     }
+
+
+    public function ListarTiposProposicoesDeputado() {
+        
+        $result = $this->proposicaoModel->ListarTiposProposicoesDeputado();
+
+        if ($result['status'] == 'success') {
+            return $result;
+        }
+
+        if ($result['status'] == 'empty') {
+            return ['status' => 'empty', 'message' => 'Nenhum tipo de  proposição encontrada.'];
+        }
+
+        if ($result['status'] == 'error') {
+            return ['status' => 'error', 'message' => 'Erro ao listar tipos de proposições.'];
+        }
+    }
+
+
+
+    public function BuscarProposicao($proposicao) {
+        
+        $result = $this->proposicaoModel->BuscarProposicao($proposicao);
+
+        if ($result['status'] == 'success') {
+            return $result;
+        }
+
+        if ($result['status'] == 'empty') {
+            return ['status' => 'empty', 'message' => 'Proposição não encontrada.'];
+        }
+
+        if ($result['status'] == 'error') {
+            return ['status' => 'error', 'message' => 'Erro ao buscar proposição.'];
+        }
+    }
+
+    public function BuscarAutores($proposicao) {
+        
+        $result = $this->proposicaoModel->BuscarAutores($proposicao);
+
+        if ($result['status'] == 'success') {
+            return $result;
+        }
+
+        if ($result['status'] == 'empty') {
+            return ['status' => 'empty', 'message' => 'Autores não encontrados.'];
+        }
+
+        if ($result['status'] == 'error') {
+            return ['status' => 'error', 'message' => 'Erro ao buscar autores.'];
+        }
+    }
 }

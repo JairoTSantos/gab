@@ -29,7 +29,6 @@ return [
         'estado_deputado' => 'AP',
         'partido_deputado' => 'MDB',
         'legislatura_atual' => $legislaturaAtual,
-        'primeira_eleicao' => 2008,
-        'ultima_eleicao' => 2024//ULTIMA ELEICAO QUE O DEPUTADO DISPUTOU
+        'ano_primeira_legislatura' => 2019
     ]
 ];

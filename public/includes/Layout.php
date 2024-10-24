@@ -107,79 +107,68 @@ class Layout {
     }
 
     public function criarTabela(array $dados = []) {
-        if (empty($dados)) {
-            return <<<HTML
-                <div class="row mb-2">
-                    <div class="col-12">
-                        <div class="card shadow-sm">
-                            <div class="card-body p-2">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered mb-0 custom_table">
-                                        <thead>
-                                            <tr>
-                                                <th>Mensagem</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Nenhum registro encontrado.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            HTML;
-        }
-    
-        $chaves = array_keys(reset($dados));
-    
+        // Inicia o HTML básico da tabela
         $html = <<<HTML
-            <div class="row mb-2">
-                <div class="col-12">
-                    <div class="card shadow-sm">
-                        <div class="card-body p-2">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered mb-0 custom_table">
-                                    <thead>
-                                        <tr>
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body p-2">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered mb-0 custom_table">
         HTML;
     
-        foreach ($chaves as $chave) {
-            $html .= "<th style='white-space: nowrap;'>{$chave}</th>";
-        }
-    
-        $html .= <<<HTML
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-        HTML;
-    
-        foreach ($dados as $linha) {
-            $html .= '<tr>';
-            foreach ($chaves as $chave) {
-                $valor = $linha[$chave];
-                // Verifica se o valor tem mais de 15 caracteres
-                $estilo = (strlen($valor) > 15) ? 'style="word-break: break-word;"' : 'style="white-space: nowrap;"';
-                $html .= "<td {$estilo}>{$valor}</td>";
-            }
-            $html .= '</tr>';
-        }
-    
-        $html .= <<<HTML
-                                    </tbody>
-                                </table>
-                            </div>
+        // Verifica se o array está vazio
+        if (empty($dados)) {
+            // Retorna a mensagem de "Nenhum registro encontrado"
+            $html .= <<<HTML
+                                <thead>
+                                    <tr>
+                                        <th>Mensagem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Nenhum registro encontrado.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         HTML;
+        } else {
+            // Pega as chaves do primeiro elemento do array para os cabeçalhos da tabela
+            $chaves = array_keys(reset($dados));
+    
+            // Monta o cabeçalho da tabela
+            $html .= '<thead><tr>';
+            foreach ($chaves as $chave) {
+                $html .= "<th style='white-space: nowrap;'>{$chave}</th>";
+            }
+            $html .= '</tr></thead><tbody>';
+    
+            // Monta as linhas de dados
+            foreach ($dados as $linha) {
+                $html .= '<tr>';
+                foreach ($chaves as $chave) {
+                    // Permite apenas algumas tags HTML, como links <a>
+                    $valor = strip_tags($linha[$chave], '<a><b><i><strong><em>'); 
+                    $estilo = (strlen(strip_tags($valor)) > 15) ? 'style="word-break: break-word;"' : 'style="white-space: nowrap;"';
+                    $html .= "<td {$estilo}>{$valor}</td>";
+                }
+                $html .= '</tr>';
+            }
+    
+            // Fecha a tabela
+            $html .= '</tbody></table></div></div></div></div></div>';
+        }
     
         return $html;
     }
+    
+    
     
 
 

@@ -106,7 +106,7 @@ class ProposicaoModel {
                     AND proposicoes.proposicao_sigla = :tipo 
                     AND proposicoes.proposicao_arquivada = 1 
                     AND proposicoes_autores.proposicao_id_autor = :id_deputado
-                ORDER BY proposicoes.proposicao_titulo ASC
+                ORDER BY proposicoes.proposicao_apresentacao ASC
             ";
         } else {
             $query = "
@@ -127,8 +127,9 @@ class ProposicaoModel {
                 WHERE 
                     proposicoes.proposicao_ano = :ano 
                     AND proposicoes.proposicao_sigla = :tipo 
+                    AND proposicoes.proposicao_arquivada = 0 
                     AND proposicoes_autores.proposicao_id_autor = :id_deputado
-                 ORDER BY proposicoes.proposicao_titulo ASC
+                 ORDER BY proposicoes.proposicao_apresentacao ASC
             ";
         }
 
@@ -157,4 +158,94 @@ class ProposicaoModel {
             ];
         }
     }
+
+    public function ListarTiposProposicoesDeputado(){
+        try {
+
+            $depConfig = $this->config['deputado'];
+
+            $query = 'SELECT proposicoes.proposicao_sigla FROM proposicoes_autores INNER JOIN proposicoes ON proposicoes_autores.proposicao_id = proposicoes.proposicao_id WHERE proposicoes_autores.proposicao_id_autor = :id_deputado GROUP BY proposicoes.proposicao_sigla ORDER BY proposicoes.proposicao_sigla ASC';
+
+            $stmt = $this->db->prepare($query);
+
+           
+            $stmt->bindParam(':id_deputado', $depConfig['id_deputado'], PDO::PARAM_INT);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return ['status' => 'empty'];
+            }
+
+            return [
+                'status' => 'success',
+                'dados' => $result
+            ];
+        } catch (PDOException $e) {
+            $this->logger->novoLog('proposicoes_error', $e->getMessage());
+            return [
+                'status' => 'error',
+            ];
+        }
+    }
+
+
+    public function BuscarProposicao($proposicao){
+        try {
+
+            $query = 'SELECT * FROM proposicoes WHERE proposicao_id = :proposicao';
+
+            $stmt = $this->db->prepare($query);
+           
+            $stmt->bindParam(':proposicao',$proposicao, PDO::PARAM_INT);
+
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return ['status' => 'empty'];
+            }
+
+            return [
+                'status' => 'success',
+                'dados' => $result
+            ];
+        } catch (PDOException $e) {
+            $this->logger->novoLog('proposicoes_error', $e->getMessage());
+            return [
+                'status' => 'error',
+            ];
+        }
+    }
+
+
+    public function BuscarAutores($proposicao){
+        try {
+
+            $query = 'SELECT * FROM proposicoes_autores WHERE proposicao_id = :proposicao';
+
+            $stmt = $this->db->prepare($query);
+           
+            $stmt->bindParam(':proposicao',$proposicao, PDO::PARAM_INT);
+
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return ['status' => 'empty'];
+            }
+
+            return [
+                'status' => 'success',
+                'dados' => $result
+            ];
+        } catch (PDOException $e) {
+            $this->logger->novoLog('proposicoes_error', $e->getMessage());
+            return [
+                'status' => 'error',
+            ];
+        }
+    }
+
 }

@@ -28,7 +28,7 @@ $proposicaoController = new ProposicaoController();
             <div class="container-fluid p-2">
 
                 <?php 
-                    print_r($proposicaoController->ListarProposicoesDeputado(2024));
+                    //print_r($proposicaoController->atualizaAutoresProposicoes(2019));
                 ?>
 
 
